@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Button } from 'semantic-ui-react';
-import Grade from '../components/grade';
+import Grade from '../components/Grade';
 import Delete from '../components/Delete';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
