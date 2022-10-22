@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Button } from 'semantic-ui-react';
 import Grade from '../components/Grade';
-import Delete from '../components/Delete';
+// import Delete from '../components/Delete';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
@@ -22,6 +22,14 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
                             </span>
                         </h2>
                     </div>
+                    {/* <div>
+                        <Button
+                            color="red"
+                            onClick={() => {setTestQuestions()}}
+                        >
+                            Clear
+                        </Button>
+                    </div> */}
                     {revealAnswer ? (
                     <>
                         <div style={{ fontSize: '20px', color: 'red' }}>
@@ -49,7 +57,7 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
                                 Show Answer
                             </Button>
                         </div>
-                        <Delete setTestQuestions={setTestQuestions} />
+                        {/* <Delete setTestQuestions={setTestQuestions} /> */}
                         {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                             <Button
                                 color="red"
