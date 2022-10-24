@@ -524,11 +524,15 @@ export default function Test() {
                     </>
                     )}
                     <Divider />
-                      <div>
-                        <Delete setTestQuestions={setTestQuestions} />
-                      </div>
-                    <Divider />
                     <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
+                      {testQuestions.length > 0 ? (
+                      <>
+                        <div style={{ transform: 'translateY(-3px)' }}>
+                          <Delete setTestQuestions={setTestQuestions} />
+                        </div>
+                      <Divider />
+                      </>
+                      ): null}
                     <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
                         Create New Questions
                     </h2>
