@@ -8,7 +8,7 @@ export default function Delete({ setTestQuestions }) {
                     color="red"
                     onClick={() => setTestQuestions([])}
                 >
-                    Delete Question
+                    Delete All Questions
                 </Button>
             </div>
         </>

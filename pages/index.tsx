@@ -4,6 +4,7 @@ import { Button, Icon, Divider, Container } from 'semantic-ui-react';
 import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
 import FocusLock from 'react-focus-lock';
+import Delete from '../components/Delete';
 
 const LOCAL_STORAGE_KEY_NAME = 'Name';
 const LOCAL_STORAGE_KEY_CLICK_NAME = 'ClickName';
@@ -522,6 +523,10 @@ export default function Test() {
                         </div>
                     </>
                     )}
+                    <Divider />
+                      <div>
+                        <Delete setTestQuestions={setTestQuestions} />
+                      </div>
                     <Divider />
                     <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
                     <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>

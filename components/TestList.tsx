@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Button } from 'semantic-ui-react';
 import Grade from '../components/Grade';
-// import Delete from '../components/Delete';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
@@ -57,7 +56,6 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
                                 Show Answer
                             </Button>
                         </div>
-                        {/* <Delete setTestQuestions={setTestQuestions} /> */}
                         {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                             <Button
                                 color="red"
@@ -85,6 +83,11 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
                     onChange={(e) => setStudentAnswer(e.target.value)}
                 />
                 <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                {/* <Button
+                    color="red"
+                >
+                    Delete
+                </Button> */}
                 <Divider />
             </>
         )
@@ -108,10 +111,26 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
     //     JSON.stringify(ques))
     //   }, [ques]);
 
+    //   [0].props.children[0].props.children[0].props.children.props.children[1]
+    // const sliced = questions.slice(0, 1);
+    // console.log(sliced);
+
+    // const reversed = questions.reverse();
+    // console.log(reversed);
+
+    // const shifted = reversed.shift();
+    // console.log(shifted);
+
+    // const popped = questions.pop();
+    // console.log(popped);
+
     return (
         <>
             <div style={{ padding: '10px' }}>
                 {questions}
+                {/* {reversed} */}
+                {/* {shifted} */}
+                {/* {sliced} */}
                 {/* {ques} */}
             </div>
         </>
