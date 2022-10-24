@@ -10,10 +10,15 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
     const grade = function() {
         if (testQuestions.value == studentAnswer) {
             setCorrect(true);
-            setScore(score + 1)
+            setScore(score + 1);
         } else {
+        //if score > 100% setbutton disabled
             setCorrect(false);
-            setScore(score);
+                        // console.log(correct);
+                        // if ((score > 0) && !correct) {
+                        //     setScore(score - 1);
+                        // }
+                        // setScore(score - 1);
         }
     }
 
