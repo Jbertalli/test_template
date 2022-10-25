@@ -528,30 +528,39 @@ export default function Test() {
                     <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
                       {testQuestions.length > 0 ? (
                       <>
-                        <h2 style={{ marginBottom: '5px' }}>
-                          Delete Question
-                        </h2>
-                        <input
-                            type='number'
-                            placeholder='Delete Question #'
-                            style={{ 
-                              padding: '9px 14px 9px 14px', 
-                              fontSize: '14px', 
-                              fontWeight: '400', 
-                              cursor: 'text', 
-                              width: '178.5px', 
-                              borderRadius: '4px', 
-                              border: '1px solid rgba(34, 36, 38, 0.15)' 
-                          }}
-                            onChange={(e) => setDeleteQuestion(e.target.value)}
-                        />
-                        <span>
-                          <Button>
-                            Save
-                          </Button>
-                        </span>
-                        <div style={{ transform: 'translateY(-3px)' }}>
-                          <Delete setTestQuestions={setTestQuestions} />
+                        <div style={{  height: '70px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', transform: 'translateY(-10px)' }}>
+                          <div>
+                            <h2 style={{ marginBottom: '5px' }}>
+                              Delete Question
+                            </h2>
+                            <span>
+                              <input
+                                  type='number'
+                                  placeholder='Delete Question #'
+                                  style={{ 
+                                    padding: '9px 14px 9px 14px', 
+                                    fontSize: '14px', 
+                                    fontWeight: '400', 
+                                    cursor: 'text', 
+                                    width: '178.5px', 
+                                    borderRadius: '4px', 
+                                    border: '1px solid rgba(34, 36, 38, 0.15)' 
+                                }}
+                                  onChange={(e) => setDeleteQuestion(e.target.value)}
+                              />
+                            </span>
+                            <span>
+                              <Button
+                                attached="right"
+                                color="red"
+                              >
+                                Save
+                              </Button>
+                            </span>
+                          </div>
+                          <div style={{ transform: 'translateY(17.6px)' }}>
+                            <Delete setTestQuestions={setTestQuestions} />
+                          </div>
                         </div>
                       <Divider />
                       </>
