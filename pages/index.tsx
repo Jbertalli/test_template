@@ -533,7 +533,7 @@ export default function Test() {
                     </>
                     )}
                     <Divider />
-                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} graded={graded} setGraded={setGraded} />
+                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
                       {testQuestions.length > 0 ? (
                       <>
                         <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-export default function Grade({ testQuestions, studentAnswer, score, setScore, total, setTotal, graded, setGraded }) {
+export default function Grade({ testQuestions, studentAnswer, score, setScore, total, setTotal }) {
     const [correct, setCorrect] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [gradeClicked, setGradeClicked] = useState<boolean>(false);
+    const [graded, setGraded] = useState<boolean>(false);
 
     const grade = function() {
         if (testQuestions.value == studentAnswer) {
             setCorrect(true);
             setScore(score + 1);
         } else {
-        //if score > 100% setbutton disabled
             setCorrect(false);
             // console.log(correct);
             // setScore(score - 1);

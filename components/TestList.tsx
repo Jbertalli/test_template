@@ -4,7 +4,7 @@ import Grade from '../components/Grade';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
-export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions, graded, setGraded }) {
+export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
 
     // console.log(deleteQuestion);
@@ -67,7 +67,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     }}
                     onChange={(e) => setStudentAnswer(e.target.value)}
                 />
-                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} graded={graded} setGraded={setGraded} />
+                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
                 <Divider />
             </>
         )
