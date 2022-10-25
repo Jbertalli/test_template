@@ -5,6 +5,7 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
     const [correct, setCorrect] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [graded, setGraded] = useState<boolean>(false);
+    // const [gradeClicked, setGradeClicked] = useState<boolean>(false);
     const [gradeClicked, setGradeClicked] = useState<boolean>(false);
 
     const grade = function() {
@@ -14,11 +15,14 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
         } else {
         //if score > 100% setbutton disabled
             setCorrect(false);
-                        // console.log(correct);
-                        // if ((score > 0) && !correct) {
-                        //     setScore(score - 1);
-                        // }
-                        // setScore(score - 1);
+            // console.log(correct);
+            // setScore(score - 1);
+
+            // if ((score > 0) && !correct) {
+            //     setScore(score - 1);
+            // } else {
+            //     return;
+            // }
         }
     }
 
@@ -38,7 +42,7 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
             </>
             ):(
             <>
-                {gradeClicked ? (
+                {/* {gradeClicked ? (
                 <>
                     <Button
                         color="red"
@@ -56,7 +60,14 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
                         Grade
                     </Button>
                 </>
-                )}
+                )} */}
+                <Button
+                    disabled={gradeClicked}
+                    color="green"
+                    onClick={() => {grade(), setGraded(true), setGradeClicked(true), setTotal(total + 1)}}
+                >
+                    Grade
+                </Button>
             </>
             )}
             <div style={{ marginTop: '10px' }}>

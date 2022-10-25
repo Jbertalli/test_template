@@ -130,7 +130,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     console.log(questions);
 
     let arr = questions;
-
     delete arr[deleteQuestion]
     console.log(arr);
 
@@ -138,7 +137,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
         <>
             <div style={{ padding: '10px' }}>
                 {questions}
-                {/* {deleteQuestion} */}
             </div>
         </>
     );

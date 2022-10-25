@@ -528,11 +528,11 @@ export default function Test() {
                     <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
                       {testQuestions.length > 0 ? (
                       <>
-                        <div style={{  height: '70px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', transform: 'translateY(-10px)' }}>
+                        <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>
+                          Delete Question
+                        </h2>
+                        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', transform: 'translateY(-40px)' }}>
                           <div>
-                            <h2 style={{ marginBottom: '5px' }}>
-                              Delete Question
-                            </h2>
                             <span>
                               <input
                                   type='number'
@@ -558,11 +558,13 @@ export default function Test() {
                               </Button>
                             </span>
                           </div>
-                          <div style={{ transform: 'translateY(17.6px)' }}>
+                          <div style={{ transform: 'translateY(-.5px)' }}>
                             <Delete setTestQuestions={setTestQuestions} />
                           </div>
                         </div>
-                      <Divider />
+                        <div style={{ transform: 'translateY(-20px)' }}>
+                          <Divider />
+                        </div>
                       </>
                       ): null}
                     <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
