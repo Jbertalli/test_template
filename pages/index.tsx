@@ -44,6 +44,7 @@ export default function Test() {
     const [letterGrade, setLetterGrade] = useState<string>('');
     const [color, setColor] = useState<string>('');
     const [deleteQuestion, setDeleteQuestion] = useState<any>(null);
+    const [finalGrade, setFinalGrade] = useState<any>(null);
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
     // const [correct, setCorrect] = useState<string>('');
@@ -278,7 +279,13 @@ export default function Test() {
         answerNameRef.current.value = null;
     }
 
-    const finalGrade: number = (((score / total) * 100));
+    useEffect(() => {
+      setFinalGrade(((score / total) * 100).toFixed(2).replace('NaN', ''))
+    }, [total])
+
+    // console.log(typeof finalGrade);
+
+    // const finalGrade: number = (((score / total) * 100));
     // console.log(typeof finalGrade);
 
     useEffect(() => {
@@ -559,7 +566,7 @@ export default function Test() {
                             </span>
                           </div>
                           <div style={{ transform: 'translateY(-.5px)' }}>
-                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} />
+                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} finalGrade={finalGrade} setFinalGrade={setFinalGrade} />
                           </div>
                         </div>
                         <div style={{ transform: 'translateY(-20px)' }}>
@@ -705,7 +712,8 @@ export default function Test() {
                             ): null}
                         </h2>
                         <h2>
-                            {(finalGrade).toFixed(2).replace('NaN', '')}
+                            {/* {(finalGrade).toFixed(2).replace('NaN', '')} */}
+                            {finalGrade}
                             <span>
                                 {(finalGrade) ? (
                                 <>
