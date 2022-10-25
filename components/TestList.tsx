@@ -4,11 +4,10 @@ import Grade from '../components/Grade';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
-export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions }) {
+export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions, graded, setGraded }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
-    // const [ques, setQues] = useState([]);
 
-    console.log(deleteQuestion);
+    // console.log(deleteQuestion);
 
     const questions = testQuestions.map(testQuestions => {
 
@@ -23,14 +22,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                             </span>
                         </h2>
                     </div>
-                    {/* <div>
-                        <Button
-                            color="red"
-                            onClick={() => {setTestQuestions()}}
-                        >
-                            Clear
-                        </Button>
-                    </div> */}
                     {revealAnswer ? (
                     <>
                         <div style={{ fontSize: '20px', color: 'red' }}>
@@ -58,14 +49,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                                 Show Answer
                             </Button>
                         </div>
-                        {/* <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button
-                                color="red"
-                                onClick={() => setTestQuestions([])}
-                            >
-                                Delete Question
-                            </Button>
-                        </div> */}
                     </>
                     )}
                 </div>
@@ -84,12 +67,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     }}
                     onChange={(e) => setStudentAnswer(e.target.value)}
                 />
-                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
-                {/* <Button
-                    color="red"
-                >
-                    Delete
-                </Button> */}
+                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} graded={graded} setGraded={setGraded} />
                 <Divider />
             </>
         )

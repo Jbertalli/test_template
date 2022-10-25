@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-export default function Grade({ testQuestions, studentAnswer, score, setScore, total, setTotal }) {
+export default function Grade({ testQuestions, studentAnswer, score, setScore, total, setTotal, graded, setGraded }) {
     const [correct, setCorrect] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
-    const [graded, setGraded] = useState<boolean>(false);
-    // const [gradeClicked, setGradeClicked] = useState<boolean>(false);
     const [gradeClicked, setGradeClicked] = useState<boolean>(false);
 
     const grade = function() {

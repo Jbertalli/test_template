@@ -45,6 +45,7 @@ export default function Test() {
     const [color, setColor] = useState<string>('');
     const [deleteQuestion, setDeleteQuestion] = useState<any>(null);
     const [finalGrade, setFinalGrade] = useState<any>(null);
+    const [graded, setGraded] = useState<boolean>(false);
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
     // const [correct, setCorrect] = useState<string>('');
@@ -532,7 +533,7 @@ export default function Test() {
                     </>
                     )}
                     <Divider />
-                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
+                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} graded={graded} setGraded={setGraded} />
                       {testQuestions.length > 0 ? (
                       <>
                         <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>
@@ -566,7 +567,7 @@ export default function Test() {
                             </span>
                           </div>
                           <div style={{ transform: 'translateY(-.5px)' }}>
-                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} finalGrade={finalGrade} setFinalGrade={setFinalGrade} />
+                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} setFinalGrade={setFinalGrade} setGraded={setGraded} />
                           </div>
                         </div>
                         <div style={{ transform: 'translateY(-20px)' }}>
@@ -723,7 +724,12 @@ export default function Test() {
                             </span>
                         </h2>
                         <h2 style={{ color: `${color}`, paddingBottom: '30px' }}>
-                            {letterGrade}
+                            
+                           {graded ? (
+                           <>
+                              {letterGrade}
+                           </>
+                           ): null}
                         </h2>
                     </div>
                 </Container>
