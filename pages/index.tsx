@@ -41,10 +41,10 @@ export default function Test() {
     const [questionNumber, setQuestionNumber] = useState<any>(0);
     const [answerNumber, setAnswerNumber] = useState<any>(0);
     const [testQuestions, setTestQuestions] = useState<any>([]);
-    const [letterGrade, setLetterGrade] = useState<string>('');
+    const [letterGrade, setLetterGrade] = useState<any>(null);
     const [color, setColor] = useState<string>('');
     const [deleteQuestion, setDeleteQuestion] = useState<any>(null);
-    const [finalGrade, setFinalGrade] = useState<any>(null);
+    const [finalGrade, setFinalGrade] = useState<any>(0);
     const [graded, setGraded] = useState<boolean>(false);
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
@@ -730,7 +730,7 @@ export default function Test() {
                            </>
                            ): null}
                         </h2>
-                        <div>
+                        {/* <div>
                          Total: {total}
                         </div>
                         <div>
@@ -741,7 +741,7 @@ export default function Test() {
                         </div>
                         <div>
                           letterGrade: {letterGrade}
-                        </div>
+                        </div> */}
                     </div>
                 </Container>
             </FocusLock>

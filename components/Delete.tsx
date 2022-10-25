@@ -6,7 +6,7 @@ export default function Delete({ setTestQuestions, setLetterGrade, setFinalGrade
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                     color="red"
-                    onClick={() => {setTestQuestions([]), setLetterGrade(''), setFinalGrade(''), setGraded(false), setTotal(0), setScore(0)}}
+                    onClick={() => {setTestQuestions([]), setLetterGrade(null), setFinalGrade(0), setGraded(false), setTotal(0), setScore(0)}}
                 >
                     Delete All Questions
                 </Button>
