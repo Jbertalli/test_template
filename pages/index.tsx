@@ -567,7 +567,7 @@ export default function Test() {
                             </span>
                           </div>
                           <div style={{ transform: 'translateY(-.5px)' }}>
-                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} setFinalGrade={setFinalGrade} setGraded={setGraded} setTotal={setTotal} />
+                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} setFinalGrade={setFinalGrade} setGraded={setGraded} setTotal={setTotal} setScore={setScore} />
                           </div>
                         </div>
                         <div style={{ transform: 'translateY(-20px)' }}>
