@@ -567,7 +567,7 @@ export default function Test() {
                             </span>
                           </div>
                           <div style={{ transform: 'translateY(-.5px)' }}>
-                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} setFinalGrade={setFinalGrade} setGraded={setGraded} />
+                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} setFinalGrade={setFinalGrade} setGraded={setGraded} setTotal={setTotal} />
                           </div>
                         </div>
                         <div style={{ transform: 'translateY(-20px)' }}>
@@ -724,13 +724,24 @@ export default function Test() {
                             </span>
                         </h2>
                         <h2 style={{ color: `${color}`, paddingBottom: '30px' }}>
-                            
-                           {graded ? (
+                           {(total > 0) ? (
                            <>
                               {letterGrade}
                            </>
                            ): null}
                         </h2>
+                        <div>
+                         Total: {total}
+                        </div>
+                        <div>
+                         Score: {score}
+                        </div>
+                        <div>
+                          finalGrade: {finalGrade}
+                        </div>
+                        <div>
+                          letterGrade: {letterGrade}
+                        </div>
                     </div>
                 </Container>
             </FocusLock>
