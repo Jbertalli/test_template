@@ -43,6 +43,7 @@ export default function Test() {
     const [testQuestions, setTestQuestions] = useState<any>([]);
     const [letterGrade, setLetterGrade] = useState<string>('');
     const [color, setColor] = useState<string>('');
+    const [deleteQuestion, setDeleteQuestion] = useState<any>(null);
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
     // const [correct, setCorrect] = useState<string>('');
@@ -524,9 +525,14 @@ export default function Test() {
                     </>
                     )}
                     <Divider />
-                    <TestList testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
+                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
                       {testQuestions.length > 0 ? (
                       <>
+                        <input
+                            type='number'
+                            placeholder='Delete Question #'
+                            onChange={(e) => setDeleteQuestion(e.target.value)}
+                        />
                         <div style={{ transform: 'translateY(-3px)' }}>
                           <Delete setTestQuestions={setTestQuestions} />
                         </div>

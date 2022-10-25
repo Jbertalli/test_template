@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Divider, Button } from 'semantic-ui-react';
 import Grade from '../components/Grade';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
-export default function TestList({ testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions }) {
+export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
     // const [ques, setQues] = useState([]);
+
+    console.log(deleteQuestion);
 
     const questions = testQuestions.map(testQuestions => {
 
@@ -97,7 +99,7 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
     //     setQues(questions);
     // }, [questions.length])
 
-    console.log(questions);
+    // console.log(questions);
     // console.log(ques);
 
     // questions
@@ -111,7 +113,6 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
     //     JSON.stringify(ques))
     //   }, [ques]);
 
-    //   [0].props.children[0].props.children[0].props.children.props.children[1]
     // const sliced = questions.slice(0, 1);
     // console.log(sliced);
 
@@ -124,14 +125,20 @@ export default function TestList({ testQuestions, questionNumber, answerNumber, 
     // const popped = questions.pop();
     // console.log(popped);
 
+    // const spliced = questions.splice(`${clear}`, 1);
+    // console.log(spliced);
+    console.log(questions);
+
+    let arr = questions;
+
+    delete arr[deleteQuestion]
+    console.log(arr);
+
     return (
         <>
             <div style={{ padding: '10px' }}>
                 {questions}
-                {/* {reversed} */}
-                {/* {shifted} */}
-                {/* {sliced} */}
-                {/* {ques} */}
+                {/* {deleteQuestion} */}
             </div>
         </>
     );
