@@ -16,7 +16,7 @@ const LOCAL_STORAGE_KEY_CLICK_TITLE = 'ClickTitle';
 // const LOCAL_STORAGE_KEY_QUESTION = 'Question';
 // const LOCAL_STORAGE_KEY_ANSWER = 'Answer';
 // const LOCAL_STORAGE_KEY_STUDENT_ANSWER = 'StudentAnswer';
-// const LOCAL_STORAGE_KEY_TEST_QUESTION = 'TestQuestion';
+const LOCAL_STORAGE_KEY_TEST_QUESTION = 'TestQuestion';
 // const LOCAL_STORAGE_KEY_QUESTION_NUMBER = 'QuestionNumber';
 // const LOCAL_STORAGE_KEY_ANSWER_NUMBER = 'AnswerNumber';
 // const LOCAL_STORAGE_KEY_SETSTUDENTANSWER = 'SetStudentAnswer';
@@ -272,13 +272,29 @@ export default function Test() {
             return [...prevQuestions, { id: id, name: quest, value: answ }]
         })
 
-        // console.log(quest);
-        // console.log(answ);
-        // console.log(id);
+        console.log(quest);
+        console.log(answ);
+        console.log(id);
 
         questionNameRef.current.value = null;
         answerNameRef.current.value = null;
     }
+
+        let consoleName = testQuestions[0]?.name;
+        console.log(JSON.stringify(testQuestions[0]?.name));
+        console.log(consoleName);
+        // console.log(typeof consoleName);
+
+        // //NO OBJECTS
+        // useEffect(() => {
+        //   const storedClickTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TEST_QUESTION))
+        //   if (storedClickTitle) setTestQuestions(storedClickTitle)
+        // }, [])
+      
+        // useEffect(() => {
+        //   localStorage.setItem(LOCAL_STORAGE_KEY_TEST_QUESTION, 
+        //   JSON.stringify())
+        // }, []);
 
     useEffect(() => {
       setFinalGrade(((score / total) * 100).toFixed(2).replace('NaN', ''))
