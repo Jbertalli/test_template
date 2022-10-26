@@ -1,4 +1,4 @@
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 export default function Delete({ setTestQuestions, setLetterGrade, setFinalGrade, setGraded, setTotal, setScore }) {
     return (
@@ -8,6 +8,9 @@ export default function Delete({ setTestQuestions, setLetterGrade, setFinalGrade
                     color="red"
                     onClick={() => {setTestQuestions([]), setLetterGrade(null), setFinalGrade(0), setGraded(false), setTotal(0), setScore(0)}}
                 >
+                    <Icon
+                        name="cancel"
+                    />
                     Delete All Questions
                 </Button>
             </div>

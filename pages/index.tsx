@@ -561,8 +561,9 @@ export default function Test() {
                               <Button
                                 attached="right"
                                 color="red"
+                                style={{ paddingLeft: '20px' }}
                               >
-                                Save
+                                Delete
                               </Button>
                             </span>
                           </div>
@@ -604,9 +605,9 @@ export default function Test() {
                             </Button>
                             <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
                                 <Icon
-                                    name="plus"
+                                    name="cancel"
                                 />
-                                Delete Question
+                                Don't Save Question
                             </Button>
                         </div>
                     </>
