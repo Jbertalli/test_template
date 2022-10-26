@@ -59,7 +59,7 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
                     </Button>
                 </>
                 )} */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -120%) scale(0.8)' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -100%) scale(0.8)' }}>
                     <Button
                         disabled={gradeClicked}
                         color="green"

@@ -405,7 +405,7 @@ export default function Test() {
                                     {name}
                                 </span>
                             </span>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-30px)' }}>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -32px) scale(0.8)' }}>
                                 <Button 
                                     color="blue"
                                     onClick={() => {setName(''), setNameClicked(false)}}
@@ -463,7 +463,7 @@ export default function Test() {
                                     {date}
                                 </span>
                             </span>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -32px) scale(0.8)' }}>
                                 <Button 
                                     color="blue"
                                     onClick={() => {setDate(''), setDateClicked(false)}}
@@ -521,7 +521,7 @@ export default function Test() {
                                     </b>
                                 </span>
                             </span>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translateY(-32px)' }}>
+                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -32px) scale(0.8)' }}>
                                 <Button 
                                     color="blue"
                                     onClick={() => {setTitle(''), setTitleClicked(false)}}
