@@ -52,22 +52,24 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     </>
                     )}
                 </div>
-                <input
-                    placeholder="Student Answer"
-                    style={{ 
-                        padding: '9px 14px 9px 14px', 
-                        fontSize: '14px', 
-                        fontWeight: '400', 
-                        cursor: 'text', 
-                        width: '178.5px', 
-                        borderRadius: '4px', 
-                        border: '1px solid rgba(34, 36, 38, 0.15)',
-                        position: 'relative', 
-                        zIndex: '100' 
-                    }}
-                    onChange={(e) => setStudentAnswer(e.target.value)}
-                />
-                <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                <div>
+                    <input
+                        placeholder="Student Answer"
+                        style={{ 
+                            padding: '9px 14px 9px 14px', 
+                            fontSize: '14px', 
+                            fontWeight: '400', 
+                            cursor: 'text', 
+                            width: '178.5px', 
+                            borderRadius: '4px', 
+                            border: '1px solid rgba(34, 36, 38, 0.15)',
+                            position: 'relative', 
+                            zIndex: '100' 
+                        }}
+                        onChange={(e) => setStudentAnswer(e.target.value)}
+                    />
+                    <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                </div>
                 <Divider />
             </>
         )

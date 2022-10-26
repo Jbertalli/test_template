@@ -59,13 +59,15 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
                     </Button>
                 </>
                 )} */}
-                <Button
-                    disabled={gradeClicked}
-                    color="green"
-                    onClick={() => {grade(), setGraded(true), setGradeClicked(true), setTotal(total + 1)}}
-                >
-                    Grade
-                </Button>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -120%) scale(0.8)' }}>
+                    <Button
+                        disabled={gradeClicked}
+                        color="green"
+                        onClick={() => {grade(), setGraded(true), setGradeClicked(true), setTotal(total + 1)}}
+                    >
+                        Grade
+                    </Button>
+                </div>
             </>
             )}
             <div style={{ marginTop: '10px' }}>
