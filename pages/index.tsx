@@ -286,9 +286,6 @@ export default function Test() {
 
     // console.log(typeof finalGrade);
 
-    // const finalGrade: number = (((score / total) * 100));
-    // console.log(typeof finalGrade);
-
     useEffect(() => {
         switch(true) {
             case (finalGrade >= 96.67 && finalGrade <= 100.0):
@@ -533,7 +530,7 @@ export default function Test() {
                     </>
                     )}
                     <Divider />
-                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} setTestQuestions={setTestQuestions} />
+                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
                       {testQuestions.length > 0 ? (
                       <>
                         <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>
@@ -612,19 +609,6 @@ export default function Test() {
                         </div>
                     </>
                     )}
-                    {/* {(studentAnswer.length > 0 && answer.length > 0) ? (
-                    <>
-                        <Button 
-                            color="blue" 
-                            onClick={() => grade()}
-                        >
-                                <Icon
-                                    name="check"
-                                />
-                                Grade
-                        </Button>
-                    </>
-                    ): null} */}
                     <div>
                         {!newQuestion ? (
                         <>
@@ -670,37 +654,6 @@ export default function Test() {
                         </>
                         ): null}
                     </div>
-                    {/* <div>
-                        {question}
-                    </div>
-                    <div>
-                        {answer}
-                    </div> */}
-                    {/* <Divider /> */}
-                    {/* <div>
-                        <h2 style={{ marginBottom: '5px' }}>
-                            Student Answer
-                        </h2>
-                        <input
-                            placeholder="Answer"
-                            style={{ 
-                                padding: '9px 14px 9px 14px', 
-                                fontSize: '14px', 
-                                fontWeight: '400', 
-                                cursor: 'text', 
-                                width: '178.5px', 
-                                borderRadius: '4px', 
-                                border: '1px solid rgba(34, 36, 38, 0.15)' 
-                            }}
-                            onChange={(e) => setStudentAnswer(e.target.value)}
-                        />
-                    </div> */}
-                    {/* <div>
-                        {studentAnswer}
-                    </div> */}
-                    {/* <h2>
-                        {correct}
-                    </h2> */}
                     <div>
                         <h2 style={{ marginBottom: '5px' }}>
                             {(finalGrade) ? (
@@ -714,7 +667,6 @@ export default function Test() {
                             ): null}
                         </h2>
                         <h2>
-                            {/* {(finalGrade).toFixed(2).replace('NaN', '')} */}
                             {finalGrade}
                             <span>
                                 {(finalGrade) ? (

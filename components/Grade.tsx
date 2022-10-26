@@ -13,20 +13,13 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
             setScore(score + 1);
         } else {
             setCorrect(false);
-            // console.log(correct);
             // setScore(score - 1);
-
-            // if ((score > 0) && !correct) {
-            //     setScore(score - 1);
-            // } else {
-            //     return;
-            // }
         }
     }
 
     // console.log(testQuestions.value);
     // console.log(studentAnswer);
-    console.log(score);
+    console.log('score:', score);
 
     return (
         <>
@@ -70,7 +63,7 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
                 </div>
             </>
             )}
-            <div style={{ marginTop: '10px' }}>
+            <div style={{ marginTop: '10px', transform: 'translateY(-10px)' }}>
                 {graded ? (
                 <>
                     {correct ? (

@@ -4,7 +4,7 @@ import Grade from '../components/Grade';
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
-export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal, setTestQuestions }) {
+export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
 
     // console.log(deleteQuestion);
