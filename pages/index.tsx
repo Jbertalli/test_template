@@ -280,9 +280,9 @@ export default function Test() {
         answerNameRef.current.value = null;
     }
 
-        let consoleName = testQuestions[0]?.name;
-        console.log(JSON.stringify(testQuestions[0]?.name));
-        console.log(consoleName);
+        // let consoleName = testQuestions[0]?.name;
+        // console.log(JSON.stringify(testQuestions[0]?.name));
+        // console.log(consoleName);
         // console.log(typeof consoleName);
 
         // //NO OBJECTS
@@ -699,18 +699,6 @@ export default function Test() {
                            </>
                            ): null}
                         </h2>
-                        {/* <div>
-                         Total: {total}
-                        </div>
-                        <div>
-                         Score: {score}
-                        </div>
-                        <div>
-                          finalGrade: {finalGrade}
-                        </div>
-                        <div>
-                          letterGrade: {letterGrade}
-                        </div> */}
                     </div>
                 </Container>
             </FocusLock>

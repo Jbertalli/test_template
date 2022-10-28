@@ -17,8 +17,8 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
         }
     }
 
-    // console.log(testQuestions.value);
-    // console.log(studentAnswer);
+    console.log(testQuestions.value);
+    console.log(studentAnswer);
     console.log('score:', score);
 
     return (
