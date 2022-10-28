@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-export default function Grade({ testQuestions, studentAnswer, score, setScore, total, setTotal }) {
+export default function Grade({ testQuestions, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [correct, setCorrect] = useState<boolean>(false);
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [gradeClicked, setGradeClicked] = useState<boolean>(false);
     const [graded, setGraded] = useState<boolean>(false);
+
+    // let array = [];
+
+    // for(let i = 0; i < studentAnswer.length; i++) {
+    //     array.push(studentAnswer[i])
+    // }
+
+    // let full = array.join('')
+
+    // console.log(full);
 
     const grade = function() {
         if (testQuestions.value == studentAnswer) {
@@ -17,8 +27,8 @@ export default function Grade({ testQuestions, studentAnswer, score, setScore, t
         }
     }
 
-    console.log(testQuestions.value);
-    console.log(studentAnswer);
+    console.log('Test Question:', testQuestions.value);
+    console.log('StudentAnswer:', studentAnswer);
     console.log('score:', score);
 
     return (

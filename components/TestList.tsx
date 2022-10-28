@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Divider, Button } from 'semantic-ui-react';
-import Grade from '../components/Grade';
+import React, { useState, useEffect } from 'react';
+import { Divider, Button, Modal } from 'semantic-ui-react';
+import Grade from '../components/Grade'; 
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
 export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [student, setStudent] = useState<boolean>(false);
 
     // console.log(deleteQuestion);
 
@@ -41,35 +43,53 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     </>
                     ):(
                     <>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -120%) scale(0.8)' }}>
-                            <Button
-                                color="blue"
-                                onClick={() => setRevealAnswer(true)}
-                            >
-                                Show Answer
-                            </Button>
-                        </div>
+                        {!student ? (
+                        <>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -120%) scale(0.8)' }}>
+                                <Button
+                                    color="blue"
+                                    onClick={() => setRevealAnswer(true)}
+                                >
+                                    Show Answer
+                                </Button>
+                            </div>
+                        </>
+                        ): null}
+                        
                     </>
                     )}
                 </div>
-                <div>
-                    <input
-                        placeholder="Student Answer"
-                        style={{ 
-                            padding: '9px 14px 9px 14px', 
-                            fontSize: '14px', 
-                            fontWeight: '400', 
-                            cursor: 'text', 
-                            width: '178.5px', 
-                            borderRadius: '4px', 
-                            border: '1px solid rgba(34, 36, 38, 0.15)',
-                            position: 'relative', 
-                            zIndex: '100' 
-                        }}
-                        onChange={(e) => setStudentAnswer(e.target.value)}
-                    />
-                    <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
-                </div>
+                <Button
+                    onClick={() => setOpen(true)}
+                >
+                    Answer Question
+                </Button>
+                <Modal open={open}>
+                    <Button
+                        style={{ borderRadius: '50px' }}
+                        onClick={() => setOpen(false)}
+                    >
+                        X
+                    </Button>
+                    <div>
+                        <input
+                            placeholder="Student Answer"
+                            style={{ 
+                                padding: '9px 14px 9px 14px', 
+                                fontSize: '14px', 
+                                fontWeight: '400', 
+                                cursor: 'text', 
+                                width: '178.5px', 
+                                borderRadius: '4px', 
+                                border: '1px solid rgba(34, 36, 38, 0.15)',
+                                position: 'relative', 
+                                zIndex: '100' 
+                            }}
+                            onChange={(e) => setStudentAnswer(e.target.value)}
+                        />
+                        <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                    </div>
+                </Modal>
                 <Divider />
             </>
         )
@@ -107,14 +127,27 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
 
     // const spliced = questions.splice(`${clear}`, 1);
     // console.log(spliced);
-    console.log(questions);
+    // console.log(questions);
 
     let arr = questions;
     delete arr[deleteQuestion]
     console.log(arr);
+    console.log(typeof arr);
 
     return (
         <>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Button
+                    onClick={() => setStudent(false)}
+                >
+                    Administrator
+                </Button>
+                <Button
+                    onClick={() => setStudent(true)}
+                >
+                    Student
+                </Button>
+            </div>
             <div style={{ padding: '10px' }}>
                 {questions}
             </div>
