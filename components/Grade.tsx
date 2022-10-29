@@ -16,7 +16,6 @@ export default function Grade({ testQuestions, studentAnswer, setStudentAnswer, 
     // let full = array.join('')
 
     // console.log(full);
-
     const grade = function() {
         if (testQuestions.value == studentAnswer) {
             setCorrect(true);
@@ -27,9 +26,9 @@ export default function Grade({ testQuestions, studentAnswer, setStudentAnswer, 
         }
     }
 
-    console.log('Test Question:', testQuestions.value);
-    console.log('StudentAnswer:', studentAnswer);
-    console.log('score:', score);
+    // console.log('Test Question:', testQuestions.value);
+    // console.log('StudentAnswer:', studentAnswer);
+    // console.log('score:', score);
 
     return (
         <>
@@ -66,6 +65,7 @@ export default function Grade({ testQuestions, studentAnswer, setStudentAnswer, 
                     <Button
                         disabled={gradeClicked}
                         color="green"
+                        // onMouseOver={() => }
                         onClick={() => {grade(), setGraded(true), setGradeClicked(true), setTotal(total + 1)}}
                     >
                         Grade
