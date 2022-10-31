@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Divider, Button, Modal, Icon } from 'semantic-ui-react';
 import Grade from '../components/Grade'; 
+import { v4 as uuidv4 } from 'uuid'; 
 
 // const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
 
@@ -8,6 +9,8 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [student, setStudent] = useState<boolean>(false);
+    const [arr2, setArr2] = useState<any>([]);
+    const [arr3, setArr3] = useState<any>([]);
 
     // console.log(deleteQuestion);
 
@@ -109,7 +112,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                         }}
                         onChange={(e) => setStudentAnswer(e.target.value)}
                     />
-                    <Grade testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                    <Grade arr2={arr2} testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
                 </div>
                 <Divider />
             </ul>
@@ -156,7 +159,35 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     // console.log(arr);
     // console.log(typeof arr);
 
-    console.log(questions.length);
+    console.log(questions);
+    // console.log(questions.length);
+
+    let array = []
+    let array1 = []
+
+    useEffect(() => {
+        for(let i = 0; i < questions.length; i++) {
+            let count = i;
+            let consoled = questions[`${count}`].props.children.props.children[0].props.children[0].props.children.props.children[4].props.children
+            // console.log(consoled);
+            array.push(consoled);
+            // console.log(array);
+            setArr2(array);
+        }
+    }, [questions.length])
+
+    useEffect(() => {
+        for(let j = 0; j < questions.length; j++) {
+            let count1 = j;
+            let consoled1 = questions[`${count1}`].props.children.props.children[1].props.children[1].props.studentAnswer;
+            array1.push(consoled1);
+            setArr3(array1);
+        }
+    }, [studentAnswer])
+
+    // console.log(arr2);
+    console.log(arr3);
+    // console.log(questions);
 
     return (
         <>
@@ -184,7 +215,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                 )}
             </div>
             <Divider />
-            <div key={testQuestions.id} style={{ padding: '10px' }}>
+            <div key={testQuestions.id} id={uuidv4()} style={{ padding: '10px' }}>
                 {questions}
             </div>
         </>

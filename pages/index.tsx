@@ -272,9 +272,9 @@ export default function Test() {
             return [...prevQuestions, { id: id, name: quest, value: answ }]
         })
 
-        console.log(quest);
-        console.log(answ);
-        console.log(id);
+        // console.log(quest);
+        // console.log(answ);
+        // console.log(id);
 
         questionNameRef.current.value = null;
         answerNameRef.current.value = null;
@@ -608,6 +608,7 @@ export default function Test() {
                     <>
                         <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'space-around' }}>
                             <Button 
+                                disabled={false}
                                 color="blue"
                                 onClick={handleAddQuestion}
                             >
