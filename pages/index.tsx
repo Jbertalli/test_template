@@ -5,6 +5,7 @@ import TestList from '../components/TestList';
 import { v4 as uuidv4 } from 'uuid';    
 import FocusLock from 'react-focus-lock';
 import Delete from '../components/Delete';
+import styles from '../styles/Home.module.css';
 
 const LOCAL_STORAGE_KEY_NAME = 'Name';
 const LOCAL_STORAGE_KEY_CLICK_NAME = 'ClickName';
@@ -272,12 +273,19 @@ export default function Test() {
             return [...prevQuestions, { id: id, name: quest, value: answ }]
         })
 
-        // console.log(quest);
-        // console.log(answ);
+        console.log(quest);
+        console.log(answ);
         // console.log(id);
 
         questionNameRef.current.value = null;
         answerNameRef.current.value = null;
+    }
+
+    let arr = []
+
+    for (let i = 0; i < testQuestions.length; i++) {
+      arr.push([studentAnswer]);
+      console.table(arr);
     }
 
         // let consoleName = testQuestions[0]?.name;
