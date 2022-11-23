@@ -1,7 +1,18 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Head>
+          <link rel="shortcut icon" sizes="32x32" href="/images/test.png" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/test.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/images/test.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/images/test.png" />
+      </Head>
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp
