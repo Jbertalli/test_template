@@ -3,8 +3,6 @@ import { Divider, Button, Modal, Icon } from 'semantic-ui-react';
 import Grade from '../components/Grade'; 
 import { v4 as uuidv4 } from 'uuid'; 
 
-// const LOCAL_STORAGE_KEY_QUESTIONS = 'questions';
-
 export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
@@ -126,17 +124,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
 
     // console.log(questions);
     // console.log(ques);
-
-    // questions
-    // useEffect(() => {
-    //     const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_QUESTIONS))
-    //     if (storedName) setQues(storedName)
-    //   }, [])
-    
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_QUESTIONS, 
-    //     JSON.stringify(ques))
-    //   }, [ques]);
 
     // const sliced = questions.slice(0, 1);
     // console.log(sliced);
