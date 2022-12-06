@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
-    const [open, setOpen] = useState<boolean>(false);
+    // const [open, setOpen] = useState<boolean>(false);
     const [student, setStudent] = useState<boolean>(false);
     const [arr2, setArr2] = useState<any>([]);
     const [arr3, setArr3] = useState<any>([]);
