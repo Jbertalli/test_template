@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Divider, Button, Modal, Icon } from 'semantic-ui-react';
 import Grade from '../components/Grade'; 
 import { v4 as uuidv4 } from 'uuid'; 
@@ -8,9 +8,118 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     // const [open, setOpen] = useState<boolean>(false);
     const [student, setStudent] = useState<boolean>(false);
     const [arr2, setArr2] = useState<any>([]);
-    const [arr3, setArr3] = useState<any>([]);
+    // const [arr3, setArr3] = useState<any>([]);
+
+    const [answersArray, setAnswersArray] = useState<any>([]);
+    const studentAnswerNameRef = useRef<any>();
 
     // console.log(deleteQuestion);
+
+    function handleSaveAnswer(e) {
+        const answer = studentAnswerNameRef.current.value;
+        console.log(studentAnswerNameRef.current.value);
+
+        if (answer === '') return 
+        
+        const aid = uuidv4();
+
+        setAnswersArray(prevAnswers => {
+            return [...prevAnswers, { id: aid, name: answer }]
+        })
+
+        // console.log(answer);
+        // console.log(id);
+
+        studentAnswerNameRef.current.value = null;
+    }
+
+    console.log(answersArray);
+    console.log(testQuestions);
+
+    let counting = []
+
+    for (let i = 0; i < answersArray.length; i++) {
+        counting.push([answersArray[i].name]);
+        // console.table(counting);
+    }
+
+    let fruits = []
+
+    for (let i = 0; i < answersArray.length; i++) {
+        fruits.push(counting.flat()[i]);
+    }
+
+    console.log('%c Student Answers', 'color: green', fruits);
+
+    let counting1 = []
+
+    for (let j = 0; j < testQuestions.length; j++) {
+        counting1.push([testQuestions[j].value]);
+        // console.table(counting1);
+    }
+
+    let fruits1 = []
+
+    for (let j = 0; j < testQuestions.length; j++) {
+        fruits1.push(counting1.flat()[j]);
+    }
+
+    console.log('%c Test Answers', 'color: blue', fruits1);
+
+    let combined = fruits1.concat(fruits);
+    
+    console.log(combined);
+
+    const totalCorrect = fruits.reduce(
+        (correctSoFar, answer, i) => correctSoFar + (answer === fruits1[i]),
+        0
+    );
+
+    console.log('totalCorrect:', totalCorrect);
+
+    // useEffect(() => {
+    //     if (fruits1.length === 0) {
+    //         console.log('zero');
+    //     } else if ((fruits1.length === 1) && (fruits[0] === fruits1[0])) {
+    //         console.log('correct');
+    //     } else {
+    //         console.log('incorrect');
+    //     }
+    // }, [fruits.length])
+
+    // console.log(fruits.length);
+
+    // useEffect(() => {
+    //     for (let i = 0; i < answersArray.length; i++) {
+    //         let answerGrade = answersArray[i].name;
+    //         let questionGrade = testQuestions[i].value;
+    //         if ((answersArray.length > 0) && (answerGrade == questionGrade)) {
+    //             console.log(true);
+    //         } else {
+    //             console.log(false);
+    //         }
+    //     }
+    // }, [answersArray])
+
+    // console.log(answersArray.length)
+
+    // let answArray = []
+
+    // for (let i = 0; i < answersArray.length; i++) {
+    //   answArray.push([studentAnswer]);
+    //   console.table(answArray);
+    // }
+
+    // let fruit = []
+
+    // useEffect(() => {
+    //     for (let i = 0; i < answersArray.length; i++) {
+    //         console.log(answersArray[i].name);
+    //         fruit.push([answersArray[i].name]);
+    //     }
+    // }, [answersArray])
+
+    // console.log(fruit);
 
     const questions = testQuestions.map(testQuestions => {
 
@@ -95,7 +204,8 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                 </Modal> */}
                 <div>
                     <input
-                        type='testQuestions'
+                        ref={studentAnswerNameRef}
+                        type='text'
                         placeholder="Student Answer"
                         style={{ 
                             padding: '9px 14px 9px 14px', 
@@ -110,7 +220,19 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                         }}
                         onChange={(e) => setStudentAnswer(e.target.value)}
                     />
-                    <Grade arr2={arr2} testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                    <Button
+                        color='blue'
+                        onClick={handleSaveAnswer}
+                        style={{
+                            cursor: 'hover'
+                        }}
+                    >
+                        Save
+                    </Button>
+                    {/* <h3>
+                        {studentAnswer}
+                    </h3> */}
+                    <Grade answersArray={answersArray} arr2={arr2} testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
                 </div>
                 <Divider />
             </ul>
@@ -146,34 +268,34 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     // console.log(arr);
     // console.log(typeof arr);
 
-    console.log(questions);
-    // console.log(questions.length);
+    // console.log(questions);
+    // // console.log(questions.length);
 
-    let array = []
-    let array1 = []
+    // let array = []
+    // let array1 = []
 
-    useEffect(() => {
-        for(let i = 0; i < questions.length; i++) {
-            let count = i;
-            let consoled = questions[`${count}`].props.children.props.children[0].props.children[0].props.children.props.children[4].props.children
-            // console.log(consoled);
-            array.push(consoled);
-            // console.log(array);
-            setArr2(array);
-        }
-    }, [questions.length])
+    // useEffect(() => {
+    //     for(let i = 0; i < questions.length; i++) {
+    //         let count = i;
+    //         let consoled = questions[`${count}`].props.children.props.children[0].props.children[0].props.children.props.children[4].props.children
+    //         // console.log(consoled);
+    //         array.push(consoled);
+    //         // console.log(array);
+    //         setArr2(array);
+    //     }
+    // }, [questions.length])
 
-    useEffect(() => {
-        for(let j = 0; j < questions.length; j++) {
-            let count1 = j;
-            let consoled1 = questions[`${count1}`].props.children.props.children[1].props.children[1].props.studentAnswer;
-            array1.push(consoled1);
-            setArr3(array1);
-        }
-    }, [studentAnswer])
+    // useEffect(() => {
+    //     for(let j = 0; j < questions.length; j++) {
+    //         let count1 = j;
+    //         let consoled1 = questions[`${count1}`].props.children.props.children[1].props.children[1].props.studentAnswer;
+    //         array1.push(consoled1);
+    //         setArr3(array1);
+    //     }
+    // }, [studentAnswer])
 
     // console.log(arr2);
-    console.log(arr3);
+    // console.log(arr3);
     // console.log(questions);
 
     return (

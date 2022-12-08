@@ -281,12 +281,12 @@ export default function Test() {
         answerNameRef.current.value = null;
     }
 
-    let arr = []
+    // let arr = []
 
-    for (let i = 0; i < testQuestions.length; i++) {
-      arr.push([studentAnswer]);
-      console.table(arr);
-    }
+    // for (let i = 0; i < testQuestions.length; i++) {
+    //   arr.push([studentAnswer]);
+    //   console.table(arr);
+    // }
 
         // let consoleName = testQuestions[0]?.name;
         // console.log(JSON.stringify(testQuestions[0]?.name));
