@@ -26,6 +26,11 @@ const LOCAL_STORAGE_KEY_TEST_QUESTION = 'TestQuestion';
 // const LOCAL_STORAGE_KEY_TOTAL = 'Total';
 // const LOCAL_STORAGE_KEY_SETTOTAL = 'SetTotal';
 
+const INITIAL_VALUES = {
+    questionField: '',
+    answerField: ''
+}
+
 export default function Test() {
     const [newQuestion, setNewQuestion] = useState<boolean>(true);
     const [question, setQuestion] = useState<string>('');
@@ -50,6 +55,10 @@ export default function Test() {
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
     // const [correct, setCorrect] = useState<string>('');
+    const [count, setCount] = useState<number>(0);
+
+    const [field, setField] = useState(INITIAL_VALUES);
+    const [empty, setEmpty] = useState<boolean>(true);
 
     // Name
     useEffect(() => {
@@ -260,7 +269,7 @@ export default function Test() {
     //     }
     // }
 
-    function handleAddQuestion(e) {
+    function handleAddQuestion() {
         const quest = questionNameRef.current.value;
         const answ = answerNameRef.current.value;
 
@@ -279,6 +288,20 @@ export default function Test() {
 
         questionNameRef.current.value = null;
         answerNameRef.current.value = null;
+    }
+
+    useEffect(() => {
+        const isField = Object.values(field).every(el => Boolean(el))
+        isField ? setEmpty(false) : setEmpty(true);
+    }, [field])
+
+    function handleChange(event) {
+        const {name, value} = event.target
+        setField(prevState => ({ ...prevState, [name]: value }))
+    }
+
+    function handleClear() {
+        setField(INITIAL_VALUES);
     }
 
     // let arr = []
@@ -371,6 +394,8 @@ export default function Test() {
                null;
         }
     }, [letterGrade])
+
+    console.log('count:', count);
 
     return (
         <>
@@ -557,7 +582,7 @@ export default function Test() {
                     <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
                       {testQuestions.length > 0 ? (
                       <>
-                        <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>
+                        {/* <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>
                           Delete Question
                         </h2>
                         <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', transform: 'translateY(-40px)' }}>
@@ -594,7 +619,7 @@ export default function Test() {
                         </div>
                         <div style={{ transform: 'translateY(-20px)' }}>
                           <Divider />
-                        </div>
+                        </div> */}
                       </>
                       ): null}
                     <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
@@ -616,9 +641,9 @@ export default function Test() {
                     <>
                         <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'space-around' }}>
                             <Button 
-                                disabled={false}
+                                disabled={empty}
                                 color="blue"
-                                onClick={handleAddQuestion}
+                                onClick={() => {handleAddQuestion(), setCount(count + 1), handleClear()}}
                             >
                                 <Icon
                                     name="save"
@@ -643,6 +668,8 @@ export default function Test() {
                                 </h2>
                                 <input
                                     ref={questionNameRef}
+                                    value={field.questionField}
+                                    name='questionField'
                                     placeholder="Question"
                                     style={{ 
                                         padding: '9px 14px 9px 14px', 
@@ -653,7 +680,7 @@ export default function Test() {
                                         borderRadius: '4px', 
                                         border: '1px solid rgba(34, 36, 38, 0.15)' 
                                     }}
-                                    onChange={(e) => setQuestion(e.target.value)}
+                                    onChange={(e) => {setQuestion(e.target.value), handleChange(e)}}
                                 />
                             </div>
                             <div>
@@ -662,6 +689,8 @@ export default function Test() {
                                 </h2>
                                 <input 
                                     ref={answerNameRef}
+                                    value={field.answerField}
+                                    name='answerField'
                                     placeholder="Answer"
                                     style={{ 
                                         padding: '9px 14px 9px 14px', 
@@ -673,7 +702,7 @@ export default function Test() {
                                         border: '1px solid rgba(34, 36, 38, 0.15)',
                                         marginBottom: '10px'
                                     }}
-                                    onChange={(e) => setAnswer(e.target.value)}
+                                    onChange={(e) => {setAnswer(e.target.value), handleChange(e)}}
                                 />
                             </div>
                         </>
