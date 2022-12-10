@@ -9,14 +9,18 @@ export default function AnswerKey({ fruits1 }) {
                     color: 'red'
                 }}
             >
-                <h1
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}
-                >
-                    Answer Key
-                </h1>
+                {fruits1 && fruits1.length > 0 ? (
+                <>
+                    <h1
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        Answer Key
+                    </h1>
+                </>
+                ): null}
                 {
                     fruits1 && fruits1.map((element, index) => 
                         <h3>

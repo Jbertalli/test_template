@@ -301,14 +301,46 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
 
     return (
         <>
-            <AnswerKey fruits1={fruits1} />
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            {!student ? (
+            <>
+                <h1
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    Admin View
+                </h1>
+                <Divider />
+                <div>
+                    <AnswerKey fruits1={fruits1} />
+                    <Divider />
+                </div>
+            </>
+            ):(
+            <>
+                <h1
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                    }}
+                >
+                    Student View
+                </h1>
+                <Divider />
+            </>
+            )}
+            <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'center' 
+                }}
+            >
                 {student ? (
                 <>
                     <Button
                         onClick={() => setStudent(false)}
                     >
-                        Administrator
+                        Switch to Admin
                     </Button>
                 </>
                 ):(
@@ -316,7 +348,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     <Button
                         onClick={() => setStudent(true)}
                     >
-                        Student
+                        Switch to Student
                         <Icon
                             name="pencil"
                             style={{ transform: 'translate(15px) scale(1.4)' }}
