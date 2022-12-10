@@ -302,7 +302,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     return (
         <>
             {!student ? (
-            <>
+            <>              
                 <h1
                     style={{
                         display: 'flex',
@@ -313,73 +313,78 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     Admin View
                 </h1>
                 <Divider />
-                {!openAnswerKey ? (
-                <>
-                    <div
-                        style={{ 
-                            transform: 'translateY(-8px)',
-                            cursor: 'pointer' 
-                        }}
-                        onClick={() => {setOpenAnswerKey(true)}}
-                    >
-                        <div 
-                            style={{ 
-                                marginLeft: '-25px',
-                                display: 'flex',
-                                color: '#125CA1',
-                                transform: 'translateY(100%) scale(0.8)'
-                            }}
-                        >
-                            <Icon
-                                name='chevron down'
-                            />
-                        </div>
+                {(fruits1 && fruits1.length > 0) ? (
+                <> 
+                    {!openAnswerKey ? (
+                    <>
                         <div
                             style={{ 
-                                display: 'flex',
-                                justifyContent: 'center',
-                                fontSize: '18px', 
-                                fontWeight: '500',
-                                color: '#125CA1'
+                                transform: 'translateY(-8px)',
+                                cursor: 'pointer' 
                             }}
+                            onClick={() => {setOpenAnswerKey(true)}}
                         >
-                            Open Answer Key
+                            <div 
+                                style={{ 
+                                    marginLeft: '-25px',
+                                    display: 'flex',
+                                    color: '#125CA1',
+                                    transform: 'translateY(100%) scale(0.8)'
+                                }}
+                            >
+                                <Icon
+                                    name='chevron down'
+                                />
+                            </div>
+                            <div
+                                style={{ 
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    fontSize: '18px', 
+                                    fontWeight: '500',
+                                    color: '#125CA1'
+                                }}
+                            >
+                                Open Answer Key
+                            </div>
                         </div>
-                    </div>
-                    <Divider />
-                </>
-                ):(
-                <>
-                    <Container
-                        style={{ 
-                            color: 'red',
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                            cursor: 'pointer',
-                            marginRight: '25px',
-                            transform: 'translate(0vw, -5px)'
-                        }}
-                            onClick={() => setOpenAnswerKey(false)}
-                    >
+                        <Divider />
+                    </>
+                    ):(
+                    <>
+                        <Container
+                            style={{ 
+                                color: 'red',
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                cursor: 'pointer',
+                                marginRight: '25px',
+                                transform: 'translate(0vw, -5px)'
+                            }}
+                                onClick={() => setOpenAnswerKey(false)}
+                        >
+                            <div
+                                style={{
+                                    transform: 'scale(2)',
+                                    zIndex: '10'
+                                }}
+                            >
+                                x
+                            </div>
+                        </Container>
                         <div
                             style={{
-                                transform: 'scale(2)'
+                                marginBottom: '15px',
+                                transform: 'translateY(-15px)'
                             }}
                         >
-                            x
+                            <AnswerKey fruits1={fruits1} />
                         </div>
-                    </Container>
-                    <div
-                        style={{
-                            marginBottom: '15px',
-                            transform: 'translateY(-15px)'
-                        }}
-                    >
-                        <AnswerKey fruits1={fruits1} />
-                    </div>
-                    <Divider />
+                        <Divider />
+                    </>
+                    )}
                 </>
-                )}
+                ): null}
             </>
             ):(
             <>
