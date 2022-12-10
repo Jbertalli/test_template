@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Divider, Button, Modal, Icon } from 'semantic-ui-react';
+import { Divider, Button, Modal, Container, Icon } from 'semantic-ui-react';
 import AnswerKey from './AnswerKey';
 import Grade from '../components/Grade'; 
 import { v4 as uuidv4 } from 'uuid'; 
@@ -9,10 +9,10 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     // const [open, setOpen] = useState<boolean>(false);
     const [student, setStudent] = useState<boolean>(false);
     const [arr2, setArr2] = useState<any>([]);
-    // const [arr3, setArr3] = useState<any>([]);
-
     const [answersArray, setAnswersArray] = useState<any>([]);
     const studentAnswerNameRef = useRef<any>();
+    const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
+    // const [arr3, setArr3] = useState<any>([]);
 
     // console.log(deleteQuestion);
 
@@ -306,23 +306,88 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                 <h1
                     style={{
                         display: 'flex',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        transform: 'translateY(-6px)'
                     }}
                 >
                     Admin View
                 </h1>
                 <Divider />
-                <div>
-                    <AnswerKey fruits1={fruits1} />
+                {!openAnswerKey ? (
+                <>
+                    <div
+                        style={{ 
+                            transform: 'translateY(-8px)',
+                            cursor: 'pointer' 
+                        }}
+                        onClick={() => {setOpenAnswerKey(true)}}
+                    >
+                        <div 
+                            style={{ 
+                                marginLeft: '-25px',
+                                display: 'flex',
+                                color: '#125CA1',
+                                transform: 'translateY(100%) scale(0.8)'
+                            }}
+                        >
+                            <Icon
+                                name='chevron down'
+                            />
+                        </div>
+                        <div
+                            style={{ 
+                                display: 'flex',
+                                justifyContent: 'center',
+                                fontSize: '18px', 
+                                fontWeight: '500',
+                                color: '#125CA1'
+                            }}
+                        >
+                            Open Answer Key
+                        </div>
+                    </div>
                     <Divider />
-                </div>
+                </>
+                ):(
+                <>
+                    <Container
+                        style={{ 
+                            color: 'red',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            cursor: 'pointer',
+                            marginRight: '25px',
+                            transform: 'translate(0vw, -5px)'
+                        }}
+                            onClick={() => setOpenAnswerKey(false)}
+                    >
+                        <div
+                            style={{
+                                transform: 'scale(2)'
+                            }}
+                        >
+                            x
+                        </div>
+                    </Container>
+                    <div
+                        style={{
+                            marginBottom: '15px',
+                            transform: 'translateY(-15px)'
+                        }}
+                    >
+                        <AnswerKey fruits1={fruits1} />
+                    </div>
+                    <Divider />
+                </>
+                )}
             </>
             ):(
             <>
                 <h1
                     style={{
                         display: 'flex',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        transform: 'translateY(-6px)'
                     }}
                 >
                     Student View
