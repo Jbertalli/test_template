@@ -14,6 +14,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     const studentAnswerNameRef = useRef<any>();
     const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
     // const [arr3, setArr3] = useState<any>([]);
+    const [openGrade, setOpenGrade] = useState<boolean>(false);
     const form = useRef();
 
     // console.log(deleteQuestion);
@@ -417,6 +418,46 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
             )}
             {student ? (
             <>
+                {openGrade ? (
+                <>
+
+                </>
+                ):(
+                <>
+
+                </>
+                )}
+                <div
+                    style={{ 
+                        transform: 'translateY(-8px)',
+                        cursor: 'pointer' 
+                    }}
+                    // onClick={() => {setOpenGrade(true)}}
+                >
+                    <div 
+                        style={{ 
+                            marginLeft: '-25px',
+                            display: 'flex',
+                            color: '#125CA1',
+                            transform: 'translateY(100%) scale(0.8)'
+                        }}
+                    >
+                        <Icon
+                            name='chevron down'
+                        />
+                    </div>
+                    <div
+                        style={{ 
+                            display: 'flex',
+                            justifyContent: 'center',
+                            fontSize: '18px', 
+                            fontWeight: '500',
+                            color: '#125CA1'
+                        }}
+                    >
+                        Email Your Grade
+                    </div>
+                </div>
                 <div>
                     <form ref={form} onSubmit={sendEmail}>
                         <label>Name</label>
@@ -428,6 +469,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                         <input type="submit" value="Send" />
                     </form>
                 </div>
+                <Divider />
             </>
             ): null}
             <div style={{ 
