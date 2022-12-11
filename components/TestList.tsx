@@ -3,6 +3,7 @@ import { Divider, Button, Modal, Container, Icon } from 'semantic-ui-react';
 import AnswerKey from './AnswerKey';
 import Grade from '../components/Grade'; 
 import { v4 as uuidv4 } from 'uuid'; 
+import emailjs from 'emailjs-com';
 
 export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
@@ -13,6 +14,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     const studentAnswerNameRef = useRef<any>();
     const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
     // const [arr3, setArr3] = useState<any>([]);
+    const form = useRef();
 
     // console.log(deleteQuestion);
 
@@ -121,6 +123,19 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     // }, [answersArray])
 
     // console.log(fruit);
+
+    function sendEmail(e) {
+        e.preventDefault();
+
+        emailjs.sendForm('service_jj71xm9', 'template_roux4nq', form.current, 'FlrSx29zmJDjwJhtt')
+        .then((result) => {
+            console.log(result.text);
+        }, (error) => {
+            console.log(error.text);
+        });
+        // fields on form are reset after submit
+        e.target.reset();
+    }
 
     const questions = testQuestions.map(testQuestions => {
 
@@ -400,6 +415,21 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                 <Divider />
             </>
             )}
+            {student ? (
+            <>
+                <div>
+                    <form ref={form} onSubmit={sendEmail}>
+                        <label>Name</label>
+                        <input type="text" name="user_name" />
+                        <label>Email</label>
+                        <input type="email" name="user_email" />
+                        <label>Message</label>
+                        <textarea name="message" />
+                        <input type="submit" value="Send" />
+                    </form>
+                </div>
+            </>
+            ): null}
             <div style={{ 
                     display: 'flex', 
                     justifyContent: 'center' 
