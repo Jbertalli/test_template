@@ -114,17 +114,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     //   console.table(answArray);
     // }
 
-    // let fruit = []
-
-    // useEffect(() => {
-    //     for (let i = 0; i < answersArray.length; i++) {
-    //         console.log(answersArray[i].name);
-    //         fruit.push([answersArray[i].name]);
-    //     }
-    // }, [answersArray])
-
-    // console.log(fruit);
-
     function sendEmail(e) {
         e.preventDefault();
 
