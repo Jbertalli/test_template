@@ -107,13 +107,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
 
     // console.log(answersArray.length)
 
-    // let answArray = []
-
-    // for (let i = 0; i < answersArray.length; i++) {
-    //   answArray.push([studentAnswer]);
-    //   console.table(answArray);
-    // }
-
     function sendEmail(e) {
         e.preventDefault();
 
