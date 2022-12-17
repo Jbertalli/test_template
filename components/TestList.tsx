@@ -11,11 +11,40 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     const [student, setStudent] = useState<boolean>(false);
     const [arr2, setArr2] = useState<any>([]);
     const [answersArray, setAnswersArray] = useState<any>([]);
-    const studentAnswerNameRef = useRef<any>();
     const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
     // const [arr3, setArr3] = useState<any>([]);
     const [openGrade, setOpenGrade] = useState<boolean>(false);
+    const [serviceList, setServiceList] = useState([{ service: '' }]);
+    const studentAnswerNameRef = useRef<any>();
     const form = useRef();
+
+    console.log(serviceList);
+
+    let arr = []
+
+    for (let i = 0; i < serviceList.length; i++) {
+        console.log(serviceList[i].service);
+        arr.push(serviceList[i].service);
+    }
+
+    console.log('array answers', arr);
+
+    const handleServiceRemove = (index) => {
+        const list = [...serviceList];
+        list.splice(index, 1);
+        setServiceList(list);
+    }
+
+    const handleServiceChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...serviceList];
+        list[index][name] = value;
+        setServiceList(list);
+    }
+
+    const handleAddService = () => {
+        setServiceList([...serviceList, { service: '' }])
+    }
 
     // console.log(deleteQuestion);
 
@@ -239,6 +268,41 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
         )
     })
 
+    // return (
+    // serviceList.map((singleService, index) => (
+    //     <div key={index}>
+    //         <div>
+    //             <input
+    //                 name='service'
+    //                 type='text'
+    //                 id='service'
+    //                 required
+    //                 value={singleService.service}
+    //                 onChange={(e) => handleServiceChange(e, index)}
+    //             />
+    //             {serviceList.length - 1 === index && serviceList.length < 4 && (
+    //                 <button
+    //                     type='button'
+    //                     onClick={handleAddService}
+    //                 >
+    //                 <span>Add a Service</span>
+    //                 </button>
+    //             )}
+    //         </div>
+    //         <div>
+    //             {serviceList.length !== 1 && (
+    //                 <button
+    //                     type='button'
+    //                     onClick={() => handleServiceRemove(index)}
+    //                 >
+    //                     <span>Remove</span>
+    //                 </button>
+    //             )}
+    //         </div>
+    //     </div>
+    // ))
+    // )
+
     // useEffect(() => {
     //     setQues(questions);
     // }, [questions.length])
@@ -402,55 +466,174 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
             <>
                 {openGrade ? (
                 <>
-
+                    <div>
+                        <Container
+                            style={{ 
+                                color: 'red',
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                cursor: 'pointer',
+                                marginRight: '25px',
+                                transform: 'translate(0vw, -5px)'
+                            }}
+                                onClick={() => setOpenGrade(false)}
+                        >
+                            <div
+                                style={{
+                                    transform: 'scale(2)',
+                                    zIndex: '10'
+                                }}
+                            >
+                                x
+                            </div>
+                        </Container>
+                    </div>
+                    <div>
+                        <form ref={form} onSubmit={sendEmail}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <div>
+                                    <h3
+                                        style={{
+                                            marginBottom: '0px',
+                                        }}
+                                    >
+                                        Name
+                                    </h3>
+                                    <input 
+                                        type="text" 
+                                        name="user_name"
+                                        style={{
+                                            padding: '9px 14px 9px 14px', 
+                                            fontSize: '14px', 
+                                            fontWeight: '400', 
+                                            cursor: 'text', 
+                                            width: '178.5px', 
+                                            borderRadius: '4px', 
+                                            border: '1px solid rgba(34, 36, 38, 0.15)',
+                                            position: 'relative',
+                                            zIndex: '1000'
+                                        }} 
+                                    />
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <div>
+                                    <h3
+                                        style={{
+                                            marginBottom: '0px',
+                                            marginTop: '10px'
+                                        }}
+                                    >
+                                        Email
+                                    </h3>
+                                    <input 
+                                        type="email" 
+                                        name="user_email" 
+                                        style={{
+                                            padding: '9px 14px 9px 14px', 
+                                            fontSize: '14px', 
+                                            fontWeight: '400', 
+                                            cursor: 'text', 
+                                            width: '178.5px', 
+                                            borderRadius: '4px', 
+                                            border: '1px solid rgba(34, 36, 38, 0.15)',
+                                            position: 'relative',
+                                            zIndex: '1000'
+                                        }}     
+                                    />
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <div>
+                                    <h3
+                                        style={{
+                                            marginBottom: '0px',
+                                            marginTop: '10px'
+                                        }}
+                                    >
+                                        Message
+                                    </h3>
+                                    <textarea name="message" />
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    marginBottom: '0px',
+                                    marginTop: '10px',
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <input 
+                                    type="submit" 
+                                    value="Send"
+                                    style={{
+                                        padding: '9px 14px 9px 14px', 
+                                        fontWeight: '400',
+                                        cursor: 'pointer', 
+                                        width: '80px', 
+                                        borderRadius: '4px', 
+                                        border: '1px solid rgba(34, 36, 38, 0.15)',
+                                        position: 'relative',
+                                        zIndex: '1000',
+                                        background: 'rgba(18, 92, 161, .90)',
+                                        color: 'white'
+                                    }}  
+                                />
+                            </div>
+                        </form>
+                    </div>
                 </>
                 ):(
                 <>
-
-                </>
-                )}
-                <div
-                    style={{ 
-                        transform: 'translateY(-8px)',
-                        cursor: 'pointer' 
-                    }}
-                    // onClick={() => {setOpenGrade(true)}}
-                >
-                    <div 
-                        style={{ 
-                            marginLeft: '-25px',
-                            display: 'flex',
-                            color: '#125CA1',
-                            transform: 'translateY(100%) scale(0.8)'
-                        }}
-                    >
-                        <Icon
-                            name='chevron down'
-                        />
-                    </div>
                     <div
                         style={{ 
-                            display: 'flex',
-                            justifyContent: 'center',
-                            fontSize: '18px', 
-                            fontWeight: '500',
-                            color: '#125CA1'
+                            transform: 'translateY(-8px)',
+                            cursor: 'pointer' 
                         }}
+                        onClick={() => {setOpenGrade(true)}}
                     >
-                        Email Your Grade
+                        <div 
+                            style={{ 
+                                marginLeft: '-25px',
+                                display: 'flex',
+                                color: '#125CA1',
+                                transform: 'translateY(100%) scale(0.8)'
+                            }}
+                        >
+                            <Icon
+                                name='chevron down'
+                            />
+                        </div>
+                        <div
+                            style={{ 
+                                display: 'flex',
+                                justifyContent: 'center',
+                                fontSize: '18px', 
+                                fontWeight: '500',
+                                color: '#125CA1'
+                            }}
+                        >
+                            Email Your Grade
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <form ref={form} onSubmit={sendEmail}>
-                        <label>Name</label>
-                        <input type="text" name="user_name" />
-                        <label>Email</label>
-                        <input type="email" name="user_email" />
-                        <label>Message</label>
-                        <textarea name="message" />
-                        <input type="submit" value="Send" />
-                    </form>
-                </div>
+                </>
+                )}
                 <Divider />
             </>
             ): null}
@@ -485,6 +668,62 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
             <div key={testQuestions.id} id={uuidv4()} style={{ padding: '10px' }}>
                 {questions}
             </div>
+            {/* <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    transform: 'translateY(50vh)'
+                }}
+            >
+                <form autoComplete='off'>
+                    <div>
+                        {serviceList.map((singleService, index) => (
+                            <div key={index}>
+                                <div>
+                                    <div>
+                                        {questions[index]}
+                                    </div>
+                                    <input
+                                        name='service'
+                                        type='text'
+                                        id='service'
+                                        required
+                                        value={singleService.service}
+                                        onChange={(e) => handleServiceChange(e, index)}
+                                    />
+                                    {serviceList.length - 1 === index && (
+                                        <button
+                                            type='button'
+                                            onClick={handleAddService}
+                                        >
+                                        <span>Add a Service</span>
+                                        </button>
+                                    )}
+                                </div>
+                                <div>
+                                    {serviceList.length !== 1 && (
+                                        <button
+                                            type='button'
+                                            onClick={() => handleServiceRemove(index)}
+                                        >
+                                            <span>Remove</span>
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div>
+                        <h2>Output</h2>
+                        {serviceList &&
+                            serviceList.map((singleService, index) => (
+                                <ul key={index}>
+                                    {singleService.service && <li>{singleService.service}</li>}
+                                </ul>
+                            ))}
+                    </div>
+                </form>
+            </div> */}
         </>
     );
 }
