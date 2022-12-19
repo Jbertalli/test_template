@@ -54,7 +54,6 @@ export default function Test() {
     const [graded, setGraded] = useState<boolean>(false);
     const questionNameRef = useRef<any>();
     const answerNameRef = useRef<any>();
-    // const [correct, setCorrect] = useState<string>('');
     const [count, setCount] = useState<number>(0);
 
     const [field, setField] = useState(INITIAL_VALUES);
@@ -257,17 +256,6 @@ export default function Test() {
     //     localStorage.setItem(LOCAL_STORAGE_KEY_SETTOTAL, 
     //     JSON.stringify(total))
     //   }, [total]);
-
-    // const grade = function() {
-    //     if (answer == studentAnswer) {
-    //         setCorrect('Correct');
-    //         setScore(score + 1);
-    //         console.log('%c Correct!', 'color: green');
-    //     } else {
-    //         setCorrect('Incorrect');
-    //         console.log('%c Incorrect.', 'color: red');
-    //     }
-    // }
 
     function handleAddQuestion() {
         const quest = questionNameRef.current.value;
