@@ -4,6 +4,7 @@ import AnswerKey from './AnswerKey';
 import Grade from '../components/Grade'; 
 import { v4 as uuidv4 } from 'uuid'; 
 import emailjs from 'emailjs-com';
+import Answer from '../components/Answer';
 
 export default function TestList({ deleteQuestion, testQuestions, questionNumber, answerNumber, studentAnswer, setStudentAnswer, score, setScore, total, setTotal }) {
     const [revealAnswer, setRevealAnswer] = useState<boolean>(false);
@@ -107,8 +108,6 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
         (correctSoFar, answer, i) => correctSoFar + (answer === fruits1[i]),
         0
     );
-
-    console.log('totalCorrect:', totalCorrect);
 
     // useEffect(() => {
     //     if (fruits1.length === 0) {
@@ -257,6 +256,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                         >
                             Save
                         </Button>
+                        <Answer />
                         {/* <h3>
                             {studentAnswer}
                         </h3> */}
