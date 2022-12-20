@@ -156,17 +156,17 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
             <>  
                 <ul key={testQuestions.id}>
                     <div style={{ transform: 'translateY(20px)' }}>
-                        <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
+                        {/* <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
                             <h2>
                                 Question #{questionNumber += 1}:{' '}
                                 <span style={{ fontWeight: '100' }}>
                                     {testQuestions.name}
                                 </span>
                             </h2>
-                        </div>
+                        </div> */}
                         {!student ? (
                         <>
-                            {revealAnswer ? (
+                            {/* {revealAnswer ? (
                             <>
                                 <div style={{ fontSize: '20px', color: 'red' }}>
                                     Answer #{answerNumber += 1}:{' '}
@@ -194,7 +194,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                                     </Button>
                                 </div>
                             </>
-                            )}
+                            )} */}
                         </>
                         ): null}
                     </div>
@@ -230,7 +230,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                         </div>
                     </Modal> */}
                     <div>
-                        <input
+                        {/* <input
                             ref={studentAnswerNameRef}
                             type='text'
                             placeholder="Student Answer"
@@ -255,12 +255,12 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                             }}
                         >
                             Save
-                        </Button>
-                        <Answer />
+                        </Button> */}
+                        <Answer questionNumber={questionNumber} student={student} setStudent={setStudent} />
                         {/* <h3>
                             {studentAnswer}
                         </h3> */}
-                        <Grade answersArray={answersArray} arr2={arr2} testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
+                        {/* <Grade answersArray={answersArray} arr2={arr2} testQuestions={testQuestions} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} /> */}
                     </div>
                     <Divider />
                 </ul>
@@ -724,6 +724,19 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                     </div>
                 </form>
             </div> */}
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center'
+                }}
+            >
+                <Button
+                    color='blue'
+                >
+                    Grade Test
+                </Button>
+            </div>
+            <Divider />
         </>
     );
 }
