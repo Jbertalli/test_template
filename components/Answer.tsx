@@ -1,7 +1,8 @@
+import { getRandomValues } from 'crypto';
 import React, { useState, useEffect } from 'react';
 import { Button, Divider, Icon } from 'semantic-ui-react';
 
-export default function Answer({ c, index, questionNumber, student, setStudent }: any) {
+export default function Answer({ value, c, index, questionNumber, student, setStudent }: any) {
     const [item, setItem] = useState(['']);
     const [serviceList, setServiceList] = useState([{ service: '' }]);
     const [answ, setAnsw] = useState<string>('');
@@ -11,6 +12,7 @@ export default function Answer({ c, index, questionNumber, student, setStudent }
     // const [correct, setCorrect] = useState<string>('correct');
     const [correct, setCorrect] = useState<boolean>(false);
     const [grade, setGrade] = useState<boolean>(false);
+    // const [count, setCount] = useState<number>(0);
     // const [saveQuestion, setSaveQuestion] = useState<boolean>(false);
 
     console.log(serviceList);
@@ -22,13 +24,13 @@ export default function Answer({ c, index, questionNumber, student, setStudent }
         arr.push(serviceList[i].service);
     }
 
-    console.log(arr)
+    console.log(arr);
 
-    // const handleServiceRemove = (index) => {
-    //     const list = [...serviceList];
-    //     list.splice(index, 1);
-    //     setServiceList(list);
-    // }
+    const handleServiceRemove = (index) => {
+        const list = [...serviceList];
+        list.splice(index, 1);
+        setServiceList(list);
+    }
 
     const handleServiceChange = (e, index) => {
         const { name, value } = e.target;
@@ -37,22 +39,22 @@ export default function Answer({ c, index, questionNumber, student, setStudent }
         setServiceList(list);
     }
 
-    // const handleAddService = () => {
-    //     setServiceList([...serviceList, { service: '' }])
-    // }
+    const handleAddService = () => {
+        setServiceList([...serviceList, { service: '' }])
+    }
 
     // function saveAnswer() {
     //         console.log(item)
     //         setItem([...item, ''])
     // }
 
-   const setInput = (index) => (e) => {
-       item.splice(index, 1, e.target.value);
-       setItem([...item]);
-       console.log(...item);
-   }
+//    const setInput = (index) => (e) => {
+//        item.splice(index, 1, e.target.value);
+//        setItem([...item]);
+//        console.log(...item);
+//    }
 
-    console.log(item);
+//     console.log(item);
 
     console.log(quest);
     console.log(answ);
@@ -60,10 +62,8 @@ export default function Answer({ c, index, questionNumber, student, setStudent }
 
     useEffect(() => {
         if ((quest && answ && studentAnsw) && (answ.toLowerCase() === studentAnsw.toLowerCase())) {
-            // setCorrect('Correct');
             setCorrect(true);
         } else {
-            // setCorrect('Incorrect');
             setCorrect(false);
         }
     }, [studentAnsw])
