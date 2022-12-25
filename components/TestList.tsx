@@ -18,6 +18,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
     const [serviceList, setServiceList] = useState([{ service: '' }]);
     const studentAnswerNameRef = useRef<any>();
     const form = useRef();
+    const [prac, setPrac] = useState<string>('');
 
     console.log(serviceList);
 
@@ -148,12 +149,44 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
         e.target.reset();
     }
 
+    // function send() {
+    //     emailjs.send("service_jj71xm9","template_7hans9n", 'FlrSx29zmJDjwJhtt',{
+    //         from_name: "Julian",
+    //         to_name: "John",
+    //         message: "Hello",
+    //     });
+    // }
+
+    var templateParams = {
+        name: `${prac}`,
+        notes: 'Check this out!'
+    };
+     
+    function send() {
+        emailjs.send('service_jj71xm9', 'template_7hans9n', templateParams, 'FlrSx29zmJDjwJhtt')
+            .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+            console.log('FAILED...', error);
+            });
+    }
+
     const questions = testQuestions.map(testQuestions => {
 
         // console.log(testQuestions.id);
 
         return (
             <>  
+                <input
+                    value={prac}
+                    onChange={(e) => setPrac(e.target.value)}
+                />
+                <Button
+                    onClick={send}
+                    color='green'
+                >
+                    Send an email
+                </Button>
                 <ul key={testQuestions.id}>
                     <div style={{ transform: 'translateY(20px)' }}>
                         {/* <div style={{ fontSize: '30px', paddingBottom: '10px' }}>
@@ -506,7 +539,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                                     </h3>
                                     <input 
                                         type="text" 
-                                        name="user_name"
+                                        name="to_name"
                                         style={{
                                             padding: '9px 14px 9px 14px', 
                                             fontSize: '14px', 
@@ -568,7 +601,7 @@ export default function TestList({ deleteQuestion, testQuestions, questionNumber
                                     >
                                         Message
                                     </h3>
-                                    <textarea name="message" />
+                                    <textarea name="message">This is the message</textarea>
                                 </div>
                             </div>
                             <div
