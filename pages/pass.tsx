@@ -17,6 +17,13 @@ export default function Services() {
     // const [access, setAccess] = useState<boolean>(false);
     // const [password, setPassword] = useState<string>('');
     // const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [count, setCount] = useState<number>(0);
+    const [auth, setAuth] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>('');
+    const [adminPassword, setAdminPassword] = useState<string>('');
+    const [hide, setHide] = useState<string>('password');
+    const [show, setShow] = useState<boolean>(false);
+    const [clickPassword, setClickPassword] = useState<boolean>(true);
 
     useEffect(() => {
         const storedList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
@@ -177,8 +184,135 @@ export default function Services() {
         }
     }, [letterGrade])
 
+    // function setCookie() {
+    //     document.cookie = 'admin=true;';
+    // }
+
+    // function removeCookie() {
+    //     document.cookie = 'admin=false; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+    // }
+
+    // useEffect(() => {
+    //     if (typeof window !== "undefined") {
+    //         console.log(document.cookie);
+    //         if (document.cookie.length > 6) {
+    //             console.log('Authenticated!')
+    //             setAuth(true);
+    //         } else {
+    //             console.log('Not Authenticated');
+    //             setAuth(false);
+    //         }
+    //     } else {
+    //         console.log('window == undefined');
+    //     }
+    // }, [count])
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            // console.log(document.cookie);
+            if ((password.length > 0) && (password === adminPassword)) {
+                // document.cookie = 'admin=true;';
+                // console.log(document.cookie);
+                // console.log('Authenticated!')
+                setAuth(true);
+            } else {
+                // document.cookie = 'admin=false; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+                // console.log('no cookie', document.cookie);
+                // console.log('Not Authenticated');
+                setAuth(false);
+            }
+        } else {
+            console.log('window == undefined');
+        }
+    }, [count])
+
     return (
         <>
+            {/* <Button
+                onClick={() => {setCookie(), setCount(count + 1)}}
+            >
+                Set Cookie
+            </Button>
+            <Button
+                onClick={() => {removeCookie(), setCount(count - 1)}}
+            >
+                Remove Cookie
+            </Button> */}
+            {clickPassword ? (
+            <>
+                <div>
+                    Set Admin Password to Create Test
+                </div>
+                <input
+                    type={hide}
+                    placeholder='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                    onClick={() => setClickPassword(false)}
+                >
+                    Set Admin Password
+                </Button>
+            </>
+            ):(
+            <>
+                <div>
+                    Login
+                </div>
+                <input
+                    type={hide}
+                    placeholder='Admin Password'
+                    value={adminPassword}
+                    onChange={(e) => setAdminPassword(e.target.value)}
+                />
+                <Button
+                    onClick={() => setCount(count + 1)}
+                >
+                    Submit
+                </Button>
+                <Button
+                    onClick={() => {setClickPassword(true), setPassword(''), setAdminPassword(''), setAuth(false)}}
+                >
+                    Reset Password
+                </Button>
+            </>
+            )} 
+            {/* {password}
+            {adminPassword} */}
+            <Divider />
+            {auth ? (
+            <>
+                Test Generator
+            </>
+            ):(
+            <>
+                Test
+            </>
+            )}
+            {show ? (
+            <>
+                <Button
+                    color='red'
+                    onClick={() => {setHide('password'), setShow(false)}}
+                >
+                    Hide Password
+                </Button>
+            </>
+            ):(
+            <>
+                <Button
+                    color='blue'
+                    onClick={() => {setHide('text'), setShow(true)}}
+                >
+                    Show Password
+                </Button>
+            </>
+            )}
+            <Divider />
+            <Button>
+                Take Test
+            </Button>
             <Head>
                 <title>Test Generator</title>
                 <meta name='description' content='test' />
