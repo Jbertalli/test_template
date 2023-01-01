@@ -40,33 +40,9 @@ export default function Grade({ answersArray, arr2, testQuestions, studentAnswer
         <>
             {submitted ? (
             <>
-                {/* <Button
-                    color="blue"
-                >
-                    Submit
-                </Button> */}
             </>
             ):(
             <>
-                {/* {gradeClicked ? (
-                <>
-                    <Button
-                        color="red"
-                        onClick={() => {setGradeClicked(false), setTotal(total - 1)}}
-                    >
-                        Redo Grade
-                    </Button>
-                </>
-                ):(
-                <>
-                    <Button
-                        color="green"
-                        onClick={() => {grade(), setGraded(true), setGradeClicked(true), setTotal(total + 1)}}
-                    >
-                        Grade
-                    </Button>
-                </>
-                )} */}
                 <div style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -100%) scale(0.8)' }}>
                     <Button
                         disabled={gradeClicked}
