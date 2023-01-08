@@ -14,9 +14,6 @@ export default function Services() {
     const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
     const [openQuestionKey, setOpenQuestionKey] = useState<boolean>(false);
     const [openStudentAnswers, setOpenStudentAnswers] = useState<boolean>(false);
-    // const [access, setAccess] = useState<boolean>(false);
-    // const [password, setPassword] = useState<string>('');
-    // const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [count, setCount] = useState<number>(0);
     const [auth, setAuth] = useState<boolean>(false);
     const [password, setPassword] = useState<string>('');
@@ -184,29 +181,6 @@ export default function Services() {
         }
     }, [letterGrade])
 
-    // function setCookie() {
-    //     document.cookie = 'admin=true;';
-    // }
-
-    // function removeCookie() {
-    //     document.cookie = 'admin=false; expires=Thu, 01 Jan 1970 00:00:00 UTC;';
-    // }
-
-    // useEffect(() => {
-    //     if (typeof window !== "undefined") {
-    //         console.log(document.cookie);
-    //         if (document.cookie.length > 6) {
-    //             console.log('Authenticated!')
-    //             setAuth(true);
-    //         } else {
-    //             console.log('Not Authenticated');
-    //             setAuth(false);
-    //         }
-    //     } else {
-    //         console.log('window == undefined');
-    //     }
-    // }, [count])
-
     useEffect(() => {
         if (typeof window !== "undefined") {
             // console.log(document.cookie);
@@ -228,16 +202,6 @@ export default function Services() {
 
     return (
         <>
-            {/* <Button
-                onClick={() => {setCookie(), setCount(count + 1)}}
-            >
-                Set Cookie
-            </Button>
-            <Button
-                onClick={() => {removeCookie(), setCount(count - 1)}}
-            >
-                Remove Cookie
-            </Button> */}
             {clickPassword ? (
             <>
                 <div>
@@ -278,8 +242,6 @@ export default function Services() {
                 </Button>
             </>
             )} 
-            {/* {password}
-            {adminPassword} */}
             <Divider />
             {auth ? (
             <>
@@ -317,56 +279,6 @@ export default function Services() {
                 <title>Test Generator</title>
                 <meta name='description' content='test' />
             </Head>
-            {/* <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    transform: 'translateY(20px)'
-                }}
-            >
-                {access ? (
-                <>
-                    <Button
-                        color='blue'
-                        onClick={() => setAccess(false)}
-                    >
-                        Set Admin Access Code
-                    </Button>
-                </>
-                ):(
-                <>
-                    <div>
-                        <input
-                            placeholder='access code'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            style={{
-                                padding: '9px 14px 9px 14px',
-                                fontSize: '14px',
-                                fontWeight: '400',
-                                cursor: 'text',
-                                width: '178.5px',
-                                borderRadius: '4px',
-                                border: '1px solid rgba(34, 36, 38. 0.15)',
-                                position: 'relative',
-                                zIndex: '100'
-                            }}
-                        />
-                    </div>
-                    <Button
-                        color='red'
-                        onClick={() => setAccess(true)}
-                    >
-                        x
-                    </Button>
-                    <Button
-                        color='blue'
-                    >
-                        Save
-                    </Button>
-                </>
-                )}
-            </div> */}
             <Container
                 style={{ 
                     margin: '3em'
