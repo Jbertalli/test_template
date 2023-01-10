@@ -25,6 +25,7 @@ export default function Services() {
     const [background, setBackground] = useState<string>('#f2f2f2');
     const [textColor, setTextColor] = useState<string>('black');
     const [questionColor, setQuestionColor] = useState<string>('#125CA1');
+    const [openHover, setOpenHover] = useState<boolean>(false);
 
     console.log(background);
     console.log(textColor);
@@ -218,7 +219,7 @@ export default function Services() {
                 {!night ? (
                 <>
                     <Button
-                        onClick={() => {setNight(true), setBackground('#313e4c'), setTextColor('#f2f2f2'), setQuestionColor('#f2f2f2')}}
+                        onClick={() => {setNight(true), setBackground('#202020'), setTextColor('#f2f2f2'), setQuestionColor('#f2f2f2')}}
                         style={{
                             position: 'absolute',
                             marginTop: '20px',
@@ -326,6 +327,78 @@ export default function Services() {
             <Button>
                 Take Test
             </Button>
+            <div
+                style={{
+                    cursor: 'pointer',
+                    margin: '0px',
+                    position: 'absolute',
+                    paddingBottom: '0px'
+                }}
+            >
+                {openHover ? (
+                <>
+                    <div
+                        onClick={() => setOpenHover(false)}
+                        style={{
+                            border: '1px solid red',
+                            width: '30vw',
+                            maxWidth: '300px',
+                            height: '100vh',
+                            background: 'red',
+                            position: 'relative',
+                            zIndex: '1000'
+                        }}
+                    >
+                        Open Menu
+                    </div>
+                </>
+                ):(
+                <>
+                    <div
+                        onClick={() => setOpenHover(true)}
+                    >
+                        <div
+                            style={{
+                               width: '50px',
+                               position: 'relative',
+                               transform: 'scaleX(2)',
+                               left: '30px',
+                               marginBottom: '0px'
+                            }}
+                        >
+                            <Icon
+                                name='minus'
+                            />
+                        </div>
+                        <div
+                            style={{
+                                width: '50px',
+                                position: 'relative',
+                                transform: 'scaleX(2) translateY(-13px)',
+                                left: '30px'
+                             }}
+                        >
+                            <Icon
+                                name='minus'
+                            />
+                        </div>
+                        <div
+                            style={{
+                                width: '50px',
+                                position: 'relative',
+                                transform: 'scaleX(2) translateY(-26px)',
+                                left: '30px',
+                                marginBottom: '0px'
+                             }}
+                        >
+                            <Icon
+                                name='minus'
+                            />
+                        </div>
+                    </div>
+                </>
+                )}
+            </div>
             <Head>
                 <title>Test Generator</title>
                 <meta name='description' content='test' />
