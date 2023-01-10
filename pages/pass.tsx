@@ -21,6 +21,13 @@ export default function Services() {
     const [hide, setHide] = useState<string>('password');
     const [show, setShow] = useState<boolean>(false);
     const [clickPassword, setClickPassword] = useState<boolean>(true);
+    const [night, setNight] = useState<boolean>(false);
+    const [background, setBackground] = useState<string>('#f2f2f2');
+    const [textColor, setTextColor] = useState<string>('black');
+    const [questionColor, setQuestionColor] = useState<string>('#125CA1');
+
+    console.log(background);
+    console.log(textColor);
 
     useEffect(() => {
         const storedList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
@@ -202,6 +209,50 @@ export default function Services() {
 
     return (
         <>
+            <div 
+                style={{ 
+                    background: `${background}`,
+                    color: `${textColor}`
+                }}
+            >
+                {!night ? (
+                <>
+                    <Button
+                        onClick={() => {setNight(true), setBackground('#313e4c'), setTextColor('#f2f2f2'), setQuestionColor('#f2f2f2')}}
+                        style={{
+                            position: 'absolute',
+                            marginTop: '20px',
+                            marginLeft: '20px',
+                            background: 'black',
+                            color: 'white'
+                        }}
+                    >
+                        <Icon
+                            name='moon'
+                        />
+                        Night Mode
+                    </Button>
+                </>
+                ):(
+                <>
+                    <Button
+                        onClick={() => {setNight(false), setBackground('#f2f2f2'), setTextColor(''), setQuestionColor('#125CA1')}}
+                        style={{
+                            position: 'absolute',
+                            marginTop: '20px',
+                            marginLeft: '20px',
+                            background: 'white',
+                            color: 'black'
+                        }}
+                    >
+                        <Icon
+                            name='sun'    
+                        />
+                        Day Mode
+                    </Button>
+                </>
+                )}
+            
             {clickPassword ? (
             <>
                 <div>
@@ -388,7 +439,7 @@ export default function Services() {
                                     style={{ 
                                         marginLeft: '-25px',
                                         display: 'flex',
-                                        color: '#125CA1',
+                                        color: `${questionColor}`,
                                         transform: 'translateY(100%) scale(0.8)'
                                     }}
                                 >
@@ -402,7 +453,7 @@ export default function Services() {
                                         justifyContent: 'center',
                                         fontSize: '20px', 
                                         fontWeight: '700',
-                                        color: '#125CA1'
+                                        color: `${questionColor}`
                                     }}
                                 >
                                     Open Question Key
@@ -483,7 +534,7 @@ export default function Services() {
                                     style={{ 
                                         marginLeft: '-25px',
                                         display: 'flex',
-                                        color: '#125CA1',
+                                        color: `${questionColor}`,
                                         transform: 'translateY(100%) scale(0.8)'
                                     }}
                                 >
@@ -497,7 +548,7 @@ export default function Services() {
                                         justifyContent: 'center',
                                         fontSize: '20px', 
                                         fontWeight: '700',
-                                        color: '#125CA1'
+                                        color: `${questionColor}`
                                     }}
                                 >
                                     Open Answer Key
@@ -582,7 +633,7 @@ export default function Services() {
                                     style={{ 
                                         marginLeft: '-25px',
                                         display: 'flex',
-                                        color: '#125CA1',
+                                        color: `${questionColor}`,
                                         transform: 'translateY(100%) scale(0.8)'
                                     }}
                                 >
@@ -596,7 +647,7 @@ export default function Services() {
                                         justifyContent: 'center',
                                         fontSize: '20px', 
                                         fontWeight: '700',
-                                        color: '#125CA1'
+                                        color: `${questionColor}`
                                     }}
                                 >
                                     Open Student Answers
@@ -914,6 +965,7 @@ export default function Services() {
                     ): null}
                 </div>
             </Container>
+        </div>
         </>
     )
 }
