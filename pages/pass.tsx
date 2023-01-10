@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { Button, Divider, Icon, Card, Container } from 'semantic-ui-react';
+import styles from '../styles/Home.module.css';
 
 const LOCAL_STORAGE_KEY = 'list';
 
@@ -338,7 +339,8 @@ export default function Services() {
                 {openHover ? (
                 <>
                     <div
-                        onClick={() => setOpenHover(false)}
+                        className={styles.open}
+                        onMouseLeave={() => setOpenHover(false)}
                         style={{
                             border: '1px solid red',
                             width: '30vw',
@@ -354,10 +356,9 @@ export default function Services() {
                 </>
                 ):(
                 <>
-                    <div
-                        onClick={() => setOpenHover(true)}
-                    >
+                    <div>
                         <div
+                            onMouseOver={() => setOpenHover(true)}
                             style={{
                                width: '50px',
                                position: 'relative',

@@ -127,3 +127,21 @@
     filter: invert(1);
   }
 }
+
+.ease {
+  transition: all 5s ease;
+}
+
+.open {
+  animation-name: opening;
+  animation-duration: 5s;
+}
+
+@keyframes opening {
+  0% {
+    width: 0px
+  }
+  100% {
+    width: 500px
+  }
+}
