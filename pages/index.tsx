@@ -1,358 +1,599 @@
 import Head from 'next/head';
-import React, { useState, useRef, useEffect } from 'react';
-import { Button, Icon, Divider, Container } from 'semantic-ui-react';
-import TestList from '../components/TestList';
-import { v4 as uuidv4 } from 'uuid';    
-import FocusLock from 'react-focus-lock';
-import Delete from '../components/Delete';
-import styles from '../styles/Home.module.css';
+import React, { useState, useEffect } from 'react';
+import styles from '../styles/Test.module.css';
+import { Button, Divider, Icon, Card, Container, Modal, Checkbox } from 'semantic-ui-react';
+import { useTimer } from 'react-timer-hook';
+import emailjs from 'emailjs-com';
+// import hash from 'object-hash';
 
+const LOCAL_STORAGE_KEY = 'list';
 const LOCAL_STORAGE_KEY_NAME = 'Name';
 const LOCAL_STORAGE_KEY_CLICK_NAME = 'ClickName';
 const LOCAL_STORAGE_KEY_DATE = 'Date';
 const LOCAL_STORAGE_KEY_CLICK_DATE = 'ClickDate';
 const LOCAL_STORAGE_KEY_TITLE = 'Title';
 const LOCAL_STORAGE_KEY_CLICK_TITLE = 'ClickTitle';
-// const LOCAL_STORAGE_KEY_NEW_QUESTION = 'NewQuestion';
-// const LOCAL_STORAGE_KEY_QUESTION = 'Question';
-// const LOCAL_STORAGE_KEY_ANSWER = 'Answer';
-// const LOCAL_STORAGE_KEY_STUDENT_ANSWER = 'StudentAnswer';
-const LOCAL_STORAGE_KEY_TEST_QUESTION = 'TestQuestion';
-// const LOCAL_STORAGE_KEY_QUESTION_NUMBER = 'QuestionNumber';
-// const LOCAL_STORAGE_KEY_ANSWER_NUMBER = 'AnswerNumber';
-// const LOCAL_STORAGE_KEY_SETSTUDENTANSWER = 'SetStudentAnswer';
-// const LOCAL_STORAGE_KEY_SCORE = 'Score';
-// const LOCAL_STORAGE_KEY_SETSCORE = 'SetScore';
-// const LOCAL_STORAGE_KEY_TOTAL = 'Total';
-// const LOCAL_STORAGE_KEY_SETTOTAL = 'SetTotal';
+const LOCAL_STORAGE_KEY_USER_EMAIL = 'UserEmail';
+const LOCAL_STORAGE_KEY_IS_VALID = 'IsValid';
+const LOCAL_STORAGE_KEY_OPEN_NAME_DATE = 'OpenNameDate';
+const LOCAL_STORAGE_KEY_OPEN_MODAL = 'OpenModal';
+const LOCAL_STORAGE_KEY_AUTH = 'Auth';
+// const LOCAL_STORAGE_KEY_PASSWORD = 'Password';
+const LOCAL_STORAGE_KEY_ADMIN_PASSWORD = 'AdminPassword'; 
+// const LOCAL_STORAGE_KEY_CLICK_PASSWORD = 'ClickPassword';
+// const LOCAL_STORAGE_KEY_HIDE_ADMIN = 'HideAdmin';
+const LOCAL_STORAGE_KEY_NEW_MODAL = 'NewModal';
+// const LOCAL_STORAGE_KEY_NEW_PASSWORD = 'NewPassword';
+// const LOCAL_STORAGE_KEY_SAME = 'Same';
+const LOCAL_STORAGE_KEY_LETTER_GRADE = 'LetterGrade';
+const LOCAL_STORAGE_KEY_COLOR = 'Color';
+const LOCAL_STORAGE_KEY_STUDENT = 'Student';
+const LOCAL_STORAGE_KEY_FINISH = 'Finish';
+const LOCAL_STORAGE_KEY_SAVE = 'Save';
+const LOCAL_STORAGE_KEY_RESET = 'ResetPassword';
+const LOCAL_STORAGE_KEY_ADMIN_EMAIL = 'AdminEmail';
+const LOCAL_STORAGE_KEY_DEMO = 'Demo';
+const LOCAL_STORAGE_KEY_CREATED = 'Created';
+const LOCAL_STORAGE_KEY_SAVE_RIPPLE = 'Ripple';
+const LOCAL_STORAGE_KEY_RESET_CLICKED = 'ResetClicked';
+const LOCAL_STORAGE_KEY_NIGHT = 'Night';
+const LOCAL_STORAGE_KEY_BACKGROUND = 'Background';
+const LOCAL_STORAGE_KEY_TEXT_COLOR = 'TextColor';
+const LOCAL_STORAGE_KEY_QUESTION_COLOR = 'QuestionColor';
 
-const INITIAL_VALUES = {
-    questionField: '',
-    answerField: ''
-}
-
-export default function Test() {
-    const [newQuestion, setNewQuestion] = useState<boolean>(true);
-    const [question, setQuestion] = useState<string>('');
-    const [answer, setAnswer] = useState<string>('');
-    const [studentAnswer, setStudentAnswer] = useState<string>('');
+export default function Services() {
+    const [serviceList, setServiceList] = useState([{ service: '', answer: '', student: '' }]);
+    const [letterGrade, setLetterGrade] = useState<any>(null);
+    const [color, setColor] = useState<string>('');
+    const [student, setStudent] = useState<boolean>(false);
+    const [finish, setFinish] = useState<boolean>(false);
+    const [save, setSave] = useState<boolean>(false);
+    const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
+    const [openQuestionKey, setOpenQuestionKey] = useState<boolean>(false);
+    const [openStudentAnswers, setOpenStudentAnswers] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [date, setDate] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [nameClicked, setNameClicked] = useState<boolean>(false);
     const [dateClicked, setDateClicked] = useState<boolean>(false);
     const [titleClicked, setTitleClicked] = useState<boolean>(false);
-    const [score, setScore] = useState<number>(0);
-    const [total, setTotal] = useState<number>(0);
-    const [questionNumber, setQuestionNumber] = useState<any>(0);
-    const [answerNumber, setAnswerNumber] = useState<any>(0);
-    const [testQuestions, setTestQuestions] = useState<any>([]);
-    const [letterGrade, setLetterGrade] = useState<any>(null);
-    const [color, setColor] = useState<string>('');
-    const [deleteQuestion, setDeleteQuestion] = useState<any>(null);
-    const [finalGrade, setFinalGrade] = useState<any>(0);
-    const [graded, setGraded] = useState<boolean>(false);
-    const questionNameRef = useRef<any>();
-    const answerNameRef = useRef<any>();
-    const [count, setCount] = useState<number>(0);
+    const [minute, setMinute] = useState<string>('0');
+    const [second, setSecond] = useState<string>('0');
+    const [timed, setTimed] = useState<boolean>(false);
+    const [timeClick, setTimeClick] = useState<boolean>(false);
+    const [openEmail, setOpenEmail] = useState<boolean>(false);
+    const [userEmail, setUserEmail] = useState<string>('');
+    const [isValid, setIsValid] = useState<boolean>(false);
+    const [edit, setEdit] = useState<boolean>(false);
+    const [isTimed, setIsTimed] = useState<boolean>(false);
+    const [openNameDate, setOpenNameDate] = useState<boolean>(false);
+    const [openModal, setOpenModal] = useState<boolean>(false);
+    const [auth, setAuth] = useState<boolean>(false);
+    const [password, setPassword] = useState<string>('');
+    const [adminPassword, setAdminPassword] = useState<string>('');
+    const [hide, setHide] = useState<string>('password');
+    const [show, setShow] = useState<boolean>(false);
+    const [clickPassword, setClickPassword] = useState<boolean>(true);
+    const [hideAdmin, setHideAdmin] = useState<boolean>(false);
+    const [newModal, setNewModal] = useState<boolean>(false);
+    const [newPassword, setNewPassword] = useState<string>('');
+    const [same, setSame] = useState<boolean>(false);
+    const [demo, setDemo] = useState<boolean>(false);
+    const [creating, setCreating] = useState<boolean>(false);
+    const [created, setCreated] = useState<boolean>(false);
+    const [adminEmail, setAdminEmail] = useState<string>('');
+    const [resetPassword, setResetPassword] = useState<string>('');
+    const [sameReset, setSameReset] = useState<boolean>(false);
+    const [isResetting, setIsResetting] = useState<boolean>(false);
+    const [saveRipple, setSaveRipple] = useState<boolean>(false);
+    const [errorCheck, setErrorCheck] = useState<boolean>(false);
+    const [resetClicked, setResetClicked] = useState<boolean>(false);
+    const [eye, setEye] = useState<boolean>(false);
+    const [night, setNight] = useState<boolean>(false);
+    const [background, setBackground] = useState<string>('white');
+    const [textColor, setTextColor] = useState<string>('black');
+    const [questionColor, setQuestionColor] = useState<string>('#125CA1');
 
-    const [field, setField] = useState(INITIAL_VALUES);
-    const [empty, setEmpty] = useState<boolean>(true);
+    // List
+    useEffect(() => {
+        const storedList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+        if (storedList) setServiceList(storedList)
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, 
+        JSON.stringify(serviceList))
+    }, [serviceList])
 
     // Name
     useEffect(() => {
         const storedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NAME))
         if (storedName) setName(storedName)
-      }, [])
+    }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_NAME, 
         JSON.stringify(name))
-      }, [name]);
+    }, [name]);
 
     // Name Clicked
     useEffect(() => {
         const storedClickedName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_NAME))
         if (storedClickedName) setNameClicked(storedClickedName)
-      }, [])
+    }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_NAME, 
         JSON.stringify(nameClicked))
-      }, [nameClicked]);
+    }, [nameClicked]);
 
     // Date
     useEffect(() => {
         const storedDate = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_DATE))
         if (storedDate) setDate(storedDate)
-      }, [])
+    }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_DATE, 
         JSON.stringify(date))
-      }, [date]);
+    }, [date]);
 
     // Date Clicked
     useEffect(() => {
         const storedClickDate = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_DATE))
         if (storedClickDate) setDateClicked(storedClickDate)
-      }, [])
+    }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_DATE, 
         JSON.stringify(dateClicked))
-      }, [dateClicked]);
+    }, [dateClicked]);
 
     // Title
     useEffect(() => {
         const storedTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TITLE))
         if (storedTitle) setTitle(storedTitle)
-      }, [])
+    }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_TITLE, 
         JSON.stringify(title))
-      }, [title]);
+    }, [title]);
 
     // Title Clicked
     useEffect(() => {
         const storedClickTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_TITLE))
         if (storedClickTitle) setTitleClicked(storedClickTitle)
-      }, [])
+    }, [])
     
-      useEffect(() => {
+    useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_TITLE, 
         JSON.stringify(titleClicked))
-      }, [titleClicked]);
+    }, [titleClicked]);
 
-    // // New Question
-    // useEffect(() => {
-    //     const storedNewQuestion = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NEW_QUESTION))
-    //     if (storedNewQuestion) setNewQuestion(storedNewQuestion)
-    //   }, [])
+    // UserEmail
+    useEffect(() => {
+        const storedUserEmail = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_USER_EMAIL))
+        if (storedUserEmail) setUserEmail(storedUserEmail)
+    }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_NEW_QUESTION, 
-    //     JSON.stringify(newQuestion))
-    //   }, [newQuestion]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_USER_EMAIL, 
+        JSON.stringify(userEmail))
+    }, [userEmail]);
 
-    // // Question
-    // useEffect(() => {
-    //     const storedQuestion = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_QUESTION))
-    //     if (storedQuestion) setQuestion(storedQuestion)
-    //   }, [])
+    // IsValid
+    useEffect(() => {
+        const storedIsValid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_IS_VALID))
+        if (storedIsValid) setIsValid(storedIsValid)
+    }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_QUESTION, 
-    //     JSON.stringify(question))
-    //   }, [question]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_IS_VALID, 
+        JSON.stringify(isValid))
+    }, [isValid]);
 
-    // // Answer
-    // useEffect(() => {
-    //     const storedAnswer = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ANSWER))
-    //     if (storedAnswer) setAnswer(storedAnswer)
-    //   }, [])
+    // OpenNameDate
+    useEffect(() => {
+        const storedOpenNameDate = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_OPEN_NAME_DATE))
+        if (storedOpenNameDate) setOpenNameDate(storedOpenNameDate)
+    }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_ANSWER, 
-    //     JSON.stringify(answer))
-    //   }, [answer]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_OPEN_NAME_DATE, 
+        JSON.stringify(openNameDate))
+    }, [openNameDate]);
 
-    // // Student Answer
-    // useEffect(() => {
-    //     const storedStudentAnswer = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_STUDENT_ANSWER))
-    //     if (storedStudentAnswer) setStudentAnswer(storedStudentAnswer)
-    //   }, [])
+    // OpenModal
+    useEffect(() => {
+        const storedOpenModal = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_OPEN_MODAL))
+        if (storedOpenModal) setOpenModal(storedOpenModal)
+    }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_STUDENT_ANSWER, 
-    //     JSON.stringify(studentAnswer))
-    //   }, [studentAnswer]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_OPEN_MODAL, 
+        JSON.stringify(openModal))
+    }, [openModal]);
 
-    // // Test Questions
+    // // Auth
     // useEffect(() => {
-    //     const storedTestQuestion = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TEST_QUESTION))
-    //     if (storedTestQuestion) setTestQuestions(storedTestQuestion)
-    //   }, [])
+    //     const storedAuth = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_AUTH))
+    //     if (storedAuth) setAuth(storedAuth)
+    // }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_TEST_QUESTION, 
-    //     JSON.stringify(testQuestions))
-    //   }, [testQuestions]);
-
-    // // Question Number
     // useEffect(() => {
-    //     const storedQuestionNumber = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_QUESTION_NUMBER))
-    //     if (storedQuestionNumber) setQuestionNumber(storedQuestionNumber)
-    //   }, [])
-    
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_QUESTION_NUMBER, 
-    //     JSON.stringify(questionNumber))
-    //   }, [questionNumber]);
+    //     localStorage.setItem(LOCAL_STORAGE_KEY_AUTH, 
+    //     JSON.stringify(auth))
+    // }, [auth]);
 
-    // // AnswerNumber
+    // // Password
     // useEffect(() => {
-    //     const storedAnswerNumber = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ANSWER_NUMBER))
-    //     if (storedAnswerNumber) setAnswerNumber(storedAnswerNumber)
-    //   }, [])
+    //     const storedPassword = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_PASSWORD))
+    //     if (storedPassword) setPassword(storedPassword)
+    // }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_ANSWER_NUMBER, 
-    //     JSON.stringify(answerNumber))
-    //   }, [answerNumber]);
-
-    // // Score
     // useEffect(() => {
-    //     const storedScore = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SCORE))
-    //     if (storedScore) setScore(storedScore)
-    //   }, [])
-    
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_SCORE, 
-    //     JSON.stringify(score))
-    //   }, [score]);
+    //     localStorage.setItem(LOCAL_STORAGE_KEY_PASSWORD, 
+    //     JSON.stringify(password))
+    // }, [password]);
 
-    // // Total
+    // AdminPassword
+    useEffect(() => {
+        const storedAdminPassword = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ADMIN_PASSWORD))
+        if (storedAdminPassword) setAdminPassword(storedAdminPassword)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_ADMIN_PASSWORD, 
+        JSON.stringify(adminPassword))
+    }, [adminPassword]);
+
+    // ClickPassword
     // useEffect(() => {
-    //     const storedTotal = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TOTAL))
-    //     if (storedTotal) setTotal(storedTotal)
-    //   }, [])
+    //     const storedClickPassword = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_PASSWORD))
+    //     if (storedClickPassword) setClickPassword(storedClickPassword)
+    // }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_TOTAL, 
-    //     JSON.stringify(total))
-    //   }, [total]);
-
-    // // SetStudentAnswer
     // useEffect(() => {
-    //     const storedStudentAnswer = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SETSTUDENTANSWER))
-    //     if (storedStudentAnswer) setStudentAnswer(storedStudentAnswer)
-    //   }, [])
-    
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_SETSTUDENTANSWER, 
-    //     JSON.stringify(studentAnswer))
-    //   }, [studentAnswer]);
+    //     localStorage.setItem(LOCAL_STORAGE_KEY_CLICK_PASSWORD, 
+    //     JSON.stringify(clickPassword))
+    // }, [clickPassword]);
 
-    // // setScore
+    // // HideAdmin
     // useEffect(() => {
-    //     const storedSetScore = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SETSCORE))
-    //     if (storedSetScore) setScore(storedSetScore)
-    //   }, [])
+    //     const storedHideAdmin = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_HIDE_ADMIN))
+    //     if (storedHideAdmin) setHideAdmin(storedHideAdmin)
+    // }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_SETSCORE, 
-    //     JSON.stringify(score))
-    //   }, [score]);
-
-    // // setTotal
     // useEffect(() => {
-    //     const storedSetTotal = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SETTOTAL))
-    //     if (storedSetTotal) setTotal(storedSetTotal)
-    //   }, [])
+    //     localStorage.setItem(LOCAL_STORAGE_KEY_HIDE_ADMIN, 
+    //     JSON.stringify(hideAdmin))
+    // }, [hideAdmin]);
+
+    // NewModal
+    useEffect(() => {
+        const storedNewModal = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NEW_MODAL))
+        if (storedNewModal) setNewModal(storedNewModal)
+    }, [])
     
-    //   useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY_SETTOTAL, 
-    //     JSON.stringify(total))
-    //   }, [total]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_NEW_MODAL, 
+        JSON.stringify(newModal))
+    }, [newModal]);
 
-    function handleAddQuestion() {
-        const quest = questionNameRef.current.value;
-        const answ = answerNameRef.current.value;
+    // // NewPassword
+    // useEffect(() => {
+    //     const storedNewPassword = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NEW_PASSWORD))
+    //     if (storedNewPassword) setNewPassword(storedNewPassword)
+    // }, [])
+    
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY_NEW_PASSWORD, 
+    //     JSON.stringify(newPassword))
+    // }, [newPassword]);
 
-        if (quest === '') return 
-        if (answ === '') return 
-        
-        const id = uuidv4();
+    // // Same
+    // useEffect(() => {
+    //     const storedSame = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAME))
+    //     if (storedSame) setSame(storedSame)
+    // }, [])
+    
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY_SAME, 
+    //     JSON.stringify(same))
+    // }, [same]);
 
-        setTestQuestions(prevQuestions => {
-            return [...prevQuestions, { id: id, name: quest, value: answ }]
-        })
+    // LetterGrade
+    useEffect(() => {
+        const storedLetterGrade = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_LETTER_GRADE))
+        if (storedLetterGrade) setLetterGrade(storedLetterGrade)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_LETTER_GRADE, 
+        JSON.stringify(letterGrade))
+    }, [letterGrade]);
 
-        console.log(quest);
-        console.log(answ);
-        // console.log(id);
+    // Color
+    useEffect(() => {
+        const storedColor = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_COLOR))
+        if (storedColor) setColor(storedColor)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_COLOR, 
+        JSON.stringify(color))
+    }, [color]);
 
-        questionNameRef.current.value = null;
-        answerNameRef.current.value = null;
-    }
+    // Student
+    useEffect(() => {
+        const storedStudent = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_STUDENT))
+        if (storedStudent) setStudent(storedStudent)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_STUDENT, 
+        JSON.stringify(student))
+    }, [student]);
+
+    // Finish
+    useEffect(() => {
+        const storedFinish = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_FINISH))
+        if (storedFinish) setFinish(storedFinish)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_FINISH, 
+        JSON.stringify(finish))
+    }, [finish]);
+
+    // Save
+    useEffect(() => {
+        const storedSave = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVE))
+        if (storedSave) setSave(storedSave)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_SAVE, 
+        JSON.stringify(save))
+    }, [save]);
+
+    // ResetPassword
+    useEffect(() => {
+        const storedResetPassword = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_RESET))
+        if (storedResetPassword) setResetPassword(storedResetPassword)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_RESET, 
+        JSON.stringify(resetPassword))
+    }, [resetPassword]);
+
+    // AdminEmail
+    useEffect(() => {
+        const storedAdminEmail = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ADMIN_EMAIL))
+        if (storedAdminEmail) setAdminEmail(storedAdminEmail)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_ADMIN_EMAIL, 
+        JSON.stringify(adminEmail))
+    }, [adminEmail]);
+
+    // Demo
+    useEffect(() => {
+        const storedDemo = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_DEMO))
+        if (storedDemo) setDemo(storedDemo)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_DEMO, 
+        JSON.stringify(demo))
+    }, [demo]);
+
+    // Created
+    useEffect(() => {
+        const storedCreated = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CREATED))
+        if (storedCreated) setCreated(storedCreated)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_CREATED, 
+        JSON.stringify(created))
+    }, [created]);
+
+    // SaveRipple
+    useEffect(() => {
+        const storedSaveRipple = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_SAVE_RIPPLE))
+        if (storedSaveRipple) setSaveRipple(storedSaveRipple)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_SAVE_RIPPLE, 
+        JSON.stringify(saveRipple))
+    }, [saveRipple]);
+
+    // ResetClicked
+    useEffect(() => {
+        const storedResetClicked = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_RESET_CLICKED))
+        if (storedResetClicked) setResetClicked(storedResetClicked)
+    }, [])
+    
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_RESET_CLICKED, 
+        JSON.stringify(resetClicked))
+    }, [resetClicked]);
+
+    // Night
+    useEffect(() => {
+        const storedNight = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_NIGHT))
+        if (storedNight) setNight(storedNight)
+    }, []);
 
     useEffect(() => {
-        const isField = Object.values(field).every(el => Boolean(el))
-        isField ? setEmpty(false) : setEmpty(true);
-    }, [field])
+        localStorage.setItem(LOCAL_STORAGE_KEY_NIGHT, 
+        JSON.stringify(night))
+    }, [night])
 
-    function handleChange(event) {
-        const {name, value} = event.target
-        setField(prevState => ({ ...prevState, [name]: value }))
-    }
-
-    function handleClear() {
-        setField(INITIAL_VALUES);
-    }
-
-        // let consoleName = testQuestions[0]?.name;
-        // console.log(JSON.stringify(testQuestions[0]?.name));
-        // console.log(consoleName);
-        // console.log(typeof consoleName);
-
-        // //NO OBJECTS
-        // useEffect(() => {
-        //   const storedClickTitle = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TEST_QUESTION))
-        //   if (storedClickTitle) setTestQuestions(storedClickTitle)
-        // }, [])
-      
-        // useEffect(() => {
-        //   localStorage.setItem(LOCAL_STORAGE_KEY_TEST_QUESTION, 
-        //   JSON.stringify())
-        // }, []);
+    // Background
+    useEffect(() => {
+        const storedBackground = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_BACKGROUND))
+        if (storedBackground) setBackground(storedBackground)
+    }, []);
 
     useEffect(() => {
-      setFinalGrade(((score / total) * 100).toFixed(2).replace('NaN', ''))
-    }, [total])
+        localStorage.setItem(LOCAL_STORAGE_KEY_BACKGROUND, 
+        JSON.stringify(background))
+    }, [background])
 
-    // console.log(typeof finalGrade);
+    // Text Color
+    useEffect(() => {
+        const storedTextColor = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_TEXT_COLOR))
+        if (storedTextColor) setTextColor(storedTextColor)
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_TEXT_COLOR, 
+        JSON.stringify(textColor))
+    }, [textColor])
+
+    // Question Color
+    useEffect(() => {
+        const storedQuestionColor = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_QUESTION_COLOR))
+        if (storedQuestionColor) setQuestionColor(storedQuestionColor)
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_QUESTION_COLOR, 
+        JSON.stringify(questionColor))
+    }, [questionColor])
+    
+    // console.log(serviceList[0].service);
+
+    console.log('Full Test Array', serviceList);
+
+    let questionArray = [];
+
+    for (let i = 0; i < serviceList.length; i++) {
+        // console.log(serviceList[i].service);
+        questionArray.push(serviceList[i].service);
+    }
+
+    console.log('%c Question Array', 'color: red', questionArray);
+
+    let answerArray = [];
+
+    for (let i = 0; i < serviceList.length; i++) {
+        // console.log(serviceList[i].answer);
+        answerArray.push(serviceList[i].answer);
+    }
+
+    console.log('%c Answer Array', 'color: blue', answerArray);
+
+    let studentAnswerArray = [];
+
+    for (let i = 0; i < serviceList.length; i++) {
+        // console.log(serviceList[i].student);
+        studentAnswerArray.push(serviceList[i].student);
+    }
+
+    console.log('%c Student Answer Array', 'color: green', studentAnswerArray);
+
+    const length = serviceList.length;
+
+    const handleServiceRemove = (index) => {
+        const list = [...serviceList];
+        list.splice(index, 1);
+        setServiceList(list);
+    }
+
+    const handleQuestionChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...serviceList];
+        list[index][name] = value;
+        setServiceList(list);
+    }
+
+    const handleAnswerChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...serviceList];
+        list[index][name] = value;
+        setServiceList(list);
+    }
+
+    const handleStudentAnswerChange = (e, index) => {
+        const { name, value } = e.target;
+        const list = [...serviceList];
+        list[index][name] = value;
+        setServiceList(list);
+    }
+
+    const handleAddService = () => {
+        setServiceList([...serviceList, { service: '', answer: '', student: '' }])
+    }
+
+    // console.log(answerArray);
+    // console.log(studentAnswerArray);
+
+    const compare = (num1, num2) => {
+        let counter = num1.reduce((total, el, index) => el.toLowerCase() === num2[index].toLowerCase() ? total + 1 : total, 0);
+        return counter;
+    }
+
+    let grade = compare(answerArray, studentAnswerArray);
+
+    // console.log(grade);
+
+    const comparePercent = (num1, num2) => {
+        let counter = num1.reduce((total, el, index) => el.toLowerCase() === num2[index].toLowerCase() ? total + 1 : total, 0);
+        const divide = Math.floor((counter / num1.length) * 100);
+        const percent = (divide.toFixed(1));
+        return percent;
+    }
+
+    let percent = Number(comparePercent(answerArray, studentAnswerArray));
+
+    // console.log(percent);
 
     useEffect(() => {
         switch(true) {
-            case (finalGrade >= 96.67 && finalGrade <= 100.0):
+            case (percent >= 96.67 && percent <= 100.0):
               setLetterGrade('A+');
               break;
-            case (finalGrade >= 93.33 && finalGrade <= 96.67):
+            case (percent >= 93.33 && percent <= 96.67):
               setLetterGrade('A');
               break;
-            case (finalGrade >= 90.0 && finalGrade <= 93.33):
+            case (percent >= 90.0 && percent <= 93.33):
               setLetterGrade('A-');
               break;
-            case (finalGrade >= 86.67 && finalGrade <= 90.0):
+            case (percent >= 86.67 && percent <= 90.0):
               setLetterGrade('B+');
               break;
-            case (finalGrade >= 83.33 && finalGrade <= 86.67):
+            case (percent >= 83.33 && percent <= 86.67):
               setLetterGrade('B');
               break;
-            case (finalGrade >= 80.0 && finalGrade <= 83.33):
+            case (percent >= 80.0 && percent <= 83.33):
               setLetterGrade('B-');
               break;
-            case (finalGrade >= 76.67 && finalGrade <= 80.0):
+            case (percent >= 76.67 && percent <= 80.0):
               setLetterGrade('C+');
               break;
-            case (finalGrade >= 73.33 && finalGrade <= 76.67):
+            case (percent >= 73.33 && percent <= 76.67):
               setLetterGrade('C');
               break;
-            case (finalGrade >= 70.0 && finalGrade <= 73.33):
+            case (percent >= 70.0 && percent <= 73.33):
               setLetterGrade('C-');
               break;
-            case (finalGrade >= 60.0 && finalGrade <= 70.0):
+            case (percent >= 60.0 && percent <= 70.0):
               setLetterGrade('D');
               break;
-            case (finalGrade >= 0.0 && finalGrade <= 60.0):
+            case (percent >= 0.0 && percent <= 60.0):
               setLetterGrade('F');
               break;
             default:
               null;
         }
-    }, [finalGrade])
+    }, [percent]);
 
     useEffect(() => {
         switch(true) {
@@ -374,353 +615,2944 @@ export default function Test() {
             default:
                null;
         }
-    }, [letterGrade])
+    }, [letterGrade]);    
 
-    console.log('count:', count);
+    let secondTime = Number(second);
+    console.log(secondTime);
+
+    let minuteTime = Number(minute);
+    console.log(minuteTime);
+
+    // let hourTime = Number(hour);
+    // console.log(hourTime);
+
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 60);
+
+    let templateParams = {
+        user_email: `${userEmail}`,
+        name: 'Grade Report',
+        score: `Grade: ${grade}/${length}`,
+        percent: `${percent}%`,
+        letter: `${letterGrade}`,
+        to_name: `${name}`
+    };
+
+    // console.log(grade);
+    // console.log(length);
+    // console.log(percent);
+    // console.log(letterGrade);
+    // console.log(userEmail);
+    // console.log('Is Timer Running?', isTimed);
+
+    function send() {
+        emailjs.send('service_jj71xm9', 'template_7hans9n', templateParams, 'FlrSx29zmJDjwJhtt')
+            .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+            console.log('FAILED...', error);
+        });
+    }
+
+    function validEmail(email) {
+        let regEx = /[a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1}([a-z0-9][\-_\.\+\!\#\$\%\&\'\*\/\=\?\^\`\{\|]{0,1})*[a-z0-9]@[a-z0-9][-\.]{0,1}([a-z][-\.]{0,1})*[a-z0-9]\.[a-z0-9]{1,}([\.\-]{0,1}[a-z]){0,}[a-z0-9]{0,}$/;
+        if(!regEx.test(email)) {
+            setIsValid(false);
+        } else {
+            setIsValid(true);
+        } 
+    }
+
+    function matchPass() {
+        if ((password.length > 0) && (password === adminPassword)) {
+            setAuth(true);
+        } else {
+            setAuth(false);
+        }
+    }
+
+    function match() {
+        if ((newPassword.length > 0) && (newPassword === adminPassword)) {
+            setSame(true);
+        } else {
+            setSame(false);
+        } 
+    }
+
+    function randomString(length) {
+        let string = '';
+        let options = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+        let optionsLength = options.length;
+        for (let i = 0; i < length; i++) {
+            string += options.charAt(Math.floor(Math.random() * optionsLength));
+        }
+        return string;
+    }
+
+    let resetTemplateParams = {
+        admin_email: `${adminEmail}`,
+        resetPass: `${resetPassword}`
+    };
+
+    function sendResetEmail() {
+        emailjs.send('service_jj71xm9', 'template_cfc61dq', resetTemplateParams, 'FlrSx29zmJDjwJhtt')
+            .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+            console.log('FAILED...', error);
+        });
+    }
+
+    console.log(resetPassword);
+    console.log(password);
+    console.log(adminEmail);
+
+    function resetMatch() {
+        if ((resetPassword.length > 0) && (resetPassword === password)) {
+            setSameReset(true);
+        } else {
+            setSameReset(false);
+        } 
+    }
+
+    let isEmpty = []
+
+    for (let i = 0; i < serviceList.length; i++) {
+        let valueLength = serviceList[i].student.length;
+        let pushed = isEmpty.unshift(valueLength);
+    }
+
+    let allZero = isEmpty.every(num => num === 0);
+    // console.log(isEmpty);
+    // console.log(allZero);
+
+    // console.log(password);
+    // console.log(hash(password));
 
     return (
         <>
             <Head>
                 <title>Test Generator</title>
-                <meta name="description" content="test" />
+                <meta name='description' content='test' />
             </Head>
-            <FocusLock>
-                <Container>
-                    {!nameClicked ? (
-                    <>
-                        <div style={{ transform: 'translateY(20px)', paddingBottom: '20px' }}>
-                            <h2 style={{ marginBottom: '5px' }}>
-                                Name
-                            </h2>
-                            <input 
-                                placeholder="Name"
-                                style={{ 
-                                    padding: '9px 14px 9px 14px', 
-                                    fontSize: '14px', 
-                                    fontWeight: '400', 
-                                    cursor: 'text', 
-                                    width: '178.5px', 
-                                    borderRadius: '4px', 
-                                    border: '1px solid rgba(34, 36, 38, 0.15)',
-                                    position: 'relative',
-                                    zIndex: '1000'
-                                }}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            {(name.length > 0) ? (
-                            <>
-                                <span style={{  display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -36.5px) scale(0.8)' }}>
-                                    <Button 
-                                        color="blue"
-                                        onClick= {() => setNameClicked(true)}
-                                    >
-                                        Save
-                                    </Button>
-                                </span>
-                            </>
-                            ): null}
-                        </div>
-                    </>
-                    ):(
-                    <>
-                        <div style={{ transform: 'translateY(25px)' }}>
-                            <span style={{ fontSize: '24px' }}>
-                                <span style={{ fontWeight: '500' }}>
-                                    Name:{' '} 
-                                </span>
-                                <span style={{ fontWeight: '300' }}>
-                                    {name}
-                                </span>
-                            </span>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -32px) scale(0.8)' }}>
-                                <Button 
-                                    color="blue"
-                                    onClick={() => {setName(''), setNameClicked(false)}}
-                                >
-                                    Edit
-                                </Button>
-                            </span>
-                        </div>
-                    </>
-                    )}
-                    {!dateClicked ? (
-                    <>
-                        <div>
-                            <h2 style={{ marginBottom: '5px', marginTop: '20px' }}>
-                                Date
-                            </h2>
-                            <input 
-                                type="date"
-                                placeholder="Date"
-                                style={{ 
-                                    padding: '9px 14px 9px 14px', 
-                                    fontSize: '14px', 
-                                    fontWeight: '400', 
-                                    cursor: 'text', 
-                                    width: '178.5px', 
-                                    borderRadius: '4px', 
-                                    border: '1px solid rgba(34, 36, 38, 0.15)',
-                                    position: 'relative',
-                                    zIndex: '1000'
-                                }}
-                                onChange={(e) => setDate(e.target.value)}
-                            />
-                            {(date.length > 0) ? (
-                            <>
-                                <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -37px) scale(0.8)' }}>
-                                    <Button 
-                                        color="blue"
-                                        onClick={() => setDateClicked(true)}
-                                    >
-                                        Save
-                                    </Button>
-                                </span>
-                            </>
-                            ):null}
-                        </div>
-                    </>
-                    ):(
-                    <>
-                        <div style={{ transform: 'translateY(20px)' }}>
-                            <span style={{ fontSize: '24px' }}>
-                                <span style={{ fontWeight: '500' }}>
-                                    Date:{' '}
-                                </span>
-                                <span style={{ fontWeight: '300' }}>
-                                    {date}
-                                </span>
-                            </span>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -32px) scale(0.8)' }}>
-                                <Button 
-                                    color="blue"
-                                    onClick={() => {setDate(''), setDateClicked(false)}}
-                                >
-                                    Edit
-                                </Button>
-                            </span>
-                        </div>
-                    </>
-                    )}
-                    {!titleClicked ? (
-                    <>
-                        <div>
-                            <h2 style={{ display: 'flex', justifyContent: 'center', marginBottom: '5px', marginTop: '20px' }}>
-                                Assignment Title
-                            </h2>
-                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                <input 
-                                    placeholder="Title"
-                                    style={{ 
-                                        padding: '9px 14px 9px 14px', 
-                                        fontSize: '14px', 
-                                        fontWeight: '400', 
-                                        cursor: 'text', 
-                                        width: '178.5px', 
-                                        borderRadius: '4px', 
-                                        border: '1px solid rgba(34, 36, 38, 0.15)',
-                                        position: 'relative',
-                                        zIndex: '1000'
-                                    }}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                            </div>
-                            {(title.length > 0) ? (
-                            <>
-                                <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -36.5px) scale(0.8)' }}>
-                                    <Button 
-                                        color="blue"
-                                        onClick={() => setTitleClicked(true)}
-                                    >
-                                        Save
-                                    </Button>
-                                </span>
-                            </>
-                            ): null}
-                        </div>
-                    </>
-                    ):(
-                    <>
-                        <div style={{ transform: 'translateY(20px)' }}>
-                            <span style={{ fontSize: '35px' }}>
-                                <span style={{ fontWeight: '500', display: 'flex', justifyContent: 'center' }}>
-                                    <b>
-                                        {title}
-                                    </b>
-                                </span>
-                            </span>
-                            <span style={{ display: 'flex', justifyContent: 'flex-end', transform: 'translate(40px, -32px) scale(0.8)' }}>
-                                <Button 
-                                    color="blue"
-                                    onClick={() => {setTitle(''), setTitleClicked(false)}}
-                                >
-                                    Edit
-                                </Button>
-                            </span>
-                        </div>
-                    </>
-                    )}
-                    <Divider />
-                    <TestList deleteQuestion={deleteQuestion} testQuestions={testQuestions} questionNumber={questionNumber} answerNumber={answerNumber} studentAnswer={studentAnswer} setStudentAnswer={setStudentAnswer} score={score} setScore={setScore} total={total} setTotal={setTotal} />
-                      {testQuestions.length > 0 ? (
-                      <>
-                        {/* <h2 style={{ display: 'flex', justifyContent: 'center', transform: 'translateY(-40px)' }}>
-                          Delete Question
-                        </h2>
-                        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center', transform: 'translateY(-40px)' }}>
-                          <div>
-                            <span>
-                              <input
-                                  type='number'
-                                  placeholder='Delete Question #'
-                                  style={{ 
-                                    padding: '9px 14px 9px 14px', 
-                                    fontSize: '14px', 
-                                    fontWeight: '400', 
-                                    cursor: 'text', 
-                                    width: '178.5px', 
-                                    borderRadius: '4px', 
-                                    border: '1px solid rgba(34, 36, 38, 0.15)' 
-                                }}
-                                  onChange={(e) => setDeleteQuestion(e.target.value)}
-                              />
-                            </span>
-                            <span>
-                              <Button
-                                attached="right"
-                                color="red"
-                                style={{ paddingLeft: '20px' }}
-                              >
-                                Delete
-                              </Button>
-                            </span>
-                          </div>
-                          <div style={{ transform: 'translateY(-.5px)' }}>
-                            <Delete setTestQuestions={setTestQuestions} setLetterGrade={setLetterGrade} setFinalGrade={setFinalGrade} setGraded={setGraded} setTotal={setTotal} setScore={setScore} />
-                          </div>
-                        </div>
-                        <div style={{ transform: 'translateY(-20px)' }}>
-                          <Divider />
-                        </div> */}
-                      </>
-                      ): null}
-                    <h2 style={{ display: 'flex', justifyContent: 'center', marginTop: '0px' }}>
-                        Create New Questions
-                    </h2>
-                    {newQuestion ? (
-                    <>
-                        <Button 
-                            color="blue"
-                            onClick={() => setNewQuestion(false)}
-                        >
-                            <Icon
-                                name="plus"
-                            />
-                            Add Question
-                        </Button>
-                    </>
-                    ):(
-                    <>
-                        <div style={{ paddingBottom: '10px', display: 'flex', justifyContent: 'space-around' }}>
-                            <Button 
-                                disabled={empty}
-                                color="blue"
-                                onClick={() => {handleAddQuestion(), setCount(count + 1), handleClear()}}
-                            >
-                                <Icon
-                                    name="save"
-                                />
-                                Save Question
-                            </Button>
-                            <Button onClick={() => {setNewQuestion(true), setQuestion(''), setAnswer('')}} color="red">
-                                <Icon
-                                    name="cancel"
-                                />
-                                Don't Save Question
-                            </Button>
-                        </div>
-                    </>
-                    )}
+            <div 
+                style={{ 
+                    background: `${background}`,
+                    color: `${textColor}`,
+                    minHeight: '100vh',
+                    height: '100%',
+                    transform: 'translateY(-10px)',
+                    paddingBottom: '1px'
+                }}
+            >
+                {/* <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        marginTop: '30px',
+                        color: `${questionColor}`,
+                        fontSize: '30px',
+                        marginRight: '10%',
+                        marginLeft: '10%'
+                    }}
+                >
+                    <div
+                        onClick={() => {setStudent(false), setFinish(false), setIsTimed(false), setOpenAnswerKey(false), setOpenQuestionKey(false), setOpenStudentAnswers(false), setEdit(false), setSave(false)}}
+                        style={{
+                            cursor: 'pointer',
+                            textDecoration: `${(!student) ? 'underline' : 'none'}`
+                        }}
+                    >
+                        Admin
+                    </div>
+                    <div
+                        onClick={() => {setStudent(true), setFinish(false), setSave(true), setOpenEmail(false), setOpenNameDate(false)}}
+                        style={{
+                            cursor: 'pointer',
+                            textDecoration: `${(student) ? 'underline' : 'none'}`
+                        }}
+                    >
+                        Student
+                    </div>
                     <div>
-                        {!newQuestion ? (
+                        Demo Mode
+                    </div>
+                    <div>
+                        End Demo
+                    </div>
+                </div> */}
+                {!night ? (
+                <>
+                    <Button
+                        onClick={() => {setNight(true), setBackground('#202020'), setTextColor('#f2f2f2'), setQuestionColor('#f2f2f2')}}
+                        style={{
+                            position: 'absolute',
+                            marginTop: '20px',
+                            marginLeft: '20px',
+                            background: 'black',
+                            color: 'white'
+                        }}
+                    >
+                        <Icon
+                            name='moon'
+                        />
+                        Night Mode
+                    </Button>
+                </>
+                ):(
+                <>
+                    <Button
+                        onClick={() => {setNight(false), setBackground('white'), setTextColor(''), setQuestionColor('#125CA1')}}
+                        style={{
+                            position: 'absolute',
+                            marginTop: '20px',
+                            marginLeft: '20px',
+                            background: 'white',
+                            color: 'black'
+                        }}
+                    >
+                        <Icon
+                            name='sun'    
+                        />
+                        Day Mode
+                    </Button>
+                </>
+                )}
+                {demo ? (
+                <>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            marginTop: '10px',
+                            marginRight: '10px'
+                        }}
+                    >
+                        <Button
+                            onClick={() => {setDemo(false), setStudent(false), setEdit(false), setClickPassword(true), setPassword(''), setAdminPassword(''), setAdminEmail(''), setAuth(false), setIsResetting(false), setNewPassword(''), setSave(false), setCreated(false), setTitleClicked(false), setSaveRipple(false), setResetClicked(false), setEye(true), setHide('password'), setUserEmail('')}}
+                            style={{
+                                border: '2px solid red',
+                                background: 'transparent',
+                                color: 'red'
+                            }}
+                        >
+                            End Demo Mode
+                        </Button>     
+                    </div>
+                </>
+                ):(
+                <>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            marginTop: '10px',
+                            marginRight: '10px'
+                        }}
+                    >
+                        <Button
+                            onClick={() => {setOpenModal(true), setStudent(false)}}
+                            style={{
+                                border: `2px solid ${textColor}`,
+                                background: 'transparent',
+                                color: `${textColor}`
+                            }}
+                        >
+                            Demo Mode
+                        </Button>     
+                    </div>
+                </>
+                )}
+                {!student ? (
+                <>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            marginTop: '10px',
+                            marginRight: '10px'
+                        }}
+                    >
+                        {(created && demo) ? (
                         <>
-                            <div style={{ paddingBottom: '10px' }}>
-                                <h2 style={{ marginBottom: '5px' }}>
-                                    Question
-                                </h2>
-                                <input
-                                    ref={questionNameRef}
-                                    value={field.questionField}
-                                    name='questionField'
-                                    placeholder="Question"
-                                    style={{ 
-                                        padding: '9px 14px 9px 14px', 
-                                        fontSize: '14px', 
-                                        fontWeight: '400', 
-                                        cursor: 'text', 
-                                        width: '178.5px', 
-                                        borderRadius: '4px', 
-                                        border: '1px solid rgba(34, 36, 38, 0.15)' 
-                                    }}
-                                    onChange={(e) => {setQuestion(e.target.value), handleChange(e)}}
-                                />
-                            </div>
                             <div>
-                                <h2 style={{ marginBottom: '5px' }}>
-                                    Answer
-                                </h2>
-                                <input 
-                                    ref={answerNameRef}
-                                    value={field.answerField}
-                                    name='answerField'
-                                    placeholder="Answer"
-                                    style={{ 
-                                        padding: '9px 14px 9px 14px', 
-                                        fontSize: '14px', 
-                                        fontWeight: '400', 
-                                        cursor: 'text', 
-                                        width: '178.5px', 
-                                        borderRadius: '4px', 
-                                        border: '1px solid rgba(34, 36, 38, 0.15)',
-                                        marginBottom: '10px'
+                                <button
+                                    className={styles.takeTest}
+                                    onClick={() => {setStudent(true), setOpenModal(false), setFinish(false), setSave(true), setDemo(true), setNewPassword(''), setEye(true), setHide('password')}}
+                                    style={{
+                                        background: 'purple',
+                                        padding: '7px 21px 7px 21px',
+                                        color: 'white',
+                                        fontWeight: '700',
+                                        fontSize: '14px',
+                                        fontFamily: 'Nunito',
+                                        borderRadius: '.28571429rem',
+                                        border: '0px solid transparent'
                                     }}
-                                    onChange={(e) => {setAnswer(e.target.value), handleChange(e)}}
-                                />
+                                >
+                                    Take Test
+                                </button>
                             </div>
                         </>
                         ): null}
                     </div>
-                    <div>
-                        <h2 style={{ marginBottom: '5px' }}>
-                            {(finalGrade) ? (
+                </>
+                ): null}
+                <div
+                    style={{
+                        marginRight: '1vw',
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        marginBottom: '-50px'
+                    }}
+                >
+                    {student ? (
+                    <>
+                        {(adminPassword.length > 0 || resetClicked) ? (
+                        <>
+                            <button
+                                className={styles.takeTest}
+                                onClick={() => {setNewModal(true), setSame(false)}}
+                                style={{
+                                    background: 'purple',
+                                    padding: '7px 21px 7px 21px',
+                                    color: 'white',
+                                    fontWeight: '700',
+                                    fontSize: '14px',
+                                    fontFamily: 'Nunito',
+                                    borderRadius: '.28571429rem',
+                                    border: '0px solid transparent'
+                                }}
+                            >
+                                Return to Admin Page
+                            </button>
+                        </>
+                        ): null}
+                        <Modal 
+                            dimmer
+                            open={newModal}
+                            style={{
+                                width: '50vw',
+                                height: '50vh',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                transform: 'translateY(-50%)'
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    marginRight: '10px',
+                                    fontSize: '40px',
+                                    color: 'red',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => {setNewModal(false), setErrorCheck(false), setHide('password'), setEye(true)}}
+                            >
+                                x
+                            </div>
+                            {isResetting ? (
                             <>
-                                <Divider />
-                                <h1 style={{ display: 'flex', justifyContent: 'center', paddingBottom: '10px' }}>
-                                    Grade Report
-                                </h1>
-                                Grade: {score}/{total}
+                                <div>
+                                    <h1
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            marginTop: '20px'
+                                        }}
+                                    >
+                                        Forgot Password?
+                                    </h1>
+                                    <h3
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            color: 'red'
+                                        }}
+                                    >
+                                        Send a new Admin Password to my Email
+                                    </h3>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            marginTop: '30px',
+                                            marginBottom: '30px'
+                                        }}
+                                    >
+                                        <Button
+                                            onClick={() => {randomString(20), setResetPassword(randomString(20)), setAdminPassword(''), setResetClicked(true)}}
+                                            style={{
+                                                border: '2px solid red',
+                                                background: 'transparent',
+                                                color: 'red'
+                                            }}
+                                        >
+                                            Reset Password
+                                        </Button>
+                                        <Button
+                                            onClick={() => {sendResetEmail(), setPassword(resetPassword)}}
+                                            style={{
+                                                border: '2px solid #21BA45',
+                                                background: 'transparent',
+                                                color: '#21BA45'
+                                            }}
+                                        >
+                                            Email New Password
+                                        </Button>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'flex-end'
+                                        }}
+                                    >
+                                    </div>
+                                    <h4
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            marginBottom: '10px'
+                                        }}
+                                    >
+                                        Enter New Admin Password
+                                    </h4>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center'
+                                        }}
+                                    >
+                                        <input
+                                            type={hide}
+                                            placeholder='New Admin Password'
+                                            style={{ 
+                                                padding: '9px 14px 9px 14px',
+                                                fontSize: '14px',
+                                                fontWeight: '400',
+                                                cursor: 'text',
+                                                width: '220px',
+                                                borderRadius: '4px',
+                                                border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                position: 'relative',
+                                                zIndex: '100'
+                                            }}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        {eye ? (
+                                        <>
+                                            <Icon
+                                                name='eye'
+                                                onClick={() => {setEye(false), setHide('text'), setShow(true)}}
+                                                style={{
+                                                    transform: 'translate(90px, 14px) scale(1.1)', 
+                                                    color: '#80808099', 
+                                                    position: 'absolute', 
+                                                    zIndex: '100',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                        </>    
+                                        ):(
+                                        <>
+                                            <Icon
+                                                name='eye'
+                                                onClick={() => {setEye(true), setHide('password'), setShow(false)}}
+                                                color='blue'
+                                                style={{
+                                                    transform: 'translate(90px, 14px) scale(1.1)', 
+                                                    color: '#80808099', 
+                                                    position: 'absolute', 
+                                                    zIndex: '100',
+                                                    cursor: 'pointer'
+                                                }}
+                                            />
+                                        </>
+                                        )}
+                                    </div>
+                                    {(!sameReset && errorCheck) ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                transform: 'translate(-5px, 50%)',
+                                                color: 'red',
+                                                fontSize: '20px',
+                                                fontWeight: '500'
+                                            }}
+                                        >
+                                            Error: Password is Invalid   
+                                        </div>
+                                    </>
+                                    ): null}
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            marginBottom: '15px'
+                                        }}
+                                    >
+                                        {/* {show ? (
+                                        <>
+                                            <Checkbox
+                                                onClick={() => {setHide('password'), setShow(false)}}
+                                                label={
+                                                    <label>
+                                                        Hide Password
+                                                    </label>
+                                                }
+                                                style={{
+                                                    marginTop: '15px'
+                                                }}
+                                            />
+                                        </>
+                                        ):(
+                                        <>
+                                            <Checkbox
+                                                onClick={() => {setHide('text'), setShow(true)}}
+                                                label={
+                                                    <label>
+                                                        Show Password
+                                                    </label>
+                                                }
+                                                style={{
+                                                    marginTop: '15px'
+                                                }}
+                                            />
+                                        </>
+                                        )} */}
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center'
+                                        }}
+                                    >
+                                        <Button
+                                            onClick={() => {resetMatch(), setCreated(false), setErrorCheck(true)}}
+                                            style={{
+                                                border: '2px solid #125CA1',
+                                                background: 'transparent',
+                                                color: '#125CA1'
+                                            }}
+                                        >
+                                            Submit
+                                        </Button>
+                                        {sameReset ? (
+                                        <>
+                                            <Button
+                                                onClick={() => {setStudent(false), setHideAdmin(false), setSave(false), setNewModal(false), setClickPassword(true), setAuth(false), setErrorCheck(false)}}
+                                                style={{
+                                                    border: '2px solid black',
+                                                    background: 'transparent',
+                                                    color: 'black'
+                                                }}
+                                            >
+                                                Go to Admin
+                                            </Button>
+                                        </>
+                                        ): null}
+                                    </div>
+                                </div> 
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '30px'
+                                    }}
+                                >
+                                    OR
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '30px'
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => {setIsResetting(false), setErrorCheck(false), setEye(true), setHide('password')}}
+                                        style={{
+                                            border: '2px solid red',
+                                            background: 'transparent',
+                                            color: 'red'
+                                        }}
+                                    >
+                                        Enter Password?
+                                    </Button>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        fontSize: '35px',
+                                        fontWeight: '700',
+                                        marginBottom: '10px', 
+                                        marginTop: '3vh'
+                                    }}
+                                >
+                                    Enter Admin Password
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <input
+                                        type={hide}
+                                        placeholder='Admin Password'
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        style={{ 
+                                            padding: '9px 14px 9px 14px',
+                                            fontSize: '14px',
+                                            fontWeight: '400',
+                                            cursor: 'text',
+                                            width: '178.5px',
+                                            borderRadius: '4px',
+                                            border: '1px solid rgba(34, 36, 38. 0.15)',
+                                            position: 'relative',
+                                            zIndex: '100'
+                                        }}
+                                    />
+                                    {eye ? (
+                                    <>
+                                        <Icon
+                                            name='eye'
+                                            onClick={() => {setEye(false), setHide('text'), setShow(true)}}
+                                            style={{
+                                                transform: 'translate(72px, 14px) scale(1.1)', 
+                                                color: '#80808099', 
+                                                position: 'absolute', 
+                                                zIndex: '100',
+                                                cursor: 'pointer'
+                                            }}
+                                        />
+                                    </>    
+                                    ):(
+                                    <>
+                                        <Icon
+                                            name='eye'
+                                            onClick={() => {setEye(true), setHide('password'), setShow(false)}}
+                                            color='blue'
+                                            style={{
+                                                transform: 'translate(72px, 14px) scale(1.1)', 
+                                                color: '#80808099', 
+                                                position: 'absolute', 
+                                                zIndex: '100',
+                                                cursor: 'pointer'
+                                            }}
+                                        />
+                                    </>
+                                    )}
+                                </div>
+                                {(!same && errorCheck) ? (
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            transform: 'translate(-5px, 50%)',
+                                            color: 'red',
+                                            fontSize: '20px',
+                                            fontWeight: '500',
+                                            marginTop: '10px',
+                                            marginBottom: '10px'
+                                        }}
+                                    >
+                                        Error: Admin Password is Invalid
+                                    </div>
+                                ): null}
+                                {/* <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    {show ? (
+                                    <>
+                                        <Checkbox
+                                            onClick={() => {setHide('password'), setShow(false)}}
+                                            label={
+                                                <label>
+                                                    Hide Password
+                                                </label>
+                                            }
+                                            style={{
+                                                marginTop: '15px'
+                                            }}
+                                        />
+                                    </>
+                                    ):(
+                                    <>
+                                        <Checkbox
+                                            onClick={() => {setHide('text'), setShow(true)}}
+                                            label={
+                                                <label>
+                                                    Show Password
+                                                </label>
+                                            }
+                                            style={{
+                                                marginTop: '15px'
+                                            }}
+                                        />
+                                    </>
+                                    )}
+                                </div> */}
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '20px'
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => {match(), setCreated(false), setErrorCheck(true)}}
+                                        style={{
+                                            border: '2px solid #125CA1',
+                                            background: 'transparent',
+                                            color: '#125CA1'
+                                        }}
+                                    >
+                                        Submit
+                                    </Button>
+                                    {same ? (
+                                    <>
+                                        <Button
+                                            onClick={() => {setStudent(false), setHideAdmin(false), setSave(false), setNewModal(false), setClickPassword(true), setAuth(false), setErrorCheck(false)}}
+                                            style={{
+                                                border: '2px solid black',
+                                                background: 'transparent',
+                                                color: 'black'
+                                            }}
+                                        >
+                                            Go to Admin
+                                        </Button>
+                                    </>
+                                    ): null}
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '30px'
+                                    }}
+                                >
+                                    OR
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '30px'
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => {setIsResetting(true), setErrorCheck(false), setEye(true), setHide('password')}}
+                                        style={{
+                                            border: '2px solid red',
+                                            background: 'transparent',
+                                            color: 'red'
+                                        }}
+                                    >
+                                        Forgot Password?
+                                    </Button>
+                                </div>
+                            </>
+                            )}
+                        </Modal>
+                    </>
+                    ): null}  
+                </div>
+                <Modal 
+                    dimmer
+                    open={openModal}
+                    style={{
+                        width: '50vw',
+                        height: '50vh',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        transform: 'translateY(-50%)'
+                    }}
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            marginRight: '10px',
+                            fontSize: '40px',
+                            color: 'red',
+                            cursor: 'pointer'
+                        }}
+                        onClick={() => {setOpenModal(false), setAuth(false), setHide('password'), setEye(true)}}
+                    >
+                        x
+                    </div>
+                    <div>
+                        {creating ? (
+                        <>
+                        {clickPassword ? (
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    fontSize: '35px',
+                                    fontWeight: '700',
+                                    marginBottom: '10px', 
+                                    marginTop: '3vh'
+                                }}
+                            >
+                                Set Admin Password
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <input
+                                    placeholder='Admin Email'
+                                    value={adminEmail}
+                                    onChange={(e) => {setAdminEmail(e.target.value), validEmail(adminEmail)}}
+                                    style={{ 
+                                        padding: '9px 14px 9px 14px',
+                                        fontSize: '14px',
+                                        fontWeight: '400',
+                                        cursor: 'text',
+                                        width: '178.5px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(34, 36, 38. 0.15)',
+                                        position: 'relative',
+                                        zIndex: '100'
+                                    }}
+                                />
+                            </div>
+                            {(adminEmail.length > 0 && password.length > 0 && !isValid) ? (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        transform: 'translateY(8px)',
+                                        color: 'red',
+                                        fontSize: '15px'
+                                    }}
+                                >
+                                    Error: Email is Invalid
+                                </div>
+                            ): null}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    marginTop: '15px'
+                                }}
+                            >
+                                <input
+                                    type={hide}
+                                    placeholder='Admin Password'
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    style={{ 
+                                        padding: '9px 14px 9px 14px',
+                                        fontSize: '14px',
+                                        fontWeight: '400',
+                                        cursor: 'text',
+                                        width: '178.5px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(34, 36, 38. 0.15)',
+                                        position: 'relative',
+                                        zIndex: '100'
+                                    }}
+                                />
+                                {eye ? (
+                                <>
+                                    <Icon
+                                        name='eye'
+                                        onClick={() => {setEye(false), setHide('text'), setShow(true)}}
+                                        style={{
+                                            transform: 'translate(72px, 14px) scale(1.1)', 
+                                            color: '#80808099', 
+                                            position: 'absolute', 
+                                            zIndex: '100',
+                                            cursor: 'pointer'
+                                        }}
+                                    />
+                                </>    
+                                ):(
+                                <>
+                                    <Icon
+                                        name='eye'
+                                        onClick={() => {setEye(true), setHide('password'), setShow(false)}}
+                                        color='blue'
+                                        style={{
+                                            transform: 'translate(72px, 14px) scale(1.1)', 
+                                            color: '#80808099', 
+                                            position: 'absolute', 
+                                            zIndex: '100',
+                                            cursor: 'pointer'
+                                        }}
+                                    />
+                                </>
+                                )}
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    marginTop: '20px'
+                                }}
+                            >
+                                <Button
+                                    disabled={((password.length > 0) && isValid) ? false : true}
+                                    onClick={() => {setClickPassword(false), setEye(true), setHide('password')}}
+                                    style={{
+                                        border: '2px solid #125CA1',
+                                        background: 'transparent',
+                                        color: '#125CA1'
+                                    }}
+                                >
+                                    Set Admin Email & Password
+                                </Button>
+                            </div>
+                        </>
+                        ):(
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    fontSize: '35px',
+                                    fontWeight: '700',
+                                    marginBottom: '10px', 
+                                    marginTop: '3vh'
+                                }}
+                            >
+                                Login
+                            </div>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                <input
+                                    type={hide}
+                                    placeholder='Admin Password'
+                                    value={adminPassword}
+                                    onChange={(e) => setAdminPassword(e.target.value)}
+                                    style={{ 
+                                        padding: '9px 14px 9px 14px',
+                                        fontSize: '14px',
+                                        fontWeight: '400',
+                                        cursor: 'text',
+                                        width: '178.5px',
+                                        borderRadius: '4px',
+                                        border: '1px solid rgba(34, 36, 38. 0.15)',
+                                        position: 'relative',
+                                        zIndex: '100'
+                                    }}
+                                />
+                                {eye ? (
+                                <>
+                                    <Icon
+                                        name='eye'
+                                        onClick={() => {setEye(false), setHide('text'), setShow(true)}}
+                                        style={{
+                                            transform: 'translate(72px, 14px) scale(1.1)', 
+                                            color: '#80808099', 
+                                            position: 'absolute', 
+                                            zIndex: '100',
+                                            cursor: 'pointer'
+                                        }}
+                                    />
+                                </>    
+                                ):(
+                                <>
+                                    <Icon
+                                        name='eye'
+                                        onClick={() => {setEye(true), setHide('password'), setShow(false)}}
+                                        color='blue'
+                                        style={{
+                                            transform: 'translate(72px, 14px) scale(1.1)', 
+                                            color: '#80808099', 
+                                            position: 'absolute', 
+                                            zIndex: '100',
+                                            cursor: 'pointer'
+                                        }}
+                                    />
+                                </>
+                                )}
+                            </div>
+                            {(!auth && errorCheck) ? (
+                            <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        transform: 'translate(-5px, 50%)',
+                                        color: 'red',
+                                        fontSize: '20px',
+                                        fontWeight: '500'
+                                    }}
+                                >
+                                    Error: Password is Invalid   
+                                </div>
                             </>
                             ): null}
-                        </h2>
-                        <h2>
-                            {finalGrade}
-                            <span>
-                                {(finalGrade) ? (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center', 
+                                    marginTop: '15px'
+                                }}
+                            >
+                                <Button
+                                    disabled={adminPassword.length > 0 ? false : true}
+                                    onClick={() => {matchPass(), setErrorCheck(true)}}
+                                    style={{
+                                        border: '2px solid #125CA1',
+                                        background: 'transparent',
+                                        color: '#125CA1'
+                                    }}
+                                >
+                                    Submit
+                                </Button>
+                                <Button
+                                    onClick={() => {setClickPassword(true), setPassword(''), setAdminPassword(''), setAdminEmail(''), setAuth(false), setErrorCheck(false)}}
+                                    style={{
+                                        border: '2px solid red',
+                                        background: 'transparent',
+                                        color: 'red'
+                                    }}
+                                >
+                                    Reset Admin Email & Password
+                                </Button>
+                            </div>
+                        </>
+                        )}
+                        {/* <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            {show ? (
+                            <>
+                                <Checkbox
+                                    onClick={() => {setHide('password'), setShow(false)}}
+                                    label={
+                                        <label>
+                                            Hide Password
+                                        </label>
+                                    }
+                                    style={{
+                                        marginTop: '15px'
+                                    }}
+                                />
+                            </>
+                            ):(
+                            <>
+                                <Checkbox
+                                    onClick={() => {setHide('text'), setShow(true)}}
+                                    label={
+                                        <label>
+                                            Show Password
+                                        </label>
+                                    }
+                                    style={{
+                                        marginTop: '15px'
+                                    }}
+                                />
+                            </>
+                            )}
+                        </div> */}
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                marginTop: '15px'
+                            }}
+                        >
+                            {auth ? (
+                            <>
+                                {/* <Button
+                                    onClick={() => {setStudent(true), setHideAdmin(true), setSave(true), setOpenModal(false), setSame(false), setFinish(false), setDemo(true)}}
+                                >
+                                    Take Test
+                                </Button> */}
+                                <Button
+                                    onClick={() => {setOpenModal(false), setFinish(false), setDemo(true), setServiceList([{ service: '', answer: '', student: '' }]), setSave(false), setCreated(false), setTitle(''), setTitleClicked(false), setSaveRipple(true), setErrorCheck(false)}}
+                                    style={{
+                                        border: '2px solid #21BA45',
+                                        background: 'transparent',
+                                        color: '#21BA45'
+                                    }}
+                                >
+                                    Create New Test
+                                </Button>
+                            </>
+                            ): null}
+                        </div>
+                        </>
+                        ):(
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    transform: 'translateY(20vh)'
+                                }}
+                            >
+                                <Button
+                                    onClick={() => {setCreating(true), setEye(false)}}
+                                    style={{
+                                        border: '2px solid #21BA45',
+                                        background: 'transparent',
+                                        color: '#21BA45'
+                                    }}
+                                >
+                                    Create a Test
+                                </Button>
+                            </div>
+                        </>
+                        )}
+                    </div>
+                </Modal>
+                {/* <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        fontSize: '65px',
+                        marginBottom: '5vh',
+                        marginTop: '8vh',
+                        fontFamily: 'sans-serif',
+                        fontWeight: '300',
+                    }}
+                >
+                    Test Generator {demo ? 'Demo': null}
+                </div> */}
+                <Container
+                    style={{ 
+                        border: `2px solid ${questionColor}`,
+                        borderRadius: '10px',
+                        padding: '3em',
+                        marginTop: '9vh',
+                        marginBottom: '100px'
+                    }}
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            fontSize: '65px',
+                            marginBottom: '7vh',
+                            marginTop: '4vh',
+                            fontFamily: 'sans-serif',
+                            fontWeight: '300',
+                            color: `${questionColor}`
+                        }}
+                    >
+                        Test Generator {demo ? 'Demo': null}
+                    </div>
+                    <Divider />
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: '100%'
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center'
+                                }}
+                            >
+                                {student ? (
                                 <>
-                                    %
+                                    <h1>
+                                        Student View
+                                    </h1>
                                 </>
-                                ): null}
+                                ):(
+                                <>
+                                    <h1>
+                                        Admin View
+                                    </h1>
+                                </>
+                                )}
+                            </div>
+                            {!demo ? (
+                            <>
+                                <div
+                                    style={{
+                                        width: '100%'
+                                    }}
+                                >
+                                    <Divider />
+                                </div>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    {student ? (
+                                    <>
+                                        <div>
+                                            <Button
+                                                onClick={() => {setStudent(false), setFinish(false), setIsTimed(false), setOpenAnswerKey(false), setOpenQuestionKey(false), setOpenStudentAnswers(false), setEdit(false), setSave(false)}}
+                                                style={{
+                                                    border: `2px solid ${textColor}`,
+                                                    background: 'transparent',
+                                                    color: `${textColor}`
+                                                }}
+                                            >
+                                                Switch to Admin
+                                            </Button>
+                                        </div>
+                                    </>
+                                    ):(
+                                    <>
+                                        <div>
+                                            <Button
+                                                onClick={() => {setStudent(true), setFinish(false), setSave(true), setOpenEmail(false), setOpenNameDate(false)}}
+                                                style={{
+                                                    border: `2px solid ${textColor}`,
+                                                    background: 'transparent',
+                                                    color: `${textColor}`
+                                                }}
+                                            >
+                                                Switch to Student&nbsp;&nbsp;&nbsp;
+                                                <span>
+                                                    <Icon
+                                                        name='pencil'
+                                                    />
+                                                </span>
+                                            </Button>
+                                        </div>
+                                    </>
+                                    )}
+                                </div>
+                            </>
+                            ): null}
+                        </div>
+                        <Divider />
+                    </div>
+                    {student ? (
+                    <>
+                        {!isTimed ? (
+                        <>
+                            <Divider />
+                            {!finish ? (
+                            <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <Button
+                                        disabled={allZero}
+                                        onClick={() => setFinish(true)}
+                                        style={{
+                                            border: '2px solid #21BA45',
+                                            background: 'transparent',
+                                            color: '#21BA45'
+                                        }}
+                                    >
+                                        Submit Test
+                                    </Button>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => setFinish(false)}   
+                                        style={{
+                                            border: '2px solid red',
+                                            background: 'transparent',
+                                            color: 'red'
+                                        }}                     
+                                    >
+                                        Edit Test
+                                    </Button>
+                                </div>
+                            </>
+                            )}
+                        </>
+                        ): null}
+                    </>
+                    ): null}
+                    {student ? (
+                    <>
+                        <Divider />
+                        <div>
+                            {!openEmail ? (
+                            <>
+                                <div
+                                    style={{ 
+                                        transform: 'translateY(-8px)',
+                                        cursor: 'pointer' 
+                                    }}
+                                    onClick={() => {setOpenEmail(true)}}
+                                >
+                                    <div 
+                                        style={{ 
+                                            marginLeft: '-25px',
+                                            display: 'flex',
+                                            color: `${questionColor}`,
+                                            transform: 'translateY(100%) scale(0.8)'
+                                        }}
+                                    >
+                                        <Icon
+                                            name='chevron down'
+                                        />
+                                    </div>
+                                    <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            fontSize: '20px', 
+                                            fontWeight: '700',
+                                            color: `${questionColor}`
+                                        }}
+                                    >
+                                        Email Grade
+                                    </div>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <Container
+                                    style={{ 
+                                        color: 'red',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        cursor: 'pointer',
+                                        marginRight: '25px',
+                                        transform: 'translate(-1vw, -5px)'
+                                    }}
+                                    className={styles.open}
+                                    onClick={() => setOpenEmail(false)}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'scale(2)',
+                                            zIndex: '10'
+                                        }}
+                                    >
+                                        x
+                                    </div>
+                                </Container>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '0px'
+                                    }}
+                                >
+                                    <div>
+                                        <h2>
+                                            Email Recipient
+                                        </h2>
+                                        <div
+                                            style={{
+                                                color: 'black'
+                                            }}
+                                        >
+                                            <input
+                                                disabled={finish ? false : true}
+                                                type='email'
+                                                name='user_email'
+                                                placeholder='email address'
+                                                style={{ 
+                                                    padding: '9px 14px 9px 14px',
+                                                    fontSize: '14px',
+                                                    fontWeight: '400',
+                                                    cursor: 'text',
+                                                    width: '178.5px',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid rgba(34, 36, 38. 0.15)'
+                                                }}
+                                                value={userEmail}
+                                                onChange={(e) => {setUserEmail(e.target.value), validEmail(userEmail)}}
+                                            />
+                                        </div>
+                                        {(userEmail.length > 0 && !isValid) ? (
+                                        <>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    transform: 'translate(-5px, 50%)',
+                                                    color: 'red',
+                                                    fontSize: '20px',
+                                                    fontWeight: '500'
+                                                }}
+                                            >
+                                                Error: Email is invalid!
+                                            </div>
+                                        </>
+                                        ): null}
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                marginTop: '25px'
+                                            }}
+                                        >
+                                            <Button
+                                                disabled={!isValid} 
+                                                onClick={send}
+                                                style={{
+                                                    border: '2px solid #21BA45',
+                                                    background: 'transparent',
+                                                    color: '#21BA45'
+                                                }}
+                                            >
+                                                Email Grade
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                            )}
+                        </div>
+                        <Divider />
+                        <div>
+                            {!openNameDate ? (
+                            <>
+                                <div
+                                    style={{ 
+                                        transform: 'translateY(-8px)',
+                                        cursor: 'pointer' 
+                                    }}
+                                    onClick={() => {setOpenNameDate(true)}}
+                                >
+                                    <div 
+                                        style={{ 
+                                            marginLeft: '-25px',
+                                            display: 'flex',
+                                            color: `${questionColor}`,
+                                            transform: 'translateY(100%) scale(0.8)'
+                                        }}
+                                    >
+                                        <Icon
+                                            name='chevron down'
+                                        />
+                                    </div>
+                                    <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            fontSize: '20px', 
+                                            fontWeight: '700',
+                                            color: `${questionColor}`
+                                        }}
+                                    >
+                                        Open Name and Date
+                                    </div>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <Container
+                                    style={{ 
+                                        color: 'red',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        cursor: 'pointer',
+                                        marginRight: '25px',
+                                        transform: 'translate(-1vw, -5px)'
+                                    }}
+                                    className={styles.open}
+                                    onClick={() => setOpenNameDate(false)}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'scale(2)',
+                                            zIndex: '10'
+                                        }}
+                                    >
+                                        x
+                                    </div>
+                                </Container>
+                                {!nameClicked ? (
+                                <>
+                                    <div>
+                                        <h2 
+                                            style={{ 
+                                                marginBottom: '5px' 
+                                            }}
+                                        >
+                                            Name
+                                        </h2>
+                                        <div
+                                            style={{
+                                                color: 'black'
+                                            }}
+                                        >
+                                            <input 
+                                                placeholder="Name"
+                                                style={{ 
+                                                    padding: '9px 14px 9px 14px',
+                                                    fontSize: '14px',
+                                                    fontWeight: '400',
+                                                    cursor: 'text',
+                                                    width: '178.5px',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                    position: 'relative',
+                                                    zIndex: '100'
+                                                }}
+                                                onChange={(e) => setName(e.target.value)}
+                                            />
+                                        </div>
+                                        {(name.length > 0) ? (
+                                        <>
+                                            <span 
+                                                style={{ 
+                                                    display: 'flex', 
+                                                    justifyContent: 'flex-end', 
+                                                    transform: 'translate(40px, -44px) scale(0.8)' 
+                                                }}
+                                            >
+                                                <Button 
+                                                    onClick= {() => setNameClicked(true)}
+                                                    style={{
+                                                        border: `2px solid ${questionColor}`,
+                                                        background: 'transparent',
+                                                        color: `${questionColor}`
+                                                    }}
+                                                >
+                                                    Save
+                                                </Button>
+                                            </span>
+                                        </>
+                                        ): null}
+                                    </div>
+                                </>
+                                ):(
+                                <>
+                                    <div style={{ transform: 'translateY(25px)' }}>
+                                        <span style={{ fontSize: '24px' }}>
+                                            <span style={{ fontWeight: '500' }}>
+                                                Name:{' '} 
+                                            </span>
+                                            <span style={{ fontWeight: '300' }}>
+                                                {name}
+                                            </span>
+                                        </span>
+                                        <span 
+                                            style={{ 
+                                                display: 'flex', 
+                                                justifyContent: 'flex-end', 
+                                                transform: 'translate(40px, -32px) scale(0.8)' 
+                                            }}
+                                        >
+                                            <Button 
+                                                color="blue"
+                                                onClick={() => {setName(''), setNameClicked(false)}}
+                                            >
+                                                Edit Name
+                                            </Button>
+                                        </span>
+                                    </div>
+                                </>
+                                )}
+                                {!dateClicked ? (
+                                <>
+                                    <div>
+                                        <h2 
+                                            style={{ 
+                                                marginBottom: '5px', 
+                                                marginTop: '20px' 
+                                            }}
+                                        >
+                                            Date
+                                        </h2>
+                                        <div
+                                            style={{
+                                                color: 'black'
+                                            }}
+                                        >
+                                            <input 
+                                                type="date"
+                                                placeholder="Date"
+                                                style={{ 
+                                                    padding: '9px 14px 9px 14px',
+                                                    fontSize: '14px',
+                                                    fontWeight: '400',
+                                                    cursor: 'text',
+                                                    width: '178.5px',
+                                                    borderRadius: '4px',
+                                                    border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                    position: 'relative',
+                                                    zIndex: '100',
+                                                    marginBottom: '10px'
+                                                }}
+                                                onChange={(e) => setDate(e.target.value)}
+                                            />
+                                        </div>
+                                        {(date.length > 0) ? (
+                                        <>
+                                            <span 
+                                                style={{ 
+                                                    display: 'flex', 
+                                                    justifyContent: 'flex-end', 
+                                                    transform: 'translate(40px, -57px) scale(0.8)' 
+                                                }}
+                                            >
+                                                <Button 
+                                                    color="blue"
+                                                    onClick={() => setDateClicked(true)}
+                                                    style={{
+                                                        border: `2px solid ${questionColor}`,
+                                                        background: 'transparent',
+                                                        color: `${questionColor}`
+                                                    }}
+                                                >
+                                                    Save
+                                                </Button>
+                                            </span>
+                                        </>
+                                        ):null}
+                                    </div>
+                                </>
+                                ):(
+                                <>
+                                    <div style={{ transform: 'translateY(20px)' }}>
+                                        <span style={{ fontSize: '24px' }}>
+                                            <span style={{ fontWeight: '500' }}>
+                                                Date:{' '}
+                                            </span>
+                                            <span style={{ fontWeight: '300' }}>
+                                                {date}
+                                            </span>
+                                        </span>
+                                        <span 
+                                            style={{ 
+                                                display: 'flex', 
+                                                justifyContent: 'flex-end', 
+                                                transform: 'translate(40px, -32px) scale(0.8)' 
+                                            }}
+                                        >
+                                            <Button 
+                                                color="blue"
+                                                onClick={() => {setDate(''), setDateClicked(false)}}
+                                            >
+                                                Edit Date
+                                            </Button>
+                                        </span>
+                                    </div>
+                                </>
+                                )}
+                            </>
+                            )}
+                        </div>
+                    </>
+                    ): null}
+                    {!student ? (
+                    <>
+                        <div>
+                            <Divider />
+                            {!edit ? (
+                            <>
+                                <div
+                                    style={{ 
+                                        transform: 'translateY(-8px)',
+                                        cursor: 'pointer' 
+                                    }}
+                                    onClick={() => {setEdit(true)}}
+                                >
+                                    <div 
+                                        style={{ 
+                                            marginLeft: '-25px',
+                                            display: 'flex',
+                                            color: `${questionColor}`,
+                                            transform: 'translateY(100%) scale(0.8)'
+                                        }}
+                                    >
+                                        <Icon
+                                            name='chevron down'
+                                        />
+                                    </div>
+                                    <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            fontSize: '20px', 
+                                            fontWeight: '700',
+                                            color: `${questionColor}`
+                                        }}
+                                    >
+                                        Create Timer
+                                    </div>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <Container
+                                    style={{ 
+                                        color: 'red',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        cursor: 'pointer',
+                                        transform: 'translate(-1vw, -5px)'
+                                    }}
+                                    className={styles.open}
+                                    onClick={() => {setEdit(false), setTimeClick(false), setIsTimed(false)}}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'scale(2)',
+                                            zIndex: '10'
+                                        }}
+                                    >
+                                        x
+                                    </div>
+                                </Container>
+                                {/* <div>
+                                    {serviceList.length > 1 ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                transform: 'translateY(-10px)'
+                                            }}
+                                        >
+                                            <Button
+                                                onClick={() => {setServiceList([{ service: '', answer: '', student: '' }]), setOpenAnswerKey(false), setOpenQuestionKey(false), setOpenStudentAnswers(false), setSave(false), setName(''), setDate(''), setTitle(''), setNameClicked(false), setNameClicked(false), setDateClicked(false), setTitleClicked(false), setSecond('0'), setTimed(false), setTimeClick(false), setOpenEmail(false), setUserEmail(''), setFinish(false)}}
+                                                style={{
+                                                    border: '2px solid red',
+                                                    background: 'transparent',
+                                                    color: 'red'
+                                                }}
+                                            >
+                                                Clear All Questions
+                                            </Button>
+                                        </div>
+                                    </>
+                                    ): null}
+                                </div> */}
+                                <div>
+                                    {timeClick ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                transform: 'translateY(-20px)'
+                                            }}
+                                        >
+                                            {!timed ? (
+                                            <>
+                                                <div
+                                                    style={{
+                                                        transform: 'translateY(-10px)'
+                                                    }}
+                                                >
+                                                    <h2
+                                                        style={{
+                                                            marginBottom: '5px',
+                                                            marginTop: '40px'
+                                                        }}
+                                                    >
+                                                        Minutes&nbsp;&nbsp;&nbsp;
+                                                    </h2>
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            justifyContent: 'center',
+                                                            color: 'black'
+                                                        }}
+                                                    >
+                                                        <input
+                                                            placeholder='Minutes'
+                                                            type='number'
+                                                            min='0'
+                                                            max='59'
+                                                            value={minute}
+                                                            onChange={(e) => setMinute(e.target.value)}
+                                                            style={{
+                                                                padding: '9px 14px 9px 14px',
+                                                                fontSize: '14px',
+                                                                fontWeight: '400',
+                                                                cursor: 'text',
+                                                                width: '80px',
+                                                                borderRadius: '4px',
+                                                                border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                                position: 'relative',
+                                                                zIndex: '100',
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    style={{
+                                                        transform: 'translateY(-10px)'
+                                                    }}
+                                                >
+                                                    <h2
+                                                        style={{
+                                                            marginBottom: '5px',
+                                                            marginTop: '40px'
+                                                        }}
+                                                    >
+                                                        Seconds
+                                                    </h2>
+                                                    <div
+                                                        style={{
+                                                            display: 'flex',
+                                                            justifyContent: 'center',
+                                                            color: 'black'
+                                                        }}
+                                                    >
+                                                        <input
+                                                            placeholder='Seconds'
+                                                            type='number'
+                                                            min='0'
+                                                            max='59'
+                                                            value={second}
+                                                            onChange={(e) => setSecond(e.target.value)}
+                                                            style={{
+                                                                padding: '9px 14px 9px 14px',
+                                                                fontSize: '14px',
+                                                                fontWeight: '400',
+                                                                cursor: 'text',
+                                                                width: '80px',
+                                                                borderRadius: '4px',
+                                                                border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                                position: 'relative',
+                                                                zIndex: '100',
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </>
+                                            ): null}
+                                        </div>
+                                    </>
+                                    ):(
+                                    <>
+                                        {!timed ? (
+                                        <>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    marginTop: '0px',
+                                                    marginBottom: '30px'
+                                                }}
+                                            >
+                                                <Button
+                                                    onClick={() => setTimeClick(true)}
+                                                    style={{
+                                                        border: `2px solid ${questionColor}`,
+                                                        background: 'transparent',
+                                                        color: `${questionColor}`
+                                                    }}
+                                                >
+                                                    Set Timer (optional)
+                                                </Button>
+                                            </div>
+                                        </>
+                                        ): null}
+                                    </>
+                                    )}
+                                </div>
+                            </>
+                            )}
+                        </div>
+                    </>
+                    ): null}
+                    <div>
+                        <MyTimer isTimed={isTimed} setIsTimed={setIsTimed} setTimed={setTimed} timed={timed} student={student} finish={finish} setFinish={setFinish} secondTime={secondTime} minuteTime={minuteTime} expiryTimestamp={time} timeClick={timeClick} edit={edit} questionColor={questionColor} setTimeClick={setTimeClick} />
+                    </div>
+                    {!student ? (
+                    <>
+                        <Divider />
+                        <div>
+                            {!openQuestionKey ? (
+                            <>
+                                <div
+                                    style={{ 
+                                        transform: 'translateY(-8px)',
+                                        cursor: 'pointer' 
+                                    }}
+                                    onClick={() => {setOpenQuestionKey(true)}}
+                                >
+                                    <div 
+                                        style={{ 
+                                            marginLeft: '-25px',
+                                            display: 'flex',
+                                            color: `${questionColor}`,
+                                            transform: 'translateY(100%) scale(0.8)'
+                                        }}
+                                    >
+                                        <Icon
+                                            name='chevron down'
+                                        />
+                                    </div>
+                                    <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            fontSize: '20px', 
+                                            fontWeight: '700',
+                                            color: `${questionColor}`
+                                        }}
+                                    >
+                                        Open Question Key
+                                    </div>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <Container
+                                    style={{ 
+                                        color: 'red',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        cursor: 'pointer',
+                                        marginRight: '25px',
+                                        transform: 'translate(-1vw, -5px)'
+                                    }}
+                                    className={styles.open}
+                                    onClick={() => setOpenQuestionKey(false)}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'scale(2)',
+                                            zIndex: '10'
+                                        }}
+                                    >
+                                        x
+                                    </div>
+                                </Container>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    {!student ? (
+                                    <>
+                                        <div>
+                                            <h1
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                Question Key
+                                            </h1>
+                                            <h2
+                                                style={{
+                                                    transform: 'translate(-20px)'
+                                                }}
+                                            >
+                                                {serviceList &&
+                                                    serviceList.map((singleService, index) => (
+                                                        <ul key={index}>
+                                                            {singleService.service && <div>{index + 1}.{' '}{singleService.service}</div>}
+                                                        </ul>
+                                                    ))
+                                                }
+                                            </h2>
+                                        </div>
+                                    </>
+                                    ): null}
+                                </div>
+                            </>
+                            )}
+                        </div>
+                        <Divider />
+                        <div>
+                            {!openAnswerKey ? (
+                            <>
+                                <div
+                                    style={{ 
+                                        transform: 'translateY(-8px)',
+                                        cursor: 'pointer' 
+                                    }}
+                                    onClick={() => {setOpenAnswerKey(true)}}
+                                >
+                                    <div 
+                                        style={{ 
+                                            marginLeft: '-25px',
+                                            display: 'flex',
+                                            color: `${questionColor}`,
+                                            transform: 'translateY(100%) scale(0.8)'
+                                        }}
+                                    >
+                                        <Icon
+                                            name='chevron down'
+                                        />
+                                    </div>
+                                    <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            fontSize: '20px', 
+                                            fontWeight: '700',
+                                            color: `${questionColor}`
+                                        }}
+                                    >
+                                        Open Answer Key
+                                    </div>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <Container
+                                    style={{ 
+                                        color: 'red',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        cursor: 'pointer',
+                                        marginRight: '25px',
+                                        transform: 'translate(-1vw, -5px)'
+                                    }}
+                                    className={styles.open}
+                                    onClick={() => setOpenAnswerKey(false)}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'scale(2)',
+                                            zIndex: '10'
+                                        }}
+                                    >
+                                        x
+                                    </div>
+                                </Container>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    {!student ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                color: 'red'
+                                            }}
+                                        >
+                                            <h1
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                Answer Key
+                                            </h1>
+                                            <h2
+                                                style={{
+                                                    transform: 'translate(-20px)'
+                                                }}
+                                            >
+                                                {serviceList &&
+                                                    serviceList.map((singleService, index) => (
+                                                        <ul key={index}>
+                                                            {singleService.answer && <div>{index + 1}.{' '}{singleService.answer}</div>}
+                                                        </ul>
+                                                    ))
+                                                }
+                                            </h2>
+                                        </div>
+                                    </>
+                                    ): null}
+                                </div>
+                            </>
+                            )}
+                        </div>
+                        <Divider />
+                        <div>
+                            {!openStudentAnswers ? (
+                            <>
+                                <div
+                                    style={{ 
+                                        transform: 'translateY(-8px)',
+                                        cursor: 'pointer' 
+                                    }}
+                                    onClick={() => {setOpenStudentAnswers(true)}}
+                                >
+                                    <div 
+                                        style={{ 
+                                            marginLeft: '-25px',
+                                            display: 'flex',
+                                            color: `${questionColor}`,
+                                            transform: 'translateY(100%) scale(0.8)'
+                                        }}
+                                    >
+                                        <Icon
+                                            name='chevron down'
+                                        />
+                                    </div>
+                                    <div
+                                        style={{ 
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            fontSize: '20px', 
+                                            fontWeight: '700',
+                                            color: `${questionColor}`
+                                        }}
+                                    >
+                                        Open Student Answers
+                                    </div>
+                                </div>
+                            </>
+                            ):(
+                            <>
+                                <Container
+                                    style={{ 
+                                        color: 'red',
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+                                        cursor: 'pointer',
+                                        marginRight: '25px',
+                                        transform: 'translate(-1vw, -5px)'
+                                    }}
+                                    className={styles.open}
+                                    onClick={() => setOpenStudentAnswers(false)}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'scale(2)',
+                                            zIndex: '10'
+                                        }}
+                                    >
+                                        x
+                                    </div>
+                                </Container>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    {!student ? (
+                                    <>
+                                        <div>
+                                            <h1
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                Student Answers
+                                            </h1>
+                                            <h2
+                                                style={{
+                                                    transform: 'translate(-20px)'
+                                                }}
+                                            >
+                                                {serviceList &&
+                                                    serviceList.map((singleService, index) => (
+                                                        <ul key={index}>
+                                                            {singleService.student && <div>{index + 1}.{' '}{singleService.student}</div>}
+                                                        </ul>
+                                                    ))
+                                                }
+                                            </h2>
+                                        </div>
+                                    </>
+                                    ): null}
+                                </div>
+                            </>
+                            )}
+                        </div>
+                    </>
+                    ): null}
+                    <Divider /> 
+                    {!student ? (
+                    <>
+                        <div>
+                            {serviceList.length > 0 ? (
+                            <>
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        marginTop: '20px'
+                                    }}
+                                >
+                                    {save ? (
+                                    <>
+                                        <Button
+                                            onClick={() => {setSave(false), setCreated(false), setTitleClicked(false)}}
+                                            style={{
+                                                border: '2px solid red',
+                                                background: 'transparent',
+                                                color: 'red'
+                                            }}
+                                        >
+                                            Edit Questions and Answers
+                                        </Button>
+                                    </>
+                                    ):(
+                                    <>
+                                        <button
+                                            className={saveRipple ? styles.saveButton : null}
+                                            onClick={() => {setSave(true), setCreated(true), setTitleClicked(true)}}
+                                            style={{
+                                                background: 'transparent',
+                                                padding: '7px 21px 7px 21px',
+                                                color: '#21BA45',
+                                                fontWeight: '700',
+                                                fontSize: '14px',
+                                                fontFamily: 'Nunito',
+                                                borderRadius: '.28571429rem',
+                                                border: '2px solid #21BA45'
+                                            }}
+                                        >
+                                            Save Questions and Answers
+                                        </button>
+                                    </>
+                                    )}
+                                </div>
+                                <div>
+                                    {!student ? (
+                                    <>
+                                        <div
+                                            style={{
+                                                marginTop: '5px',
+                                                display: 'flex',
+                                                justifyContent: 'center'
+                                            }}
+                                        >
+                                            {serviceList.length > 1 ? (
+                                            <>
+                                                <div
+                                                    style={{
+                                                        display: 'flex',
+                                                        justifyContent: 'center',
+                                                        transform: 'translateY(10px)',
+                                                        marginBottom: '15px'
+                                                    }}
+                                                >
+                                                    <Button
+                                                        onClick={() => {setServiceList([{ service: '', answer: '', student: '' }]), setOpenAnswerKey(false), setOpenQuestionKey(false), setOpenStudentAnswers(false), setSave(false), setName(''), setDate(''), setTitle(''), setNameClicked(false), setNameClicked(false), setDateClicked(false), setTitleClicked(false), setSecond('0'), setTimed(false), setTimeClick(false), setOpenEmail(false), setUserEmail(''), setFinish(false)}}
+                                                        style={{
+                                                            border: '2px solid red',
+                                                            background: 'transparent',
+                                                            color: 'red'
+                                                        }}
+                                                    >
+                                                        Clear All Questions
+                                                    </Button>
+                                                </div>
+                                            </>
+                                            ): null}
+                                        </div>
+                                    </>
+                                    ): null}
+                                </div>
+                                <Divider />
+                            </>
+                            ): null}
+                        </div>
+                        <div>
+                            {!titleClicked ? (
+                            <>
+                                <div>
+                                    <h2 
+                                        style={{ 
+                                            display: 'flex', 
+                                            justifyContent: 'center', 
+                                            marginBottom: '5px' 
+                                        }}
+                                    >
+                                        Assignment Title
+                                    </h2>
+                                    <div 
+                                        style={{ 
+                                            display: 'flex', 
+                                            justifyContent: 'center',
+                                            color: 'black'
+                                        }}
+                                    >
+                                        <input 
+                                            placeholder="Title"
+                                            value={title}
+                                            style={{ 
+                                                padding: '9px 14px 9px 14px',
+                                                fontSize: '14px',
+                                                fontWeight: '400',
+                                                cursor: 'text',
+                                                width: '178.5px',
+                                                borderRadius: '4px',
+                                                border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                position: 'relative',
+                                                zIndex: '100'
+                                            }}
+                                            onChange={(e) => setTitle(e.target.value)}
+                                        />
+                                    </div>
+                                    {(title.length > 0) ? (
+                                    <>
+                                        <span 
+                                            style={{ 
+                                                display: 'flex', 
+                                                justifyContent: 'flex-end', 
+                                                transform: 'translate(40px, -40px) scale(0.8)'
+                                            }}
+                                        >
+                                            <Button 
+                                                onClick={() => setTitleClicked(true)}
+                                                style={{
+                                                    position: 'absolute',
+                                                    border: `2px solid ${questionColor}`,
+                                                    background: 'transparent',
+                                                    color: `${questionColor}`
+                                                }}
+                                            >
+                                                Save
+                                            </Button>
+                                        </span>
+                                    </>
+                                    ): null}
+                                </div>
+                                <Divider />
+                            </>
+                            ):(
+                            <>
+                                <div 
+                                    style={{ 
+                                        transform: 'translateY(20px)' 
+                                    }}
+                                >
+                                    <span style={{ fontSize: '45px' }}>
+                                        <span 
+                                            style={{ 
+                                                fontWeight: '500', 
+                                                display: 'flex', 
+                                                justifyContent: 'center'
+                                            }}
+                                        >
+                                            <b>
+                                                {title}
+                                            </b>
+                                        </span>
+                                    </span>
+                                    <span 
+                                        style={{ 
+                                            display: 'flex', 
+                                            justifyContent: 'flex-end', 
+                                            transform: 'translate(40px, -32px) scale(0.8)' 
+                                        }}
+                                    >
+                                        <Button 
+                                            onClick={() => {setTitle(''), setTitleClicked(false)}}
+                                            style={{
+                                                border: '2px solid #125CA1',
+                                                background: 'transparent',
+                                                color: '#125CA1'
+                                            }}
+                                        >
+                                            Edit Title
+                                        </Button>
+                                    </span>
+                                </div>
+                            </>
+                            )}
+                        </div>
+                    </>
+                    ):(
+                    <>
+                        <span 
+                            style={{ 
+                                fontSize: '45px',
+                                display: (title.length > 0) ? 'block' : 'none'
+                            }}
+                        >
+                            <span 
+                                style={{ 
+                                    fontWeight: '500', 
+                                    display: 'flex', 
+                                    justifyContent: 'center',
+                                    transform: 'translate(-13px)',
+                                    marginTop: '40px',
+                                    marginBottom: '20px'
+                                }}
+                            >
+                                <b>
+                                    {title}
+                                </b>
                             </span>
-                        </h2>
-                        <h2 style={{ color: `${color}`, paddingBottom: '30px' }}>
-                           {(total > 0) ? (
-                           <>
-                              {letterGrade}
-                           </>
-                           ): null}
-                        </h2>
+                        </span>
+                    </>
+                    )}
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            transform: 'translateY(1em)'
+                        }}
+                    >
+                        <form autoComplete='off'>
+                            <div>
+                                {serviceList.map((singleService, index) => (
+                                    <div key={index}>
+                                        <div>
+                                            <h2>
+                                                Question #{index + 1}
+                                            </h2>
+                                            {save ? (
+                                            <>
+                                                <div
+                                                    style={{
+                                                        fontSize: '25px'
+                                                    }}
+                                                >
+                                                    {singleService.service}
+                                                </div>
+                                            </>
+                                            ):(
+                                            <>
+                                                <div
+                                                    style={{
+                                                        color: 'black'
+                                                    }}
+                                                >
+                                                    <input
+                                                        name='service'
+                                                        type='text'
+                                                        id='service'
+                                                        placeholder='Question'
+                                                        value={singleService.service}
+                                                        onChange={(e) => handleQuestionChange(e, index)}
+                                                        style={{
+                                                            padding: '9px 14px 9px 14px',
+                                                            fontSize: '14px',
+                                                            fontWeight: '400',
+                                                            cursor: 'text',
+                                                            width: '178.5px',
+                                                            borderRadius: '4px',
+                                                            border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                            position: 'relative',
+                                                            zIndex: '100'
+                                                        }}
+                                                    />
+                                                </div>
+                                            </>
+                                            )}
+                                            {!student ? (
+                                            <>
+                                                <h2>
+                                                    Answer #{index + 1}
+                                                </h2>
+                                                {save ? (
+                                                <>
+                                                    <div
+                                                        style={{
+                                                            fontSize: '25px'
+                                                        }}
+                                                    >
+                                                        {singleService.answer}
+                                                    </div>
+                                                </>
+                                                ):(
+                                                <>
+                                                    <div
+                                                        style={{
+                                                            color: 'black'
+                                                        }}
+                                                    >
+                                                        <input
+                                                            name='answer'
+                                                            type='text'
+                                                            id='answer'
+                                                            placeholder='Answer'
+                                                            value={singleService.answer}
+                                                            onChange={(e) => handleAnswerChange(e, index)}
+                                                            style={{
+                                                                padding: '9px 14px 9px 14px',
+                                                                fontSize: '14px',
+                                                                fontWeight: '400',
+                                                                cursor: 'text',
+                                                                width: '178.5px',
+                                                                borderRadius: '4px',
+                                                                border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                                position: 'relative',
+                                                                zIndex: '100'
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </>
+                                                )}
+                                            </>
+                                            ): null}
+                                            {student ? (
+                                            <>
+                                                <div
+                                                    style={{
+                                                        display: (singleService.service.length > 0 && singleService.answer.length > 0) ? 'block' : 'none',
+                                                        marginTop: '20px'
+                                                    }}
+                                                >
+                                                    <h2>
+                                                        Student Answer #{index + 1}
+                                                    </h2>
+                                                    {finish ? (
+                                                    <>
+                                                        <div
+                                                            style={{
+                                                                fontSize: '25px'
+                                                            }}
+                                                        >
+                                                            {singleService.student}
+                                                        </div>
+                                                    </>
+                                                    ):(
+                                                    <>
+                                                        <div
+                                                            style={{
+                                                                color: 'black'
+                                                            }}
+                                                        >
+                                                            <input
+                                                                name='student'
+                                                                type='text'
+                                                                id='student'
+                                                                placeholder='Student Question'
+                                                                value={singleService.student}
+                                                                onChange={(e) => handleStudentAnswerChange(e, index)}
+                                                                style={{
+                                                                    padding: '9px 14px 9px 14px',
+                                                                    fontSize: '14px',
+                                                                    fontWeight: '400',
+                                                                    cursor: 'text',
+                                                                    width: '178.5px',
+                                                                    borderRadius: '4px',
+                                                                    border: '1px solid rgba(34, 36, 38. 0.15)',
+                                                                    position: 'relative',
+                                                                    zIndex: '100'
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </>
+                                                    )}
+                                                </div>
+                                            </>
+                                            ): null}
+                                            <Divider />
+                                        </div>
+                                        {(singleService.student && singleService.student.length > 0) ? (
+                                        <>
+                                            <div>
+                                                {((singleService.answer).toLowerCase() === (singleService.student).toLowerCase()) ? (
+                                                <>
+                                                    <div style={{ fontSize: '30px', fontWeight: '500', color: 'green' }}>
+                                                        <Icon
+                                                            name="check"
+                                                        />
+                                                        <span>
+                                                            Correct
+                                                        </span>  
+                                                    </div>
+                                                </>
+                                                ):(
+                                                <>
+                                                    <div style={{ fontSize: '30px', fontWeight: '500', color: 'red' }}>
+                                                        <Icon
+                                                            name="plus"
+                                                            style={{ transform: 'rotate(45deg)' }}
+                                                        />
+                                                        <span>
+                                                            Incorrect
+                                                        </span>
+                                                    </div>
+                                                </>
+                                                )}
+                                            </div>
+                                        </>
+                                        ): null}
+                                        <div
+                                            style={{
+                                                transform: 'translateY(-5px)'
+                                            }}
+                                        >
+                                            <Divider />
+                                        </div>
+                                        {!student ? (
+                                        <>
+                                            <div>
+                                                {serviceList.length !== 1 && (
+                                                    <Button
+                                                        onClick={() => handleServiceRemove(index)}
+                                                        style={{
+                                                            border: '2px solid red',
+                                                            background: 'transparent',
+                                                            color: 'red'
+                                                        }}
+                                                    >
+                                                        <span>Remove Question #{index + 1}</span>
+                                                    </Button>
+                                                )}
+                                            </div>
+                                            {serviceList.length > 1 ? (
+                                                <Divider />
+                                            ): null}
+                                            {!save ? (
+                                            <>
+                                                <div
+                                                    style={{
+                                                        display: 'flex',
+                                                        justifyContent: 'center'
+                                                    }}
+                                                >
+                                                    {serviceList.length - 1 === index && (
+                                                        <Button
+                                                            onClick={handleAddService}
+                                                            style={{
+                                                                border: `2px solid ${questionColor}`,
+                                                                background: 'transparent',
+                                                                color: `${questionColor}`
+                                                            }}
+                                                        >
+                                                            Add a Question
+                                                        </Button>
+                                                    )}
+                                                </div>
+                                            </>
+                                            ): null}
+                                        </>
+                                        ): null}
+                                    </div>
+                                ))}
+                            </div>
+                        </form>
+                        {student ? (
+                        <>
+                            {finish ? (
+                            <>
+                                <Card
+                                    style={{
+                                        height: '300px'
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            transform: 'translateY(20%)'
+                                        }}
+                                    >
+                                        <div 
+                                            style={{ 
+                                                marginBottom: '5px',
+                                                color: 'black'
+                                            }}
+                                        >
+                                            <h1 
+                                                style={{ 
+                                                    display: 'flex', 
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                Grade Report
+                                            </h1>
+                                            <h2
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center'
+                                                }}
+                                            >
+                                                Grade: {grade}/{length}
+                                            </h2>
+                                        </div>
+                                        <h2>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    color: 'black'
+                                                }}
+                                            >
+                                                {percent}%
+                                            </div>
+                                        </h2>
+                                        <h1 
+                                            style={{ 
+                                                color: `${color}`, 
+                                                paddingBottom: '30px' ,
+                                                display: 'flex',
+                                                justifyContent: 'center'
+                                                }}
+                                            >
+                                            {(length > 0) ? (
+                                            <>
+                                                {letterGrade}
+                                            </>
+                                            ): null}
+                                        </h1>
+                                    </div>
+                                </Card>
+                            </>
+                            ): null}
+                        </>
+                        ): null}
                     </div>
                 </Container>
-            </FocusLock>
+            </div>
         </>
+    )
+}
+
+function MyTimer({ expiryTimestamp, secondTime, minuteTime, finish, setFinish, student, timed, setTimed, timeClick, edit, isTimed, setIsTimed, questionColor, setTimeClick }) {
+    const {
+      seconds,
+      minutes,
+      hours,
+      days,
+      isRunning,
+      start,
+      pause,
+      resume,
+      restart,
+    } = useTimer({ expiryTimestamp, onExpire: () => {console.warn('onExpire called'), setFinish(true)} });
+
+    // console.log(minutes);
+    // console.log(seconds);
+
+    // let value = secondTime;
+    // console.log(typeof value);
+
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + secondTime);
+    time.setMinutes(time.getMinutes() + minuteTime);
+
+    // console.log('isRunning', isRunning);
+
+    return (
+        <div 
+            style={{
+                textAlign: 'center',
+                transform: 'translateY(50px)'
+            }}
+        >
+            {!student ? (
+            <>
+                {timed ? (
+                <>
+                    {edit ? (
+                    <>
+                        <div 
+                            style={{
+                                fontSize: '100px',
+                                marginBottom: '15px'
+                            }}
+                        >
+                            <span>{minutes}</span>:<span>{seconds}</span>
+                        </div>
+                        <Button
+                            onClick={() => {setTimed(false), setIsTimed(false)}}
+                            style={{
+                                marginTop: '40px',
+                                marginBottom: '55px',
+                                border: `2px solid red`,
+                                background: 'transparent',
+                                color: `red`
+                            }}
+                        >
+                            Reset Time Limit
+                        </Button>
+                    </>
+                    ): null}
+                </>
+                ):(
+                <>
+                    {timeClick ? (
+                    <>
+                        <div
+                            style={{
+                                marginBottom: '10px',
+                                transform: 'translateY(-62px)'
+                            }}
+                        >
+                            <div
+                                onClick={pause}
+                            >
+                                <Button 
+                                    onClick={() => {setTimed(true), restart(time), setIsTimed(true)}}
+                                    style={{
+                                        border: `2px solid ${questionColor}`,
+                                        background: 'transparent',
+                                        color: `${questionColor}`
+                                    }}
+                                >
+                                    Set Time Limit
+                                </Button>
+                                <Button
+                                    onClick={() => {setTimeClick(false), setIsTimed(false)}}
+                                    style={{
+                                        border: '2px solid red',
+                                        background: 'transparent',
+                                        color: 'red',
+                                        marginTop: '10px'
+                                    }}
+                                >
+                                    Delete Time Limit
+                                </Button>
+                            </div>
+                        </div>
+                    </>
+                    ): null}
+                </>
+                )}
+            </>
+            ):(
+            <>
+                {isTimed ? (
+                <>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            position: 'relative',
+                            zIndex: '100'
+                        }}
+                    >
+                        {finish ? (
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    transform: 'translateY(-45px)'
+                                }}
+                            >
+                                <Button
+                                    onClick={() => {setFinish(false), restart(time)}}      
+                                    style={{
+                                        border: '2px solid red',
+                                        background: 'transparent',
+                                        color: 'red'
+                                    }}                  
+                                >
+                                    Restart Test
+                                </Button>
+                            </div>
+                        </>
+                        ):(
+                        <>
+                            <div>
+                                <Button
+                                    style={{
+                                        border: '2px solid #125CA1',
+                                        background: 'transparent',
+                                        color: '#125CA1',
+                                        transform: 'translateY(-10px)'
+                                    }}
+                                    disabled={isRunning}
+                                    onClick={resume}
+                                >
+                                    Start Test
+                                </Button>
+                            </div>
+                        </>
+                        )}
+                    </div>
+                </>
+                ): null}
+                {isTimed ? (
+                <>
+                    {finish ? (
+                    <>
+                        <h2
+                            style={{
+                                transform: 'translateY(-50px)'
+                            }}
+                        >
+                            Test Completed
+                        </h2>
+                    </>
+                    ):(
+                    <>
+                        <div 
+                            style={{
+                                fontSize: '100px',
+                                marginBottom: '-105px',
+                                transform: 'translateY(42px)'
+                            }}
+                        >
+                            <span>{minutes}</span>:<span>{seconds}</span>
+                        </div>
+                        {isRunning ? (
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    transform: 'translateY(190px)'
+                                }}
+                            >
+                                <h3
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        position: 'absolute'
+                                    }}
+                                >
+                                    Test in progress...
+                                </h3>
+                            </div>
+                        </>
+                        ): null}
+                    </>
+                    )}
+                </>
+                ): null}
+            </>
+            )}
+            {/* {student ? (
+            <>
+                {isTimed ? (
+                <>
+                    {!finish ? (
+                    <>
+                        <div
+                            style={{
+                                marginBottom: '230px'
+                            }}
+                        >
+                            <Divider />
+                        </div>
+                    </>
+                    ): null}
+                </>
+                ): null}
+            </>
+            ): null} */}
+            {(!finish && isTimed && student) ? (
+            <>
+                <div
+                    style={{
+                        marginBottom: '230px'
+                    }}
+                >
+                    <Divider />
+                </div>
+            </>
+            ): null}
+        </div>
     );
 }
