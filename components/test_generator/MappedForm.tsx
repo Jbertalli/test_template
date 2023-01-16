@@ -1,4 +1,4 @@
-import { Button, Divider, Icon } from "semantic-ui-react";
+import { Button, Divider, Icon } from 'semantic-ui-react';
 
 export default function MappedForm(values) {
 
@@ -12,7 +12,7 @@ export default function MappedForm(values) {
     handleAnswerChange,
     handleStudentAnswerChange,
     handleServiceRemove,
-    handleAddService
+    handleAddService,
   } = values;
 
   return (
@@ -28,7 +28,7 @@ export default function MappedForm(values) {
                     <>
                       <div
                         style={{
-                          fontSize: "25px",
+                          fontSize: '25px',
                         }}
                       >
                         {singleService.service}
@@ -38,7 +38,7 @@ export default function MappedForm(values) {
                     <>
                       <div
                         style={{
-                          color: "black",
+                          color: 'black',
                         }}
                       >
                         <input
@@ -49,15 +49,15 @@ export default function MappedForm(values) {
                           value={singleService.service}
                           onChange={(e) => handleQuestionChange(e, index)}
                           style={{
-                            padding: "9px 14px 9px 14px",
-                            fontSize: "14px",
-                            fontWeight: "400",
-                            cursor: "text",
-                            width: "178.5px",
-                            borderRadius: "4px",
-                            border: "1px solid rgba(34, 36, 38. 0.15)",
-                            position: "relative",
-                            zIndex: "100",
+                            padding: '9px 14px 9px 14px',
+                            fontSize: '14px',
+                            fontWeight: '400',
+                            cursor: 'text',
+                            width: '178.5px',
+                            borderRadius: '4px',
+                            border: '1px solid rgba(34, 36, 38. 0.15)',
+                            position: 'relative',
+                            zIndex: '100',
                           }}
                         />
                       </div>
@@ -70,7 +70,7 @@ export default function MappedForm(values) {
                         <>
                           <div
                             style={{
-                              fontSize: "25px",
+                              fontSize: '25px',
                             }}
                           >
                             {singleService.answer}
@@ -80,7 +80,7 @@ export default function MappedForm(values) {
                         <>
                           <div
                             style={{
-                              color: "black",
+                              color: 'black',
                             }}
                           >
                             <input
@@ -91,15 +91,15 @@ export default function MappedForm(values) {
                               value={singleService.answer}
                               onChange={(e) => handleAnswerChange(e, index)}
                               style={{
-                                padding: "9px 14px 9px 14px",
-                                fontSize: "14px",
-                                fontWeight: "400",
-                                cursor: "text",
-                                width: "178.5px",
-                                borderRadius: "4px",
-                                border: "1px solid rgba(34, 36, 38. 0.15)",
-                                position: "relative",
-                                zIndex: "100",
+                                padding: '9px 14px 9px 14px',
+                                fontSize: '14px',
+                                fontWeight: '400',
+                                cursor: 'text',
+                                width: '178.5px',
+                                borderRadius: '4px',
+                                border: '1px solid rgba(34, 36, 38. 0.15)',
+                                position: 'relative',
+                                zIndex: '100',
                               }}
                             />
                           </div>
@@ -114,9 +114,9 @@ export default function MappedForm(values) {
                           display:
                             singleService.service.length > 0 &&
                             singleService.answer.length > 0
-                              ? "block"
-                              : "none",
-                          marginTop: "20px",
+                              ? 'block'
+                              : 'none',
+                          marginTop: '20px',
                         }}
                       >
                         <h2>Student Answer #{index + 1}</h2>
@@ -124,7 +124,7 @@ export default function MappedForm(values) {
                           <>
                             <div
                               style={{
-                                fontSize: "25px",
+                                fontSize: '25px',
                               }}
                             >
                               {singleService.student}
@@ -134,7 +134,7 @@ export default function MappedForm(values) {
                           <>
                             <div
                               style={{
-                                color: "black",
+                                color: 'black',
                               }}
                             >
                               <input
@@ -147,15 +147,15 @@ export default function MappedForm(values) {
                                   handleStudentAnswerChange(e, index)
                                 }
                                 style={{
-                                  padding: "9px 14px 9px 14px",
-                                  fontSize: "14px",
-                                  fontWeight: "400",
-                                  cursor: "text",
-                                  width: "178.5px",
-                                  borderRadius: "4px",
-                                  border: "1px solid rgba(34, 36, 38. 0.15)",
-                                  position: "relative",
-                                  zIndex: "100",
+                                  padding: '9px 14px 9px 14px',
+                                  fontSize: '14px',
+                                  fontWeight: '400',
+                                  cursor: 'text',
+                                  width: '178.5px',
+                                  borderRadius: '4px',
+                                  border: '1px solid rgba(34, 36, 38. 0.15)',
+                                  position: 'relative',
+                                  zIndex: '100',
                                 }}
                               />
                             </div>
@@ -174,9 +174,9 @@ export default function MappedForm(values) {
                         <>
                           <div
                             style={{
-                              fontSize: "30px",
-                              fontWeight: "500",
-                              color: "green",
+                              fontSize: '30px',
+                              fontWeight: '500',
+                              color: 'green',
                             }}
                           >
                             <Icon name="check" />
@@ -187,14 +187,14 @@ export default function MappedForm(values) {
                         <>
                           <div
                             style={{
-                              fontSize: "30px",
-                              fontWeight: "500",
-                              color: "red",
+                              fontSize: '30px',
+                              fontWeight: '500',
+                              color: 'red',
                             }}
                           >
                             <Icon
                               name="plus"
-                              style={{ transform: "rotate(45deg)" }}
+                              style={{ transform: 'rotate(45deg)' }}
                             />
                             <span>Incorrect</span>
                           </div>
@@ -205,7 +205,7 @@ export default function MappedForm(values) {
                 ) : null}
                 <div
                   style={{
-                    transform: "translateY(-5px)",
+                    transform: 'translateY(-5px)',
                   }}
                 >
                   <Divider />
@@ -217,9 +217,9 @@ export default function MappedForm(values) {
                         <Button
                           onClick={() => handleServiceRemove(index)}
                           style={{
-                            border: "2px solid red",
-                            background: "transparent",
-                            color: "red",
+                            border: '2px solid red',
+                            background: 'transparent',
+                            color: 'red',
                           }}
                         >
                           <span>Remove Question #{index + 1}</span>
@@ -231,8 +231,8 @@ export default function MappedForm(values) {
                       <>
                         <div
                           style={{
-                            display: "flex",
-                            justifyContent: "center",
+                            display: 'flex',
+                            justifyContent: 'center',
                           }}
                         >
                           {serviceList.length - 1 === index && (
@@ -240,7 +240,7 @@ export default function MappedForm(values) {
                               onClick={handleAddService}
                               style={{
                                 border: `2px solid ${questionColor}`,
-                                background: "transparent",
+                                background: 'transparent',
                                 color: `${questionColor}`,
                               }}
                             >

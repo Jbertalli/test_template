@@ -1,12 +1,11 @@
-import styles from "../../styles/Test.module.css";
+import styles from '../../styles/Test.module.css';
 
 export default function ReturnAdminButton(values) {
-
-  const {
-    adminPassword,
-    resetClicked,
-    setNewModal,
-    setSame
+  const { 
+    adminPassword, 
+    resetClicked, 
+    setNewModal, 
+    setSame 
   } = values;
 
   return (
@@ -19,14 +18,14 @@ export default function ReturnAdminButton(values) {
               setNewModal(true), setSame(false);
             }}
             style={{
-              padding: "7px 21px 7px 21px",
-              fontWeight: "700",
-              fontSize: "14px",
-              fontFamily: "Nunito",
-              borderRadius: ".28571429rem",
-              border: "2px solid purple",
-              background: "transparent",
-              color: "purple",
+              padding: '7px 21px 7px 21px',
+              fontWeight: '700',
+              fontSize: '14px',
+              fontFamily: 'Nunito',
+              borderRadius: '.28571429rem',
+              border: '2px solid purple',
+              background: 'transparent',
+              color: 'purple',
             }}
           >
             Return to Admin Page

@@ -1,18 +1,17 @@
-import { Icon } from "semantic-ui-react";
+import { Icon } from 'semantic-ui-react';
 
 export default function OpenNameDate(values) {
-
-  const {
-    setOpenNameDate,
-    questionColor
+  const { 
+    setOpenNameDate, 
+    questionColor 
   } = values;
-  
+
   return (
     <>
       <div
         style={{
-          transform: "translateY(-8px)",
-          cursor: "pointer",
+          transform: 'translateY(-8px)',
+          cursor: 'pointer',
         }}
         onClick={() => {
           setOpenNameDate(true);
@@ -20,20 +19,20 @@ export default function OpenNameDate(values) {
       >
         <div
           style={{
-            marginLeft: "-25px",
-            display: "flex",
+            marginLeft: '-25px',
+            display: 'flex',
             color: `${questionColor}`,
-            transform: "translateY(100%) scale(0.8)",
+            transform: 'translateY(100%) scale(0.8)',
           }}
         >
           <Icon name="chevron down" />
         </div>
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "20px",
-            fontWeight: "700",
+            display: 'flex',
+            justifyContent: 'center',
+            fontSize: '20px',
+            fontWeight: '700',
             color: `${questionColor}`,
           }}
         >

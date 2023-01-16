@@ -1,4 +1,4 @@
-import styles from "../../styles/Test.module.css";
+import styles from '../../styles/Test.module.css';
 
 export default function TakeTest(values) {
 
@@ -13,19 +13,19 @@ export default function TakeTest(values) {
     setDemo,
     setNewPassword,
     setEye,
-    setHide
+    setHide,
   } = values;
-  
+
   return (
     <>
       {!student ? (
         <>
           <div
             style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: "10px",
-              marginRight: "10px",
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '10px',
+              marginRight: '10px',
             }}
           >
             {created && demo ? (
@@ -39,19 +39,19 @@ export default function TakeTest(values) {
                         setFinish(false),
                         setSave(true),
                         setDemo(true),
-                        setNewPassword(""),
+                        setNewPassword(''),
                         setEye(true),
-                        setHide("password");
+                        setHide('password')
                     }}
                     style={{
-                      padding: "7px 21px 7px 21px",
-                      fontWeight: "700",
-                      fontSize: "14px",
-                      fontFamily: "Nunito",
-                      borderRadius: ".28571429rem",
+                      padding: '7px 21px 7px 21px',
+                      fontWeight: '700',
+                      fontSize: '14px',
+                      fontFamily: 'Nunito',
+                      borderRadius: '.28571429rem',
                       border: `2px solid purple`,
-                      background: "transparent",
-                      color: "purple",
+                      background: 'transparent',
+                      color: 'purple',
                     }}
                   >
                     Take Test

@@ -1,5 +1,5 @@
-import { Button, Divider } from "semantic-ui-react";
-import styles from "../../styles/Test.module.css";
+import { Button, Divider } from 'semantic-ui-react';
+import styles from '../../styles/Test.module.css';
 
 export default function EditTitle(values) {
 
@@ -29,7 +29,7 @@ export default function EditTitle(values) {
     title,
     setNameClicked,
     questionColor,
-    setOpenHover
+    setOpenHover,
   } = values;
 
   return (
@@ -41,23 +41,23 @@ export default function EditTitle(values) {
               <>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "20px",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '20px',
                   }}
                 >
                   {save ? (
                     <>
                       <Button
                         onClick={() => {
-                          setSave(false),
+                            setSave(false),
                             setCreated(false),
                             setTitleClicked(false);
                         }}
                         style={{
-                          border: "2px solid red",
-                          background: "transparent",
-                          color: "red",
+                          border: '2px solid red',
+                          background: 'transparent',
+                          color: 'red',
                         }}
                       >
                         Edit Questions and Answers
@@ -74,14 +74,14 @@ export default function EditTitle(values) {
                             setOpenHover(true);
                         }}
                         style={{
-                          background: "transparent",
-                          padding: "7px 21px 7px 21px",
-                          color: "#21BA45",
-                          fontWeight: "700",
-                          fontSize: "14px",
-                          fontFamily: "Nunito",
-                          borderRadius: ".28571429rem",
-                          border: "2px solid #21BA45",
+                          background: 'transparent',
+                          padding: '7px 21px 7px 21px',
+                          color: '#21BA45',
+                          fontWeight: '700',
+                          fontSize: '14px',
+                          fontFamily: 'Nunito',
+                          borderRadius: '.28571429rem',
+                          border: '2px solid #21BA45',
                         }}
                       >
                         Save Questions and Answers
@@ -94,54 +94,54 @@ export default function EditTitle(values) {
                     <>
                       <div
                         style={{
-                          marginTop: "5px",
-                          display: "flex",
-                          justifyContent: "center",
+                          marginTop: '5px',
+                          display: 'flex',
+                          justifyContent: 'center',
                         }}
                       >
                         {serviceList.length > 1 ? (
                           <>
                             <div
                               style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                transform: "translateY(10px)",
-                                marginBottom: "15px",
+                                display: 'flex',
+                                justifyContent: 'center',
+                                transform: 'translateY(10px)',
+                                marginBottom: '15px',
                               }}
                             >
                               <Button
                                 onClick={() => {
                                   setServiceList([
                                     {
-                                      id: "",
-                                      service: "",
-                                      answer: "",
-                                      student: "",
+                                      id: '',
+                                      service: '',
+                                      answer: '',
+                                      student: '',
                                     },
                                   ]),
                                     setOpenAnswerKey(false),
                                     setOpenQuestionKey(false),
                                     setOpenStudentAnswers(false),
                                     setSave(false),
-                                    setName(""),
-                                    setDate(""),
-                                    setTitle(""),
+                                    setName(''),
+                                    setDate(''),
+                                    setTitle(''),
                                     setNameClicked(false),
                                     setNameClicked(false),
                                     setDateClicked(false),
                                     setTitleClicked(false),
-                                    setSecond("0"),
+                                    setSecond('0'),
                                     setTimed(false),
                                     setTimeClick(false),
                                     setOpenEmail(false),
-                                    setUserEmail(""),
+                                    setUserEmail(''),
                                     setFinish(false),
                                     setOpenHover(false)
                                 }}
                                 style={{
-                                  border: "2px solid red",
-                                  background: "transparent",
-                                  color: "red",
+                                  border: '2px solid red',
+                                  background: 'transparent',
+                                  color: 'red',
                                 }}
                               >
                                 Clear All Questions
@@ -163,33 +163,33 @@ export default function EditTitle(values) {
                 <div>
                   <h2
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: "5px",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      marginBottom: '5px',
                     }}
                   >
                     Assignment Title
                   </h2>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      color: "black",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      color: 'black',
                     }}
                   >
                     <input
                       placeholder="Title"
                       value={title}
                       style={{
-                        padding: "9px 14px 9px 14px",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        cursor: "text",
-                        width: "178.5px",
-                        borderRadius: "4px",
-                        border: "1px solid rgba(34, 36, 38. 0.15)",
-                        position: "relative",
-                        zIndex: "100",
+                        padding: '9px 14px 9px 14px',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        cursor: 'text',
+                        width: '178.5px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(34, 36, 38. 0.15)',
+                        position: 'relative',
+                        zIndex: '100',
                       }}
                       onChange={(e) => setTitle(e.target.value)}
                     />
@@ -198,17 +198,17 @@ export default function EditTitle(values) {
                     <>
                       <span
                         style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          transform: "translate(40px, -40px) scale(0.8)",
+                          display: 'flex',
+                          justifyContent: 'flex-end',
+                          transform: 'translate(40px, -40px) scale(0.8)',
                         }}
                       >
                         <Button
                           onClick={() => setTitleClicked(true)}
                           style={{
-                            position: "absolute",
+                            position: 'absolute',
                             border: `2px solid ${questionColor}`,
-                            background: "transparent",
+                            background: 'transparent',
                             color: `${questionColor}`,
                           }}
                         >
@@ -224,15 +224,15 @@ export default function EditTitle(values) {
               <>
                 <div
                   style={{
-                    transform: "translateY(20px)",
+                    transform: 'translateY(20px)',
                   }}
                 >
-                  <span style={{ fontSize: "45px" }}>
+                  <span style={{ fontSize: '45px' }}>
                     <span
                       style={{
-                        fontWeight: "500",
-                        display: "flex",
-                        justifyContent: "center",
+                        fontWeight: '500',
+                        display: 'flex',
+                        justifyContent: 'center',
                       }}
                     >
                       <b>{title}</b>
@@ -240,19 +240,19 @@ export default function EditTitle(values) {
                   </span>
                   <span
                     style={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      transform: "translate(40px, -32px) scale(0.8)",
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      transform: 'translate(40px, -32px) scale(0.8)',
                     }}
                   >
                     <Button
                       onClick={() => {
-                        setTitle(""), setTitleClicked(false);
+                        setTitle(''), setTitleClicked(false);
                       }}
                       style={{
-                        border: "2px solid #125CA1",
-                        background: "transparent",
-                        color: "#125CA1",
+                        border: '2px solid #125CA1',
+                        background: 'transparent',
+                        color: '#125CA1',
                       }}
                     >
                       Edit Title
@@ -267,18 +267,18 @@ export default function EditTitle(values) {
         <>
           <span
             style={{
-              fontSize: "45px",
-              display: title.length > 0 ? "block" : "none",
+              fontSize: '45px',
+              display: title.length > 0 ? 'block' : 'none',
             }}
           >
             <span
               style={{
-                fontWeight: "500",
-                display: "flex",
-                justifyContent: "center",
-                transform: "translate(-13px)",
-                marginTop: "40px",
-                marginBottom: "20px",
+                fontWeight: '500',
+                display: 'flex',
+                justifyContent: 'center',
+                transform: 'translate(-13px)',
+                marginTop: '40px',
+                marginBottom: '20px',
               }}
             >
               <b>{title}</b>

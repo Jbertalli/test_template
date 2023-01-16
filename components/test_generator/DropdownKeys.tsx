@@ -1,5 +1,5 @@
-import { Divider, Icon, Container } from "semantic-ui-react";
-import styles from "../../styles/Test.module.css";
+import { Divider, Icon, Container } from 'semantic-ui-react';
+import styles from '../../styles/Test.module.css';
 
 export default function DropdownKeys(values) {
 
@@ -12,7 +12,7 @@ export default function DropdownKeys(values) {
     openAnswerKey,
     setOpenAnswerKey,
     openStudentAnswers,
-    setOpenStudentAnswers
+    setOpenStudentAnswers,
   } = values;
 
   return (
@@ -25,8 +25,8 @@ export default function DropdownKeys(values) {
               <>
                 <div
                   style={{
-                    transform: "translateY(-8px)",
-                    cursor: "pointer",
+                    transform: 'translateY(-8px)',
+                    cursor: 'pointer',
                   }}
                   onClick={() => {
                     setOpenQuestionKey(true);
@@ -34,20 +34,20 @@ export default function DropdownKeys(values) {
                 >
                   <div
                     style={{
-                      marginLeft: "-25px",
-                      display: "flex",
+                      marginLeft: '-25px',
+                      display: 'flex',
                       color: `${questionColor}`,
-                      transform: "translateY(100%) scale(0.8)",
+                      transform: 'translateY(100%) scale(0.8)',
                     }}
                   >
                     <Icon name="chevron down" />
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      fontSize: "20px",
-                      fontWeight: "700",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      fontSize: '20px',
+                      fontWeight: '700',
                       color: `${questionColor}`,
                     }}
                   >
@@ -59,20 +59,20 @@ export default function DropdownKeys(values) {
               <>
                 <Container
                   style={{
-                    color: "red",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    cursor: "pointer",
-                    marginRight: "25px",
-                    transform: "translate(-1vw, -5px)",
+                    color: 'red',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    cursor: 'pointer',
+                    marginRight: '25px',
+                    transform: 'translate(-1vw, -5px)',
                   }}
                   className={styles.open}
                   onClick={() => setOpenQuestionKey(false)}
                 >
                   <div
                     style={{
-                      transform: "scale(2)",
-                      zIndex: "10",
+                      transform: 'scale(2)',
+                      zIndex: '10',
                     }}
                   >
                     x
@@ -80,8 +80,8 @@ export default function DropdownKeys(values) {
                 </Container>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
                   {!student ? (
@@ -89,15 +89,15 @@ export default function DropdownKeys(values) {
                       <div>
                         <h1
                           style={{
-                            display: "flex",
-                            justifyContent: "center",
+                            display: 'flex',
+                            justifyContent: 'center',
                           }}
                         >
                           Question Key
                         </h1>
                         <h2
                           style={{
-                            transform: "translate(-20px)",
+                            transform: 'translate(-20px)',
                           }}
                         >
                           {serviceList &&
@@ -124,8 +124,8 @@ export default function DropdownKeys(values) {
               <>
                 <div
                   style={{
-                    transform: "translateY(-8px)",
-                    cursor: "pointer",
+                    transform: 'translateY(-8px)',
+                    cursor: 'pointer',
                   }}
                   onClick={() => {
                     setOpenAnswerKey(true);
@@ -133,20 +133,20 @@ export default function DropdownKeys(values) {
                 >
                   <div
                     style={{
-                      marginLeft: "-25px",
-                      display: "flex",
+                      marginLeft: '-25px',
+                      display: 'flex',
                       color: `${questionColor}`,
-                      transform: "translateY(100%) scale(0.8)",
+                      transform: 'translateY(100%) scale(0.8)',
                     }}
                   >
                     <Icon name="chevron down" />
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      fontSize: "20px",
-                      fontWeight: "700",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      fontSize: '20px',
+                      fontWeight: '700',
                       color: `${questionColor}`,
                     }}
                   >
@@ -158,20 +158,20 @@ export default function DropdownKeys(values) {
               <>
                 <Container
                   style={{
-                    color: "red",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    cursor: "pointer",
-                    marginRight: "25px",
-                    transform: "translate(-1vw, -5px)",
+                    color: 'red',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    cursor: 'pointer',
+                    marginRight: '25px',
+                    transform: 'translate(-1vw, -5px)',
                   }}
                   className={styles.open}
                   onClick={() => setOpenAnswerKey(false)}
                 >
                   <div
                     style={{
-                      transform: "scale(2)",
-                      zIndex: "10",
+                      transform: 'scale(2)',
+                      zIndex: '10',
                     }}
                   >
                     x
@@ -179,28 +179,28 @@ export default function DropdownKeys(values) {
                 </Container>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
                   {!student ? (
                     <>
                       <div
                         style={{
-                          color: "red",
+                          color: 'red',
                         }}
                       >
                         <h1
                           style={{
-                            display: "flex",
-                            justifyContent: "center",
+                            display: 'flex',
+                            justifyContent: 'center',
                           }}
                         >
                           Answer Key
                         </h1>
                         <h2
                           style={{
-                            transform: "translate(-20px)",
+                            transform: 'translate(-20px)',
                           }}
                         >
                           {serviceList &&
@@ -227,8 +227,8 @@ export default function DropdownKeys(values) {
               <>
                 <div
                   style={{
-                    transform: "translateY(-8px)",
-                    cursor: "pointer",
+                    transform: 'translateY(-8px)',
+                    cursor: 'pointer',
                   }}
                   onClick={() => {
                     setOpenStudentAnswers(true);
@@ -236,20 +236,20 @@ export default function DropdownKeys(values) {
                 >
                   <div
                     style={{
-                      marginLeft: "-25px",
-                      display: "flex",
+                      marginLeft: '-25px',
+                      display: 'flex',
                       color: `${questionColor}`,
-                      transform: "translateY(100%) scale(0.8)",
+                      transform: 'translateY(100%) scale(0.8)',
                     }}
                   >
                     <Icon name="chevron down" />
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      fontSize: "20px",
-                      fontWeight: "700",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      fontSize: '20px',
+                      fontWeight: '700',
                       color: `${questionColor}`,
                     }}
                   >
@@ -261,20 +261,20 @@ export default function DropdownKeys(values) {
               <>
                 <Container
                   style={{
-                    color: "red",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    cursor: "pointer",
-                    marginRight: "25px",
-                    transform: "translate(-1vw, -5px)",
+                    color: 'red',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    cursor: 'pointer',
+                    marginRight: '25px',
+                    transform: 'translate(-1vw, -5px)',
                   }}
                   className={styles.open}
                   onClick={() => setOpenStudentAnswers(false)}
                 >
                   <div
                     style={{
-                      transform: "scale(2)",
-                      zIndex: "10",
+                      transform: 'scale(2)',
+                      zIndex: '10',
                     }}
                   >
                     x
@@ -282,8 +282,8 @@ export default function DropdownKeys(values) {
                 </Container>
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
+                    display: 'flex',
+                    justifyContent: 'center',
                   }}
                 >
                   {!student ? (
@@ -291,15 +291,15 @@ export default function DropdownKeys(values) {
                       <div>
                         <h1
                           style={{
-                            display: "flex",
-                            justifyContent: "center",
+                            display: 'flex',
+                            justifyContent: 'center',
                           }}
                         >
                           Student Answers
                         </h1>
                         <h2
                           style={{
-                            transform: "translate(-20px)",
+                            transform: 'translate(-20px)',
                           }}
                         >
                           {serviceList &&

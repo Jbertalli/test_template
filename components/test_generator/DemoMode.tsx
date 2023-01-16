@@ -1,4 +1,4 @@
-import { Button } from "semantic-ui-react";
+import { Button } from 'semantic-ui-react';
 
 export default function DemoMode(values) {
 
@@ -24,7 +24,7 @@ export default function DemoMode(values) {
     setUserEmail,
     setOpenModal,
     setResetTernary,
-    textColor
+    textColor,
   } = values;
 
   return (
@@ -33,10 +33,10 @@ export default function DemoMode(values) {
         <>
           <div
             style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: "10px",
-              marginRight: "10px",
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '10px',
+              marginRight: '10px',
             }}
           >
             <Button
@@ -45,26 +45,26 @@ export default function DemoMode(values) {
                   setStudent(false),
                   setEdit(false),
                   setClickPassword(true),
-                  setPassword(""),
-                  setAdminPassword(""),
-                  setAdminEmail(""),
+                  setPassword(''),
+                  setAdminPassword(''),
+                  setAdminEmail(''),
                   setAuth(false),
                   setIsResetting(false),
-                  setNewPassword(""),
+                  setNewPassword(''),
                   setSave(false),
                   setCreated(false),
                   setTitleClicked(false),
                   setSaveRipple(false),
                   setResetClicked(false),
                   setEye(true),
-                  setHide("password"),
-                  setUserEmail("");
+                  setHide('password'),
+                  setUserEmail('')
               }}
               style={{
-                border: "2px solid red",
-                background: "transparent",
-                color: "red",
-                marginTop: '20px'
+                border: '2px solid red',
+                background: 'transparent',
+                color: 'red',
+                marginTop: '20px',
               }}
             >
               End Demo
@@ -75,22 +75,20 @@ export default function DemoMode(values) {
         <>
           <div
             style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: "10px",
-              marginRight: "10px"
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: '10px',
+              marginRight: '10px',
             }}
           >
             <Button
               onClick={() => {
-                setOpenModal(true), 
-                setStudent(false), 
-                setResetTernary(false);
+                setOpenModal(true), setStudent(false), setResetTernary(false);
               }}
               style={{
                 border: `2px solid ${textColor}`,
-                background: "transparent",
-                color: `${textColor}`
+                background: 'transparent',
+                color: `${textColor}`,
               }}
             >
               Demo Mode

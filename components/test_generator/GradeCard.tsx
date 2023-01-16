@@ -1,22 +1,14 @@
-import { Card } from "semantic-ui-react";
+import { Card } from 'semantic-ui-react';
 
 export default function GradeCard(values) {
-
-  const {
-    student,
-    finish,
-    grade,
-    percent,
-    color,
-    length,
-    letterGrade
-  } = values;
+  const { student, finish, grade, percent, color, length, letterGrade } =
+    values;
 
   return (
     <>
       <div
         style={{
-          marginBottom: "20px",
+          marginBottom: '20px',
         }}
       >
         {student ? (
@@ -25,32 +17,32 @@ export default function GradeCard(values) {
               <>
                 <Card
                   style={{
-                    height: "300px",
+                    height: '300px',
                   }}
                 >
                   <div
                     style={{
-                      transform: "translateY(20%)",
+                      transform: 'translateY(20%)',
                     }}
                   >
                     <div
                       style={{
-                        marginBottom: "5px",
-                        color: "black",
+                        marginBottom: '5px',
+                        color: 'black',
                       }}
                     >
                       <h1
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
+                          display: 'flex',
+                          justifyContent: 'center',
                         }}
                       >
                         Grade Report
                       </h1>
                       <h2
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
+                          display: 'flex',
+                          justifyContent: 'center',
                         }}
                       >
                         Grade: {grade}/{length}
@@ -59,9 +51,9 @@ export default function GradeCard(values) {
                     <h2>
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          color: "black",
+                          display: 'flex',
+                          justifyContent: 'center',
+                          color: 'black',
                         }}
                       >
                         {percent}%
@@ -70,9 +62,9 @@ export default function GradeCard(values) {
                     <h1
                       style={{
                         color: `${color}`,
-                        paddingBottom: "30px",
-                        display: "flex",
-                        justifyContent: "center",
+                        paddingBottom: '30px',
+                        display: 'flex',
+                        justifyContent: 'center',
                       }}
                     >
                       {length > 0 ? <>{letterGrade}</> : null}

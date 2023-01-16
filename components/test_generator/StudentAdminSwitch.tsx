@@ -1,4 +1,4 @@
-import { Divider, Button, Icon } from "semantic-ui-react";
+import { Divider, Button, Icon } from 'semantic-ui-react';
 
 export default function StudentAdminSwitch(values) {
 
@@ -16,26 +16,26 @@ export default function StudentAdminSwitch(values) {
     setTimeClick,
     textColor,
     setOpenEmail,
-    setOpenNameDate
+    setOpenNameDate,
   } = values;
 
   return (
     <>
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
+          display: 'flex',
+          justifyContent: 'center',
         }}
       >
         <div
           style={{
-            width: "100%",
+            width: '100%',
           }}
         >
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
+              display: 'flex',
+              justifyContent: 'center',
             }}
           >
             {student ? (
@@ -52,15 +52,15 @@ export default function StudentAdminSwitch(values) {
             <>
               <div
                 style={{
-                  width: "100%",
+                  width: '100%',
                 }}
               >
                 <Divider />
               </div>
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
               >
                 {student ? (
@@ -76,11 +76,11 @@ export default function StudentAdminSwitch(values) {
                             setOpenStudentAnswers(false),
                             setEdit(false),
                             setSave(false),
-                            setTimeClick(false);
+                            setTimeClick(false)
                         }}
                         style={{
                           border: `2px solid ${textColor}`,
-                          background: "transparent",
+                          background: 'transparent',
                           color: `${textColor}`,
                         }}
                       >
@@ -97,11 +97,11 @@ export default function StudentAdminSwitch(values) {
                             setFinish(false),
                             setSave(true),
                             setOpenEmail(false),
-                            setOpenNameDate(false);
+                            setOpenNameDate(false)
                         }}
                         style={{
                           border: `2px solid ${textColor}`,
-                          background: "transparent",
+                          background: 'transparent',
                           color: `${textColor}`,
                         }}
                       >

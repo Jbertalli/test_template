@@ -1,4 +1,4 @@
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon } from 'semantic-ui-react';
 
 export default function NightMode(values) {
 
@@ -8,7 +8,7 @@ export default function NightMode(values) {
     setBackground,
     setTextColor,
     setQuestionColor,
-    resize
+    resize,
   } = values;
 
   return (
@@ -18,20 +18,20 @@ export default function NightMode(values) {
           <Button
             onClick={() => {
                 setNight(true),
-                setBackground("#202020"),
-                setTextColor("#f2f2f2"),
-                setQuestionColor("#f2f2f2");
+                setBackground('#202020'),
+                setTextColor('#f2f2f2'),
+                setQuestionColor('#f2f2f2')
             }}
             style={{
-              position: "absolute",
-              marginTop: "20px",
-              marginLeft: "20px",
-              background: "black",
-              color: "white",
+              position: 'absolute',
+              marginTop: '20px',
+              marginLeft: '20px',
+              background: 'black',
+              color: 'white',
             }}
           >
             <Icon name="moon" />
-            {resize ? "Night Mode" : "Dark"}
+            {resize ? 'Night Mode' : 'Dark'}
           </Button>
         </>
       ) : (
@@ -39,20 +39,20 @@ export default function NightMode(values) {
           <Button
             onClick={() => {
                 setNight(false),
-                setBackground("white"),
-                setTextColor(""),
-                setQuestionColor("#125CA1");
+                setBackground('white'),
+                setTextColor(''),
+                setQuestionColor('#125CA1')
             }}
             style={{
-              position: "absolute",
-              marginTop: "20px",
-              marginLeft: "20px",
-              background: "white",
-              color: "black",
+              position: 'absolute',
+              marginTop: '20px',
+              marginLeft: '20px',
+              background: 'white',
+              color: 'black',
             }}
           >
             <Icon name="sun" />
-            {resize ? "Day Mode" : "Light"}
+            {resize ? 'Day Mode' : 'Light'}
           </Button>
         </>
       )}

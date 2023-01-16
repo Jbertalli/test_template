@@ -1,5 +1,5 @@
-import styles from "../../styles/Test.module.css";
-import { Divider, Container, Icon, Button } from "semantic-ui-react";
+import styles from '../../styles/Test.module.css';
+import { Divider, Container, Icon, Button } from 'semantic-ui-react';
 
 export default function Email(values) {
 
@@ -12,7 +12,7 @@ export default function Email(values) {
     setUserEmail,
     validEmail,
     isValid,
-    send
+    send,
   } = values;
 
   return (
@@ -23,8 +23,8 @@ export default function Email(values) {
           <>
             <div
               style={{
-                transform: "translateY(-8px)",
-                cursor: "pointer",
+                transform: 'translateY(-8px)',
+                cursor: 'pointer',
               }}
               onClick={() => {
                 setOpenEmail(true);
@@ -32,20 +32,20 @@ export default function Email(values) {
             >
               <div
                 style={{
-                  marginLeft: "-25px",
-                  display: "flex",
+                  marginLeft: '-25px',
+                  display: 'flex',
                   color: `${questionColor}`,
-                  transform: "translateY(100%) scale(0.8)",
+                  transform: 'translateY(100%) scale(0.8)',
                 }}
               >
                 <Icon name="chevron down" />
               </div>
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  fontSize: "20px",
-                  fontWeight: "700",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  fontSize: '20px',
+                  fontWeight: '700',
                   color: `${questionColor}`,
                 }}
               >
@@ -57,20 +57,20 @@ export default function Email(values) {
           <>
             <Container
               style={{
-                color: "red",
-                display: "flex",
-                justifyContent: "flex-end",
-                cursor: "pointer",
-                marginRight: "25px",
-                transform: "translate(-1vw, -5px)",
+                color: 'red',
+                display: 'flex',
+                justifyContent: 'flex-end',
+                cursor: 'pointer',
+                marginRight: '25px',
+                transform: 'translate(-1vw, -5px)',
               }}
               className={styles.open}
               onClick={() => setOpenEmail(false)}
             >
               <div
                 style={{
-                  transform: "scale(2)",
-                  zIndex: "10",
+                  transform: 'scale(2)',
+                  zIndex: '10',
                 }}
               >
                 x
@@ -78,16 +78,16 @@ export default function Email(values) {
             </Container>
             <div
               style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "0px",
+                display: 'flex',
+                justifyContent: 'center',
+                marginTop: '0px',
               }}
             >
               <div>
                 <h2>Email Recipient</h2>
                 <div
                   style={{
-                    color: "black",
+                    color: 'black',
                   }}
                 >
                   <input
@@ -96,13 +96,13 @@ export default function Email(values) {
                     name="user_email"
                     placeholder="email address"
                     style={{
-                      padding: "9px 14px 9px 14px",
-                      fontSize: "14px",
-                      fontWeight: "400",
-                      cursor: "text",
-                      width: "178.5px",
-                      borderRadius: "4px",
-                      border: "1px solid rgba(34, 36, 38. 0.15)",
+                      padding: '9px 14px 9px 14px',
+                      fontSize: '14px',
+                      fontWeight: '400',
+                      cursor: 'text',
+                      width: '178.5px',
+                      borderRadius: '4px',
+                      border: '1px solid rgba(34, 36, 38. 0.15)',
                     }}
                     value={userEmail}
                     onChange={(e) => {
@@ -114,12 +114,12 @@ export default function Email(values) {
                   <>
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        transform: "translate(-5px, 50%)",
-                        color: "red",
-                        fontSize: "20px",
-                        fontWeight: "500",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        transform: 'translate(-5px, 50%)',
+                        color: 'red',
+                        fontSize: '20px',
+                        fontWeight: '500',
                       }}
                     >
                       Error: Email is invalid!
@@ -128,18 +128,18 @@ export default function Email(values) {
                 ) : null}
                 <div
                   style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "25px",
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '25px',
                   }}
                 >
                   <Button
                     disabled={!isValid}
                     onClick={send}
                     style={{
-                      border: "2px solid #21BA45",
-                      background: "transparent",
-                      color: "#21BA45",
+                      border: '2px solid #21BA45',
+                      background: 'transparent',
+                      color: '#21BA45',
                     }}
                   >
                     Email Grade

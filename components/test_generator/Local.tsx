@@ -1,111 +1,111 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-const LOCAL_STORAGE_KEY = "list";
-const LOCAL_STORAGE_KEY_NAME = "Name";
-const LOCAL_STORAGE_KEY_CLICK_NAME = "ClickName";
-const LOCAL_STORAGE_KEY_DATE = "Date";
-const LOCAL_STORAGE_KEY_CLICK_DATE = "ClickDate";
-const LOCAL_STORAGE_KEY_TITLE = "Title";
-const LOCAL_STORAGE_KEY_CLICK_TITLE = "ClickTitle";
-const LOCAL_STORAGE_KEY_USER_EMAIL = "UserEmail";
-const LOCAL_STORAGE_KEY_IS_VALID = "IsValid";
-const LOCAL_STORAGE_KEY_OPEN_NAME_DATE = "OpenNameDate";
-const LOCAL_STORAGE_KEY_OPEN_MODAL = "OpenModal";
-const LOCAL_STORAGE_KEY_AUTH = "Auth";
+const LOCAL_STORAGE_KEY = 'list';
+const LOCAL_STORAGE_KEY_NAME = 'Name';
+const LOCAL_STORAGE_KEY_CLICK_NAME = 'ClickName';
+const LOCAL_STORAGE_KEY_DATE = 'Date';
+const LOCAL_STORAGE_KEY_CLICK_DATE = 'ClickDate';
+const LOCAL_STORAGE_KEY_TITLE = 'Title';
+const LOCAL_STORAGE_KEY_CLICK_TITLE = 'ClickTitle';
+const LOCAL_STORAGE_KEY_USER_EMAIL = 'UserEmail';
+const LOCAL_STORAGE_KEY_IS_VALID = 'IsValid';
+const LOCAL_STORAGE_KEY_OPEN_NAME_DATE = 'OpenNameDate';
+const LOCAL_STORAGE_KEY_OPEN_MODAL = 'OpenModal';
+const LOCAL_STORAGE_KEY_AUTH = 'Auth';
 // const LOCAL_STORAGE_KEY_PASSWORD = 'Password';
-const LOCAL_STORAGE_KEY_ADMIN_PASSWORD = "AdminPassword";
+const LOCAL_STORAGE_KEY_ADMIN_PASSWORD = 'AdminPassword';
 // const LOCAL_STORAGE_KEY_CLICK_PASSWORD = 'ClickPassword';
 // const LOCAL_STORAGE_KEY_HIDE_ADMIN = 'HideAdmin';
-const LOCAL_STORAGE_KEY_NEW_MODAL = "NewModal";
+const LOCAL_STORAGE_KEY_NEW_MODAL = 'NewModal';
 // const LOCAL_STORAGE_KEY_NEW_PASSWORD = 'NewPassword';
 // const LOCAL_STORAGE_KEY_SAME = 'Same';
-const LOCAL_STORAGE_KEY_LETTER_GRADE = "LetterGrade";
-const LOCAL_STORAGE_KEY_COLOR = "Color";
-const LOCAL_STORAGE_KEY_STUDENT = "Student";
-const LOCAL_STORAGE_KEY_FINISH = "Finish";
-const LOCAL_STORAGE_KEY_SAVE = "Save";
-const LOCAL_STORAGE_KEY_RESET = "ResetPassword";
-const LOCAL_STORAGE_KEY_ADMIN_EMAIL = "AdminEmail";
-const LOCAL_STORAGE_KEY_DEMO = "Demo";
-const LOCAL_STORAGE_KEY_CREATED = "Created";
-const LOCAL_STORAGE_KEY_SAVE_RIPPLE = "Ripple";
-const LOCAL_STORAGE_KEY_RESET_CLICKED = "ResetClicked";
-const LOCAL_STORAGE_KEY_NIGHT = "Night";
-const LOCAL_STORAGE_KEY_BACKGROUND = "Background";
-const LOCAL_STORAGE_KEY_TEXT_COLOR = "TextColor";
-const LOCAL_STORAGE_KEY_QUESTION_COLOR = "QuestionColor";
+const LOCAL_STORAGE_KEY_LETTER_GRADE = 'LetterGrade';
+const LOCAL_STORAGE_KEY_COLOR = 'Color';
+const LOCAL_STORAGE_KEY_STUDENT = 'Student';
+const LOCAL_STORAGE_KEY_FINISH = 'Finish';
+const LOCAL_STORAGE_KEY_SAVE = 'Save';
+const LOCAL_STORAGE_KEY_RESET = 'ResetPassword';
+const LOCAL_STORAGE_KEY_ADMIN_EMAIL = 'AdminEmail';
+const LOCAL_STORAGE_KEY_DEMO = 'Demo';
+const LOCAL_STORAGE_KEY_CREATED = 'Created';
+const LOCAL_STORAGE_KEY_SAVE_RIPPLE = 'Ripple';
+const LOCAL_STORAGE_KEY_RESET_CLICKED = 'ResetClicked';
+const LOCAL_STORAGE_KEY_NIGHT = 'Night';
+const LOCAL_STORAGE_KEY_BACKGROUND = 'Background';
+const LOCAL_STORAGE_KEY_TEXT_COLOR = 'TextColor';
+const LOCAL_STORAGE_KEY_QUESTION_COLOR = 'QuestionColor';
 
 export default function Local(values) {
 
   const {
-    setServiceList, 
-    serviceList, 
-    setName, 
-    name, 
-    setNameClicked, 
-    nameClicked, 
-    setDate, 
-    date, 
-    setDateClicked, 
-    dateClicked, 
-    setTitle, 
-    title, 
-    setTitleClicked, 
-    titleClicked, 
+    setServiceList,
+    serviceList,
+    setName,
+    name,
+    setNameClicked,
+    nameClicked,
+    setDate,
+    date,
+    setDateClicked,
+    dateClicked,
+    setTitle,
+    title,
+    setTitleClicked,
+    titleClicked,
     setUserEmail,
-    userEmail, 
-    setIsValid, 
-    isValid, 
-    setOpenNameDate, 
-    openNameDate, 
-    setOpenModal, 
-    openModal, 
-    setAuth, 
+    userEmail,
+    setIsValid,
+    isValid,
+    setOpenNameDate,
+    openNameDate,
+    setOpenModal,
+    openModal,
+    setAuth,
     auth,
-    setPassword, 
-    password, 
-    setAdminPassword, 
-    adminPassword, 
-    setClickPassword, 
-    clickPassword, 
-    setHideAdmin, 
-    hideAdmin, 
-    setNewModal, 
-    newModal, 
+    setPassword,
+    password,
+    setAdminPassword,
+    adminPassword,
+    setClickPassword,
+    clickPassword,
+    setHideAdmin,
+    hideAdmin,
+    setNewModal,
+    newModal,
     setNewPassword,
-    newPassword, 
-    setSame, 
-    same, 
-    setLetterGrade, 
-    letterGrade, 
-    setColor, 
-    color, 
-    setStudent, 
-    student, 
-    setFinish, 
-    finish, 
-    setSave, 
-    save, 
+    newPassword,
+    setSame,
+    same,
+    setLetterGrade,
+    letterGrade,
+    setColor,
+    color,
+    setStudent,
+    student,
+    setFinish,
+    finish,
+    setSave,
+    save,
     setResetPassword,
-    resetPassword, 
-    setAdminEmail, 
-    adminEmail, 
-    setDemo, 
-    demo, 
-    setCreated, 
-    created, 
-    setSaveRipple, 
-    saveRipple, 
-    setResetClicked, 
+    resetPassword,
+    setAdminEmail,
+    adminEmail,
+    setDemo,
+    demo,
+    setCreated,
+    created,
+    setSaveRipple,
+    saveRipple,
+    setResetClicked,
     resetClicked,
-    setNight, 
-    night, 
-    setBackground, 
-    background, 
-    setTextColor, 
-    textColor, 
-    setQuestionColor, 
-    questionColor
+    setNight,
+    night,
+    setBackground,
+    background,
+    setTextColor,
+    textColor,
+    setQuestionColor,
+    questionColor,
   } = values;
 
   // List
@@ -547,9 +547,5 @@ export default function Local(values) {
     );
   }, [questionColor]);
 
-    return (
-        <>
-            &nbsp;
-        </>
-    );
+  return <>&nbsp;</>;
 }

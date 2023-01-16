@@ -1,71 +1,71 @@
-import Head from "next/head";
-import React, { useState, useEffect } from "react";
-import { Divider, Container } from "semantic-ui-react";
-import { v4 as uuidv4 } from "uuid";
-import emailjs from "emailjs-com";
+import Head from 'next/head';
+import React, { useState, useEffect } from 'react';
+import { Divider, Container } from 'semantic-ui-react';
+import { v4 as uuidv4 } from 'uuid';
+import emailjs from 'emailjs-com';
 // import hash from 'object-hash';
-import MyTimer from "../components/test_generator/MyTimer";
-import DemoModal from "../components/test_generator/DemoModal";
-import ReturnAdminModal from "../components/test_generator/ReturnAdminModal";
-import MappedForm from "../components/test_generator/MappedForm";
-import GradeCard from "../components/test_generator/GradeCard";
-import EditTitle from "../components/test_generator/EditTitle";
-import DropdownKeys from "../components/test_generator/DropdownKeys";
-import Email from "../components/test_generator/Email";
-import CreateTimer from "../components/test_generator/CreateTimer";
-import DateClicked from "../components/test_generator/DateClicked";
-import NameClicked from "../components/test_generator/NameClicked";
-import OpenNameDate from "../components/test_generator/OpenNameDate";
-import SubmitTestButton from "../components/test_generator/SubmitTestButton";
-import StudentAdminSwitch from "../components/test_generator/StudentAdminSwitch";
-import TestHeader from "../components/test_generator/TestHeader";
-import Local from "../components/test_generator/Local";
-import SideMenu from "../components/test_generator/SideMenu";
+import MyTimer from '../components/test_generator/MyTimer';
+import DemoModal from '../components/test_generator/DemoModal';
+import ReturnAdminModal from '../components/test_generator/ReturnAdminModal';
+import MappedForm from '../components/test_generator/MappedForm';
+import GradeCard from '../components/test_generator/GradeCard';
+import EditTitle from '../components/test_generator/EditTitle';
+import DropdownKeys from '../components/test_generator/DropdownKeys';
+import Email from '../components/test_generator/Email';
+import CreateTimer from '../components/test_generator/CreateTimer';
+import DateClicked from '../components/test_generator/DateClicked';
+import NameClicked from '../components/test_generator/NameClicked';
+import OpenNameDate from '../components/test_generator/OpenNameDate';
+import SubmitTestButton from '../components/test_generator/SubmitTestButton';
+import StudentAdminSwitch from '../components/test_generator/StudentAdminSwitch';
+import TestHeader from '../components/test_generator/TestHeader';
+import Local from '../components/test_generator/Local';
+import SideMenu from '../components/test_generator/SideMenu';
 
 export default function Services() {
   const [serviceList, setServiceList] = useState([
-    { id: "", service: "", answer: "", student: "" },
+    { id: '', service: '', answer: '', student: '' },
   ]);
   const [letterGrade, setLetterGrade] = useState<any>(null);
-  const [color, setColor] = useState<string>("");
+  const [color, setColor] = useState<string>('');
   const [student, setStudent] = useState<boolean>(false);
   const [finish, setFinish] = useState<boolean>(false);
   const [save, setSave] = useState<boolean>(false);
   const [openAnswerKey, setOpenAnswerKey] = useState<boolean>(false);
   const [openQuestionKey, setOpenQuestionKey] = useState<boolean>(false);
   const [openStudentAnswers, setOpenStudentAnswers] = useState<boolean>(false);
-  const [name, setName] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [title, setTitle] = useState<string>("");
+  const [name, setName] = useState<string>('');
+  const [date, setDate] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
   const [nameClicked, setNameClicked] = useState<boolean>(false);
   const [dateClicked, setDateClicked] = useState<boolean>(false);
   const [titleClicked, setTitleClicked] = useState<boolean>(false);
-  const [minute, setMinute] = useState<string>("0");
-  const [second, setSecond] = useState<string>("0");
+  const [minute, setMinute] = useState<string>('0');
+  const [second, setSecond] = useState<string>('0');
   const [timed, setTimed] = useState<boolean>(false);
   const [timeClick, setTimeClick] = useState<boolean>(false);
   const [openEmail, setOpenEmail] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>('');
   const [isValid, setIsValid] = useState<boolean>(false);
   const [edit, setEdit] = useState<boolean>(false);
   const [isTimed, setIsTimed] = useState<boolean>(false);
   const [openNameDate, setOpenNameDate] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [auth, setAuth] = useState<boolean>(false);
-  const [password, setPassword] = useState<string>("");
-  const [adminPassword, setAdminPassword] = useState<string>("");
-  const [hide, setHide] = useState<string>("password");
+  const [password, setPassword] = useState<string>('');
+  const [adminPassword, setAdminPassword] = useState<string>('');
+  const [hide, setHide] = useState<string>('password');
   const [show, setShow] = useState<boolean>(false);
   const [clickPassword, setClickPassword] = useState<boolean>(true);
   const [hideAdmin, setHideAdmin] = useState<boolean>(false);
   const [newModal, setNewModal] = useState<boolean>(false);
-  const [newPassword, setNewPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>('');
   const [same, setSame] = useState<boolean>(false);
   const [demo, setDemo] = useState<boolean>(false);
   const [creating, setCreating] = useState<boolean>(false);
   const [created, setCreated] = useState<boolean>(false);
-  const [adminEmail, setAdminEmail] = useState<string>("");
-  const [resetPassword, setResetPassword] = useState<string>("");
+  const [adminEmail, setAdminEmail] = useState<string>('');
+  const [resetPassword, setResetPassword] = useState<string>('');
   const [sameReset, setSameReset] = useState<boolean>(false);
   const [isResetting, setIsResetting] = useState<boolean>(false);
   const [saveRipple, setSaveRipple] = useState<boolean>(false);
@@ -73,9 +73,9 @@ export default function Services() {
   const [resetClicked, setResetClicked] = useState<boolean>(false);
   const [eye, setEye] = useState<boolean>(false);
   const [night, setNight] = useState<boolean>(false);
-  const [background, setBackground] = useState<string>("white");
-  const [textColor, setTextColor] = useState<string>("black");
-  const [questionColor, setQuestionColor] = useState<string>("#125CA1");
+  const [background, setBackground] = useState<string>('white');
+  const [textColor, setTextColor] = useState<string>('black');
+  const [questionColor, setQuestionColor] = useState<string>('#125CA1');
   const [resetTernary, setResetTernary] = useState<boolean>(false);
   const [resize, setResize] = useState<boolean>(false);
   const [openHover, setOpenHover] = useState<boolean>(false);
@@ -94,13 +94,13 @@ export default function Services() {
         setResize(false);
       }
     };
-    window.addEventListener("resize", updateMedia);
-    return () => window.removeEventListener("resize", updateMedia);
+    window.addEventListener('resize', updateMedia);
+    return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
   // console.log(serviceList[0].service);
 
-  console.log("Full Test Array", serviceList);
+  console.log('Full Test Array', serviceList);
 
   let questionArray = [];
 
@@ -109,7 +109,7 @@ export default function Services() {
     questionArray.push(serviceList[i].service);
   }
 
-  console.log("%c Question Array", "color: red", questionArray);
+  console.log('%c Question Array', 'color: red', questionArray);
 
   let answerArray = [];
 
@@ -118,7 +118,7 @@ export default function Services() {
     answerArray.push(serviceList[i].answer);
   }
 
-  console.log("%c Answer Array", "color: blue", answerArray);
+  console.log('%c Answer Array', 'color: blue', answerArray);
 
   let studentAnswerArray = [];
 
@@ -127,7 +127,7 @@ export default function Services() {
     studentAnswerArray.push(serviceList[i].student);
   }
 
-  console.log("%c Student Answer Array", "color: green", studentAnswerArray);
+  console.log('%c Student Answer Array', 'color: green', studentAnswerArray);
 
   const length = serviceList.length;
 
@@ -162,7 +162,7 @@ export default function Services() {
     const id = uuidv4();
     setServiceList([
       ...serviceList,
-      { id: id, service: "", answer: "", student: "" },
+      { id: id, service: '', answer: '', student: '' },
     ]);
   };
 
@@ -200,37 +200,37 @@ export default function Services() {
   useEffect(() => {
     switch (true) {
       case percent >= 96.67 && percent <= 100.0:
-        setLetterGrade("A+");
+        setLetterGrade('A+');
         break;
       case percent >= 93.33 && percent <= 96.67:
-        setLetterGrade("A");
+        setLetterGrade('A');
         break;
       case percent >= 90.0 && percent <= 93.33:
-        setLetterGrade("A-");
+        setLetterGrade('A-');
         break;
       case percent >= 86.67 && percent <= 90.0:
-        setLetterGrade("B+");
+        setLetterGrade('B+');
         break;
       case percent >= 83.33 && percent <= 86.67:
-        setLetterGrade("B");
+        setLetterGrade('B');
         break;
       case percent >= 80.0 && percent <= 83.33:
-        setLetterGrade("B-");
+        setLetterGrade('B-');
         break;
       case percent >= 76.67 && percent <= 80.0:
-        setLetterGrade("C+");
+        setLetterGrade('C+');
         break;
       case percent >= 73.33 && percent <= 76.67:
-        setLetterGrade("C");
+        setLetterGrade('C');
         break;
       case percent >= 70.0 && percent <= 73.33:
-        setLetterGrade("C-");
+        setLetterGrade('C-');
         break;
       case percent >= 60.0 && percent <= 70.0:
-        setLetterGrade("D");
+        setLetterGrade('D');
         break;
       case percent >= 0.0 && percent <= 60.0:
-        setLetterGrade("F");
+        setLetterGrade('F');
         break;
       default:
         null;
@@ -239,20 +239,20 @@ export default function Services() {
 
   useEffect(() => {
     switch (true) {
-      case letterGrade == "A+" || letterGrade == "A" || letterGrade == "A-":
-        setColor("darkgreen");
+      case letterGrade == 'A+' || letterGrade == 'A' || letterGrade == 'A-':
+        setColor('darkgreen');
         break;
-      case letterGrade == "B+" || letterGrade == "B" || letterGrade == "B-":
-        setColor("green");
+      case letterGrade == 'B+' || letterGrade == 'B' || letterGrade == 'B-':
+        setColor('green');
         break;
-      case letterGrade == "C+" || letterGrade == "C" || letterGrade == "C-":
-        setColor("orange");
+      case letterGrade == 'C+' || letterGrade == 'C' || letterGrade == 'C-':
+        setColor('orange');
         break;
-      case letterGrade == "D":
-        setColor("darkred");
+      case letterGrade == 'D':
+        setColor('darkred');
         break;
-      case letterGrade == "F":
-        setColor("red");
+      case letterGrade == 'F':
+        setColor('red');
         break;
       default:
         null;
@@ -273,7 +273,7 @@ export default function Services() {
 
   let templateParams = {
     user_email: `${userEmail}`,
-    name: "Grade Report",
+    name: 'Grade Report',
     score: `Grade: ${grade}/${length}`,
     percent: `${percent}%`,
     letter: `${letterGrade}`,
@@ -290,17 +290,17 @@ export default function Services() {
   function send() {
     emailjs
       .send(
-        "service_jj71xm9",
-        "template_7hans9n",
+        'service_jj71xm9',
+        'template_7hans9n',
         templateParams,
-        "FlrSx29zmJDjwJhtt"
+        'FlrSx29zmJDjwJhtt'
       )
       .then(
         function (response) {
-          console.log("SUCCESS!", response.status, response.text);
+          console.log('SUCCESS!', response.status, response.text);
         },
         function (error) {
-          console.log("FAILED...", error);
+          console.log('FAILED...', error);
         }
       );
   }
@@ -331,8 +331,8 @@ export default function Services() {
   }
 
   function randomString(length) {
-    let string = "";
-    let options = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*";
+    let string = '';
+    let options = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
     let optionsLength = options.length;
     for (let i = 0; i < length; i++) {
       string += options.charAt(Math.floor(Math.random() * optionsLength));
@@ -342,23 +342,23 @@ export default function Services() {
 
   let resetTemplateParams = {
     admin_email: `${adminEmail}`,
-    resetPass: `${resetPassword}`
+    resetPass: `${resetPassword}`,
   };
 
   function sendResetEmail() {
     emailjs
       .send(
-        "service_jj71xm9",
-        "template_cfc61dq",
+        'service_jj71xm9',
+        'template_cfc61dq',
         resetTemplateParams,
-        "FlrSx29zmJDjwJhtt"
+        'FlrSx29zmJDjwJhtt'
       )
       .then(
         function (response) {
-          console.log("SUCCESS!", response.status, response.text);
+          console.log('SUCCESS!', response.status, response.text);
         },
         function (error) {
-          console.log("FAILED...", error);
+          console.log('FAILED...', error);
         }
       );
   }
@@ -467,10 +467,10 @@ export default function Services() {
         style={{
           background: `${background}`,
           color: `${textColor}`,
-          minHeight: "100vh",
-          height: "100%",
-          transform: "translateY(-30px)",
-          paddingBottom: "1px",
+          minHeight: '100vh',
+          height: '100%',
+          transform: 'translateY(-30px)',
+          paddingBottom: '1px',
         }}
       >
         <SideMenu
@@ -514,10 +514,10 @@ export default function Services() {
         />
         <div
           style={{
-            marginRight: "1vw",
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: "-50px",
+            marginRight: '1vw',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginBottom: '-50px',
           }}
         >
           {student ? (
@@ -597,10 +597,10 @@ export default function Services() {
         <Container
           style={{
             border: `2px solid ${questionColor}`,
-            borderRadius: "10px",
-            padding: "3em",
-            marginTop: resize ? "12vh" : "16vh",
-            marginBottom: "100px",
+            borderRadius: '10px',
+            padding: '3em',
+            marginTop: resize ? '12vh' : '16vh',
+            marginBottom: '100px',
           }}
         >
           {/* <div
@@ -790,9 +790,9 @@ export default function Services() {
           />
           <div
             style={{
-              display: "flex",
-              justifyContent: "center",
-              transform: "translateY(1em)",
+              display: 'flex',
+              justifyContent: 'center',
+              transform: 'translateY(1em)',
             }}
           >
             <div>

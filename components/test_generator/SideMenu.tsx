@@ -1,7 +1,8 @@
-import { Icon } from "semantic-ui-react";
-import styles from "../../styles/Test.module.css";
+import { Icon } from 'semantic-ui-react';
+import styles from '../../styles/Test.module.css';
 
 export default function SideMenu(values) {
+
   const {
     openHover,
     setOpenHover,
@@ -39,15 +40,15 @@ export default function SideMenu(values) {
     adminPassword,
     resetClicked,
     setNewModal,
-    setSame
+    setSame,
   } = values;
 
   return (
     <>
       <div
         style={{
-          cursor: "pointer",
-          position: "absolute"
+          cursor: 'pointer',
+          position: 'absolute',
         }}
       >
         {openHover ? (
@@ -55,51 +56,51 @@ export default function SideMenu(values) {
             <div
               onClick={() => setOpenHover(false)}
               style={{
-                width: resize ? "300px" : "100vw",
+                width: resize ? '300px' : '100vw',
                 // minWidth: '300px',
-                maxWidth: "600px",
-                height: resize ? "100vh" : "100%",
-                background: night ? "black" : "white",
+                maxWidth: '600px',
+                height: resize ? '100vh' : '100%',
+                background: night ? 'black' : 'white',
                 color: `${questionColor}`,
-                position: "relative",
-                zIndex: "1000",
-                fontSize: "20px",
-                fontWeight: "700",
-                border: night ? "2px solid white" : "2px solid #125CA1"
+                position: 'relative',
+                zIndex: '1000',
+                fontSize: '20px',
+                fontWeight: '700',
+                border: night ? '2px solid white' : '2px solid #125CA1',
               }}
               className={resize ? styles.menu : styles.dropdown}
             >
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginRight: "20px",
-                  transform: "translateY(44px)",
-                  marginBottom: "30px"
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  marginRight: '20px',
+                  transform: 'translateY(44px)',
+                  marginBottom: '30px',
                 }}
               >
-                <Icon name={resize ? "chevron left" : "chevron up"} />
+                <Icon name={resize ? 'chevron left' : 'chevron up'} />
               </div>
               <h1
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  transform: "translateY(-15px)"
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transform: 'translateY(-15px)',
                 }}
               >
                 Dashboard
               </h1>
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center"
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
               >
                 <div
                   style={{
-                    width: "88%",
-                    height: "1px",
-                    background: `${questionColor}`
+                    width: '88%',
+                    height: '1px',
+                    background: `${questionColor}`,
                   }}
                 />
               </div>
@@ -108,15 +109,15 @@ export default function SideMenu(values) {
                   <div
                     onClick={() => {
                         setNight(true),
-                        setBackground("black"),
-                        setTextColor("#f2f2f2"),
-                        setQuestionColor("#f2f2f2")
+                        setBackground('black'),
+                        setTextColor('#f2f2f2'),
+                        setQuestionColor('#f2f2f2')
                     }}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      margin: "15px 0px 15px 0px",
-                      padding: "0px"
+                      display: 'flex',
+                      justifyContent: 'center',
+                      margin: '15px 0px 15px 0px',
+                      padding: '0px',
                     }}
                   >
                     <Icon name="moon" />
@@ -128,15 +129,15 @@ export default function SideMenu(values) {
                   <div
                     onClick={() => {
                         setNight(false),
-                        setBackground("white"),
-                        setTextColor(""),
-                        setQuestionColor("#125CA1")
+                        setBackground('white'),
+                        setTextColor(''),
+                        setQuestionColor('#125CA1')
                     }}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      margin: "15px 0px 15px 0px",
-                      padding: "0px"
+                      display: 'flex',
+                      justifyContent: 'center',
+                      margin: '15px 0px 15px 0px',
+                      padding: '0px',
                     }}
                   >
                     <Icon name="sun" />
@@ -146,15 +147,15 @@ export default function SideMenu(values) {
               )}
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center"
+                  display: 'flex',
+                  justifyContent: 'center',
                 }}
               >
                 <div
                   style={{
-                    width: "88%",
-                    height: "1px",
-                    background: `${questionColor}`
+                    width: '88%',
+                    height: '1px',
+                    background: `${questionColor}`,
                   }}
                 />
               </div>
@@ -166,42 +167,42 @@ export default function SideMenu(values) {
                         setStudent(false),
                         setEdit(false),
                         setClickPassword(true),
-                        setPassword(""),
-                        setAdminPassword(""),
-                        setAdminEmail(""),
+                        setPassword(''),
+                        setAdminPassword(''),
+                        setAdminEmail(''),
                         setAuth(false),
                         setIsResetting(false),
-                        setNewPassword(""),
+                        setNewPassword(''),
                         setSave(false),
                         setCreated(false),
                         setTitleClicked(false),
                         setSaveRipple(false),
                         setResetClicked(false),
                         setEye(true),
-                        setHide("password"),
-                        setUserEmail("")
+                        setHide('password'),
+                        setUserEmail('')
                     }}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      margin: "15px 0px 15px 0px",
-                      color: "red"
+                      display: 'flex',
+                      justifyContent: 'center',
+                      margin: '15px 0px 15px 0px',
+                      color: 'red',
                     }}
                   >
                     End Demo Mode
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center"
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
                   >
                     <div
                       style={{
-                        width: "88%",
-                        height: "1px",
+                        width: '88%',
+                        height: '1px',
                         background: `${questionColor}`,
-                        transform: "translateY(-0px)"
+                        transform: 'translateY(-0px)',
                       }}
                     />
                   </div>
@@ -215,14 +216,14 @@ export default function SideMenu(values) {
                         setResetTernary(false)
                     }}
                     style={{
-                      border: "1px solid transparent"
+                      border: '1px solid transparent',
                     }}
                   >
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        margin: "15px 0px 15px 0px"
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '15px 0px 15px 0px',
                       }}
                     >
                       Demo Mode
@@ -230,16 +231,16 @@ export default function SideMenu(values) {
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center"
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
                   >
                     <div
                       style={{
-                        width: "88%",
-                        height: "1px",
+                        width: '88%',
+                        height: '1px',
                         background: `${questionColor}`,
-                        transform: "translateY(0px)"
+                        transform: 'translateY(0px)',
                       }}
                     />
                   </div>
@@ -258,15 +259,15 @@ export default function SideMenu(values) {
                                 setFinish(false),
                                 setSave(true),
                                 setDemo(true),
-                                setNewPassword(""),
+                                setNewPassword(''),
                                 setEye(true),
-                                setHide("password")
+                                setHide('password')
                             }}
                             style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              margin: "0px 18px 16px 18px",
-                              padding: "14.8px"
+                              display: 'flex',
+                              justifyContent: 'center',
+                              margin: '0px 18px 16px 18px',
+                              padding: '14.8px',
                             }}
                             className={
                               night ? styles.takeTestNight : styles.takeTest
@@ -276,16 +277,16 @@ export default function SideMenu(values) {
                           </div>
                           <div
                             style={{
-                              display: "flex",
-                              justifyContent: "center"
+                              display: 'flex',
+                              justifyContent: 'center',
                             }}
                           >
                             <div
                               style={{
-                                width: "88%",
-                                height: "1px",
+                                width: '88%',
+                                height: '1px',
                                 background: `${questionColor}`,
-                                transform: "translateY(-16px)"
+                                transform: 'translateY(-16px)',
                               }}
                             />
                           </div>
@@ -302,10 +303,10 @@ export default function SideMenu(values) {
                       setNewModal(true), setSame(false);
                     }}
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      margin: "0px 18px 0px 18px",
-                      padding: "14.8px",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      margin: '0px 18px 0px 18px',
+                      padding: '14.8px',
                     }}
                     className={night ? styles.takeTestNight : styles.takeTest}
                   >
@@ -313,15 +314,15 @@ export default function SideMenu(values) {
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
                   >
                     <div
                       style={{
-                        width: "88%",
-                        height: "1px",
-                        background: `${questionColor}`
+                        width: '88%',
+                        height: '1px',
+                        background: `${questionColor}`,
                       }}
                     />
                   </div>
@@ -329,7 +330,7 @@ export default function SideMenu(values) {
               ) : null}
               <div
                 style={{
-                  height: "20px",
+                  height: '20px',
                 }}
               />
             </div>
@@ -339,38 +340,38 @@ export default function SideMenu(values) {
             <div
               onClick={() => setOpenHover(true)}
               style={{
-                marginTop: resize ? "40px" : "3.8vh",
-                marginLeft: resize ? "30px" : "8px",
-                transform: "scale(1.3)",
-                color: `${questionColor}`
+                marginTop: resize ? '40px' : '3.8vh',
+                marginLeft: resize ? '30px' : '8px',
+                transform: 'scale(1.3)',
+                color: `${questionColor}`,
               }}
             >
               <div
                 style={{
-                  width: "50px",
-                  position: "relative",
-                  transform: "scaleX(2)",
-                  left: "30px"
+                  width: '50px',
+                  position: 'relative',
+                  transform: 'scaleX(2)',
+                  left: '30px',
                 }}
               >
                 <Icon name="minus" />
               </div>
               <div
                 style={{
-                  width: "50px",
-                  position: "relative",
-                  transform: "scaleX(2) translateY(-13px)",
-                  left: "30px"
+                  width: '50px',
+                  position: 'relative',
+                  transform: 'scaleX(2) translateY(-13px)',
+                  left: '30px',
                 }}
               >
                 <Icon name="minus" />
               </div>
               <div
                 style={{
-                  width: "50px",
-                  position: "relative",
-                  transform: "scaleX(2) translateY(-26px)",
-                  left: "30px"
+                  width: '50px',
+                  position: 'relative',
+                  transform: 'scaleX(2) translateY(-26px)',
+                  left: '30px',
                 }}
               >
                 <Icon name="minus" />

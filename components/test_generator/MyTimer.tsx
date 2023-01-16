@@ -1,5 +1,5 @@
-import { Button, Divider } from "semantic-ui-react";
-import { useTimer } from "react-timer-hook";
+import { Button, Divider } from 'semantic-ui-react';
+import { useTimer } from 'react-timer-hook';
 
 export default function MyTimer(values) {
 
@@ -17,7 +17,7 @@ export default function MyTimer(values) {
     isTimed,
     setIsTimed,
     questionColor,
-    setTimeClick
+    setTimeClick,
   } = values;
 
   const {
@@ -33,7 +33,7 @@ export default function MyTimer(values) {
   } = useTimer({
     expiryTimestamp,
     onExpire: () => {
-      console.warn("onExpire called"), setFinish(true);
+      console.warn('onExpire called'), setFinish(true);
     },
   });
 
@@ -52,8 +52,8 @@ export default function MyTimer(values) {
   return (
     <div
       style={{
-        textAlign: "center",
-        transform: "translateY(50px)",
+        textAlign: 'center',
+        transform: 'translateY(50px)',
       }}
     >
       {!student ? (
@@ -64,8 +64,8 @@ export default function MyTimer(values) {
                 <>
                   <div
                     style={{
-                      fontSize: "100px",
-                      marginBottom: "15px",
+                      fontSize: '100px',
+                      marginBottom: '15px',
                     }}
                   >
                     <span>{minutes}</span>:<span>{seconds}</span>
@@ -75,10 +75,10 @@ export default function MyTimer(values) {
                       setTimed(false), setIsTimed(false);
                     }}
                     style={{
-                      marginTop: "40px",
-                      marginBottom: "55px",
+                      marginTop: '40px',
+                      marginBottom: '55px',
                       border: `2px solid red`,
-                      background: "transparent",
+                      background: 'transparent',
                       color: `red`,
                     }}
                   >
@@ -93,8 +93,8 @@ export default function MyTimer(values) {
                 <>
                   <div
                     style={{
-                      marginBottom: "10px",
-                      transform: "translateY(-62px)",
+                      marginBottom: '10px',
+                      transform: 'translateY(-62px)',
                     }}
                   >
                     <div onClick={pause}>
@@ -104,7 +104,7 @@ export default function MyTimer(values) {
                         }}
                         style={{
                           border: `2px solid ${questionColor}`,
-                          background: "transparent",
+                          background: 'transparent',
                           color: `${questionColor}`,
                         }}
                       >
@@ -115,10 +115,10 @@ export default function MyTimer(values) {
                           setTimeClick(false), setIsTimed(false);
                         }}
                         style={{
-                          border: "2px solid red",
-                          background: "transparent",
-                          color: "red",
-                          marginTop: "10px",
+                          border: '2px solid red',
+                          background: 'transparent',
+                          color: 'red',
+                          marginTop: '10px',
                         }}
                       >
                         Delete Time Limit
@@ -136,19 +136,19 @@ export default function MyTimer(values) {
             <>
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  position: "relative",
-                  zIndex: "100",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  zIndex: '100',
                 }}
               >
                 {finish ? (
                   <>
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        transform: "translateY(-45px)",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        transform: 'translateY(-45px)',
                       }}
                     >
                       <Button
@@ -156,9 +156,9 @@ export default function MyTimer(values) {
                           setFinish(false), restart(time);
                         }}
                         style={{
-                          border: "2px solid red",
-                          background: "transparent",
-                          color: "red",
+                          border: '2px solid red',
+                          background: 'transparent',
+                          color: 'red',
                         }}
                       >
                         Restart Test
@@ -170,10 +170,10 @@ export default function MyTimer(values) {
                     <div>
                       <Button
                         style={{
-                          border: "2px solid #125CA1",
-                          background: "transparent",
-                          color: "#125CA1",
-                          transform: "translateY(-10px)",
+                          border: '2px solid #125CA1',
+                          background: 'transparent',
+                          color: '#125CA1',
+                          transform: 'translateY(-10px)',
                         }}
                         disabled={isRunning}
                         onClick={resume}
@@ -192,7 +192,7 @@ export default function MyTimer(values) {
                 <>
                   <h2
                     style={{
-                      transform: "translateY(-50px)",
+                      transform: 'translateY(-50px)',
                     }}
                   >
                     Test Completed
@@ -202,9 +202,9 @@ export default function MyTimer(values) {
                 <>
                   <div
                     style={{
-                      fontSize: "100px",
-                      marginBottom: "-105px",
-                      transform: "translateY(42px)",
+                      fontSize: '100px',
+                      marginBottom: '-105px',
+                      transform: 'translateY(42px)',
                     }}
                   >
                     <span>{minutes}</span>:<span>{seconds}</span>
@@ -213,16 +213,16 @@ export default function MyTimer(values) {
                     <>
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          transform: "translateY(190px)",
+                          display: 'flex',
+                          justifyContent: 'center',
+                          transform: 'translateY(190px)',
                         }}
                       >
                         <h3
                           style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            position: "absolute",
+                            display: 'flex',
+                            justifyContent: 'center',
+                            position: 'absolute',
                           }}
                         >
                           Test in progress...
@@ -259,7 +259,7 @@ export default function MyTimer(values) {
         <>
           <div
             style={{
-              marginBottom: "230px",
+              marginBottom: '230px',
             }}
           >
             <Divider />

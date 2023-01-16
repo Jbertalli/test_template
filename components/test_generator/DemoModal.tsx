@@ -1,4 +1,4 @@
-import { Button, Icon, Modal } from "semantic-ui-react";
+import { Button, Icon, Modal } from 'semantic-ui-react';
 
 export default function DemoModal(values) {
 
@@ -34,7 +34,7 @@ export default function DemoModal(values) {
     setCreated,
     setTitle,
     setTitleClicked,
-    setSaveRipple
+    setSaveRipple,
   } = values;
   return (
     <>
@@ -43,25 +43,25 @@ export default function DemoModal(values) {
         open={openModal}
         size="small"
         style={{
-          transform: "translateY(-200px)",
-          borderRadius: "20px",
-          position: "fixed",
-          height: "400px",
+          transform: 'translateY(-200px)',
+          borderRadius: '20px',
+          position: 'fixed',
+          height: '400px',
         }}
       >
         <div
           style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginRight: "10px",
-            fontSize: "40px",
-            color: "red",
-            cursor: "pointer",
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginRight: '10px',
+            fontSize: '40px',
+            color: 'red',
+            cursor: 'pointer',
           }}
           onClick={() => {
             setOpenModal(false),
               setAuth(false),
-              setHide("password"),
+              setHide('password'),
               setEye(true);
           }}
         >
@@ -69,7 +69,7 @@ export default function DemoModal(values) {
         </div>
         <div
           style={{
-            transform: "translateY(10px)",
+            transform: 'translateY(10px)',
           }}
         >
           {creating ? (
@@ -78,20 +78,20 @@ export default function DemoModal(values) {
                 <>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      fontSize: "35px",
-                      fontWeight: "700",
-                      marginBottom: "20px",
-                      marginTop: "3vh",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      fontSize: '35px',
+                      fontWeight: '700',
+                      marginBottom: '20px',
+                      marginTop: '3vh',
                     }}
                   >
                     Set Admin Password
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
+                      display: 'flex',
+                      justifyContent: 'center',
                     }}
                   >
                     <input
@@ -101,27 +101,27 @@ export default function DemoModal(values) {
                         setAdminEmail(e.target.value), validEmail(adminEmail);
                       }}
                       style={{
-                        padding: "9px 14px 9px 14px",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        cursor: "text",
-                        width: "178.5px",
-                        borderRadius: "4px",
-                        border: "1px solid rgba(34, 36, 38. 0.15)",
-                        position: "relative",
-                        zIndex: "100",
-                        marginBottom: "10px",
+                        padding: '9px 14px 9px 14px',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        cursor: 'text',
+                        width: '178.5px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(34, 36, 38. 0.15)',
+                        position: 'relative',
+                        zIndex: '100',
+                        marginBottom: '10px',
                       }}
                     />
                   </div>
                   {adminEmail.length > 0 && password.length > 0 && !isValid ? (
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        transform: "translateY(8px)",
-                        color: "red",
-                        fontSize: "15px",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        transform: 'translateY(8px)',
+                        color: 'red',
+                        fontSize: '15px',
                       }}
                     >
                       Error: Email is Invalid
@@ -129,9 +129,9 @@ export default function DemoModal(values) {
                   ) : null}
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginTop: "15px",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      marginTop: '15px',
                     }}
                   >
                     <input
@@ -140,16 +140,16 @@ export default function DemoModal(values) {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       style={{
-                        padding: "9px 14px 9px 14px",
-                        fontSize: "14px",
-                        fontWeight: "400",
-                        cursor: "text",
-                        width: "178.5px",
-                        borderRadius: "4px",
-                        border: "1px solid rgba(34, 36, 38. 0.15)",
-                        position: "relative",
-                        zIndex: "100",
-                        marginBottom: "10px",
+                        padding: '9px 14px 9px 14px',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        cursor: 'text',
+                        width: '178.5px',
+                        borderRadius: '4px',
+                        border: '1px solid rgba(34, 36, 38. 0.15)',
+                        position: 'relative',
+                        zIndex: '100',
+                        marginBottom: '10px',
                       }}
                     />
                     {eye ? (
@@ -157,14 +157,14 @@ export default function DemoModal(values) {
                         <Icon
                           name="eye"
                           onClick={() => {
-                            setEye(false), setHide("text"), setShow(true);
+                            setEye(false), setHide('text'), setShow(true);
                           }}
                           style={{
-                            transform: "translate(72px, 14px) scale(1.1)",
-                            color: "#80808099",
-                            position: "absolute",
-                            zIndex: "100",
-                            cursor: "pointer",
+                            transform: 'translate(72px, 14px) scale(1.1)',
+                            color: '#80808099',
+                            position: 'absolute',
+                            zIndex: '100',
+                            cursor: 'pointer',
                           }}
                         />
                       </>
@@ -173,15 +173,15 @@ export default function DemoModal(values) {
                         <Icon
                           name="eye"
                           onClick={() => {
-                            setEye(true), setHide("password"), setShow(false);
+                            setEye(true), setHide('password'), setShow(false);
                           }}
                           color="blue"
                           style={{
-                            transform: "translate(72px, 14px) scale(1.1)",
-                            color: "#80808099",
-                            position: "absolute",
-                            zIndex: "100",
-                            cursor: "pointer",
+                            transform: 'translate(72px, 14px) scale(1.1)',
+                            color: '#80808099',
+                            position: 'absolute',
+                            zIndex: '100',
+                            cursor: 'pointer',
                           }}
                         />
                       </>
@@ -189,22 +189,22 @@ export default function DemoModal(values) {
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginTop: "20px",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      marginTop: '20px',
                     }}
                   >
                     <Button
                       disabled={password.length > 0 && isValid ? false : true}
                       onClick={() => {
-                          setClickPassword(false),
+                        setClickPassword(false),
                           setEye(true),
-                          setHide("password");
+                          setHide('password');
                       }}
                       style={{
-                        border: "2px solid #125CA1",
-                        background: "transparent",
-                        color: "#125CA1",
+                        border: '2px solid #125CA1',
+                        background: 'transparent',
+                        color: '#125CA1',
                       }}
                     >
                       Set Admin Email & Password
@@ -215,25 +215,25 @@ export default function DemoModal(values) {
                 <>
                   <div
                     style={{
-                      transform: "translateY(10px)",
+                      transform: 'translateY(10px)',
                     }}
                   >
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        fontSize: "35px",
-                        fontWeight: "700",
-                        marginBottom: "20px",
-                        marginTop: "3vh",
+                        display: 'flex',
+                        justifyContent: 'center',
+                        fontSize: '35px',
+                        fontWeight: '700',
+                        marginBottom: '20px',
+                        marginTop: '3vh',
                       }}
                     >
                       Login
                     </div>
                     <div
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
+                        display: 'flex',
+                        justifyContent: 'center',
                       }}
                     >
                       <input
@@ -242,16 +242,16 @@ export default function DemoModal(values) {
                         value={adminPassword}
                         onChange={(e) => setAdminPassword(e.target.value)}
                         style={{
-                          padding: "9px 14px 9px 14px",
-                          fontSize: "14px",
-                          fontWeight: "400",
-                          cursor: "text",
-                          width: "178.5px",
-                          borderRadius: "4px",
-                          border: "1px solid rgba(34, 36, 38. 0.15)",
-                          position: "relative",
-                          zIndex: "100",
-                          marginBottom: "20px",
+                          padding: '9px 14px 9px 14px',
+                          fontSize: '14px',
+                          fontWeight: '400',
+                          cursor: 'text',
+                          width: '178.5px',
+                          borderRadius: '4px',
+                          border: '1px solid rgba(34, 36, 38. 0.15)',
+                          position: 'relative',
+                          zIndex: '100',
+                          marginBottom: '20px',
                         }}
                       />
                       {eye ? (
@@ -259,14 +259,14 @@ export default function DemoModal(values) {
                           <Icon
                             name="eye"
                             onClick={() => {
-                              setEye(false), setHide("text"), setShow(true);
+                              setEye(false), setHide('text'), setShow(true);
                             }}
                             style={{
-                              transform: "translate(72px, 14px) scale(1.1)",
-                              color: "#80808099",
-                              position: "absolute",
-                              zIndex: "100",
-                              cursor: "pointer",
+                              transform: 'translate(72px, 14px) scale(1.1)',
+                              color: '#80808099',
+                              position: 'absolute',
+                              zIndex: '100',
+                              cursor: 'pointer',
                             }}
                           />
                         </>
@@ -275,15 +275,15 @@ export default function DemoModal(values) {
                           <Icon
                             name="eye"
                             onClick={() => {
-                              setEye(true), setHide("password"), setShow(false);
+                              setEye(true), setHide('password'), setShow(false);
                             }}
                             color="blue"
                             style={{
-                              transform: "translate(72px, 14px) scale(1.1)",
-                              color: "#80808099",
-                              position: "absolute",
-                              zIndex: "100",
-                              cursor: "pointer",
+                              transform: 'translate(72px, 14px) scale(1.1)',
+                              color: '#80808099',
+                              position: 'absolute',
+                              zIndex: '100',
+                              cursor: 'pointer',
                             }}
                           />
                         </>
@@ -294,13 +294,13 @@ export default function DemoModal(values) {
                     <>
                       <div
                         style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          transform: "translate(-5px, 50%)",
-                          color: "red",
-                          fontSize: "20px",
-                          fontWeight: "500",
-                          marginBottom: "30px",
+                          display: 'flex',
+                          justifyContent: 'center',
+                          transform: 'translate(-5px, 50%)',
+                          color: 'red',
+                          fontSize: '20px',
+                          fontWeight: '500',
+                          marginBottom: '30px',
                         }}
                       >
                         Error: Password is Invalid
@@ -309,9 +309,9 @@ export default function DemoModal(values) {
                   ) : null}
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginTop: "15px",
+                      display: 'flex',
+                      justifyContent: 'center',
+                      marginTop: '15px',
                     }}
                   >
                     <Button
@@ -320,26 +320,26 @@ export default function DemoModal(values) {
                         matchPass(), setErrorCheck(true);
                       }}
                       style={{
-                        border: "2px solid #125CA1",
-                        background: "transparent",
-                        color: "#125CA1",
+                        border: '2px solid #125CA1',
+                        background: 'transparent',
+                        color: '#125CA1',
                       }}
                     >
                       Submit
                     </Button>
                     <Button
                       onClick={() => {
-                          setClickPassword(true),
-                          setPassword(""),
-                          setAdminPassword(""),
-                          setAdminEmail(""),
+                        setClickPassword(true),
+                          setPassword(''),
+                          setAdminPassword(''),
+                          setAdminEmail(''),
                           setAuth(false),
-                          setErrorCheck(false);
+                          setErrorCheck(false)
                       }}
                       style={{
-                        border: "2px solid red",
-                        background: "transparent",
-                        color: "red",
+                        border: '2px solid red',
+                        background: 'transparent',
+                        color: 'red',
                       }}
                     >
                       Reset Admin Email & Password
@@ -385,9 +385,9 @@ export default function DemoModal(values) {
                     </div> */}
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "15px",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: '15px',
                 }}
               >
                 {auth ? (
@@ -399,24 +399,24 @@ export default function DemoModal(values) {
                             </Button> */}
                     <Button
                       onClick={() => {
-                          setOpenModal(false),
+                        setOpenModal(false),
                           setFinish(false),
                           setDemo(true),
                           setServiceList([
-                            { id: "", service: "", answer: "", student: "" },
+                            { id: '', service: '', answer: '', student: '' },
                           ]),
                           setSave(false),
                           setCreated(false),
-                          setTitle(""),
+                          setTitle(''),
                           setTitleClicked(false),
                           setSaveRipple(true),
-                          setErrorCheck(false);
+                          setErrorCheck(false)
                       }}
                       style={{
-                        border: "2px solid #21BA45",
-                        background: "transparent",
-                        color: "#21BA45",
-                        marginTop: "10px",
+                        border: '2px solid #21BA45',
+                        background: 'transparent',
+                        color: '#21BA45',
+                        marginTop: '10px',
                       }}
                     >
                       Create New Test
@@ -429,9 +429,9 @@ export default function DemoModal(values) {
             <>
               <div
                 style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "140px",
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginTop: '140px',
                 }}
               >
                 <Button
@@ -439,9 +439,9 @@ export default function DemoModal(values) {
                     setCreating(true), setEye(false);
                   }}
                   style={{
-                    border: "2px solid #21BA45",
-                    background: "transparent",
-                    color: "#21BA45",
+                    border: '2px solid #21BA45',
+                    background: 'transparent',
+                    color: '#21BA45',
                   }}
                 >
                   Create a Test
