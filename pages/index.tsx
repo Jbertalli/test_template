@@ -474,6 +474,8 @@ export default function Services() {
         }}
       >
         <SideMenu
+          save={save}
+          finish={finish}
           openHover={openHover}
           setOpenHover={setOpenHover}
           resize={resize}
@@ -808,6 +810,7 @@ export default function Services() {
               <MappedForm
                 serviceList={serviceList}
                 save={save}
+                demo={demo}
                 student={student}
                 finish={finish}
                 questionColor={questionColor}

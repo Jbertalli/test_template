@@ -5,6 +5,7 @@ export default function MappedForm(values) {
   const {
     serviceList,
     save,
+    demo,
     student,
     finish,
     questionColor,
@@ -168,48 +169,106 @@ export default function MappedForm(values) {
                 </div>
                 {singleService.student && singleService.student.length > 0 ? (
                   <>
-                    <div>
-                      {singleService.answer.toLowerCase() ===
-                      singleService.student.toLowerCase() ? (
-                        <>
-                          <div
-                            style={{
-                              fontSize: '30px',
-                              fontWeight: '500',
-                              color: 'green',
-                            }}
-                          >
-                            <Icon name="check" />
-                            <span>Correct</span>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div
-                            style={{
-                              fontSize: '30px',
-                              fontWeight: '500',
-                              color: 'red',
-                            }}
-                          >
-                            <Icon
-                              name="plus"
-                              style={{ transform: 'rotate(45deg)' }}
-                            />
-                            <span>Incorrect</span>
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    {demo ? (
+                      <>
+                        {finish ? (
+                          <>
+                            <div>
+                              {singleService.answer.toLowerCase() ===
+                              singleService.student.toLowerCase() ? (
+                                <>
+                                  <div
+                                    style={{
+                                      fontSize: '30px',
+                                      fontWeight: '500',
+                                      color: 'green',
+                                    }}
+                                  >
+                                    <Icon name="check" />
+                                    <span>Correct</span>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <div
+                                    style={{
+                                      fontSize: '30px',
+                                      fontWeight: '500',
+                                      color: 'red',
+                                    }}
+                                  >
+                                    <Icon
+                                      name="plus"
+                                      style={{ transform: 'rotate(45deg)' }}
+                                    />
+                                    <span>Incorrect</span>
+                                  </div>
+                                </>
+                              )}
+                            </div>
+                            <div
+                              style={{
+                                transform: 'translateY(-7px)',
+                              }}
+                            >
+                              <Divider />
+                            </div>
+                          </>
+                        ) : null}
+                      </>
+                    ) : (
+                      <>
+                        {/* <Divider /> */}
+                        <div>
+                          {singleService.answer.toLowerCase() === singleService.student.toLowerCase() ? (
+                            <>
+                              <div
+                                style={{
+                                  fontSize: '30px',
+                                  fontWeight: '500',
+                                  color: 'green',
+                                }}
+                              >
+                                <Icon name="check" />
+                                <span>Correct</span>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div
+                                style={{
+                                  fontSize: '30px',
+                                  fontWeight: '500',
+                                  color: 'red',
+                                }}
+                              >
+                                <Icon
+                                  name="plus"
+                                  style={{ transform: 'rotate(45deg)' }}
+                                />
+                                <span>Incorrect</span>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                        <div
+                          style={{
+                            transform: 'translateY(-5px)',
+                          }}
+                        >
+                          <Divider />
+                        </div>
+                      </>
+                    )}
                   </>
                 ) : null}
-                <div
+                {/* <div
                   style={{
                     transform: 'translateY(-5px)',
                   }}
                 >
                   <Divider />
-                </div>
+                </div> */}
                 {!student ? (
                   <>
                     <div>

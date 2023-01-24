@@ -4,6 +4,8 @@ import styles from '../../styles/Test.module.css';
 export default function SideMenu(values) {
 
   const {
+    save,
+    finish,
     openHover,
     setOpenHover,
     resize,
@@ -339,11 +341,14 @@ export default function SideMenu(values) {
           <>
             <div
               onClick={() => setOpenHover(true)}
+              className={(save && demo && finish) ? styles.takeTest : null}
               style={{
                 marginTop: resize ? '40px' : '3.8vh',
-                marginLeft: resize ? '30px' : '8px',
+                marginLeft: resize ? '30px' : '12px',
                 transform: 'scale(1.3)',
                 color: `${questionColor}`,
+                height: '35px',
+                // border: '1px solid red',
               }}
             >
               <div
@@ -351,7 +356,7 @@ export default function SideMenu(values) {
                   width: '50px',
                   position: 'relative',
                   transform: 'scaleX(2)',
-                  left: '30px',
+                  left: '33px',
                 }}
               >
                 <Icon name="minus" />
@@ -361,7 +366,7 @@ export default function SideMenu(values) {
                   width: '50px',
                   position: 'relative',
                   transform: 'scaleX(2) translateY(-13px)',
-                  left: '30px',
+                  left: '33px',
                 }}
               >
                 <Icon name="minus" />
@@ -371,7 +376,7 @@ export default function SideMenu(values) {
                   width: '50px',
                   position: 'relative',
                   transform: 'scaleX(2) translateY(-26px)',
-                  left: '30px',
+                  left: '33px',
                 }}
               >
                 <Icon name="minus" />
