@@ -341,7 +341,11 @@ export default function SideMenu(values) {
           <>
             <div
               onClick={() => setOpenHover(true)}
-              className={(save && demo && finish) ? styles.takeTest : null}
+              className={night ? (
+                (demo && finish) ? styles.takeTestNight : null
+              ):(
+                (demo && finish) ? styles.takeTest : null
+              )}
               style={{
                 marginTop: resize ? '40px' : '3.8vh',
                 marginLeft: resize ? '30px' : '12px',
