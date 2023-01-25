@@ -302,7 +302,7 @@ export default function SideMenu(values) {
                 <>
                   <div
                     onClick={() => {
-                      setNewModal(true), setSame(false);
+                      setNewModal(true), setSame(false), setFinish(false);
                     }}
                     style={{
                       display: 'flex',
