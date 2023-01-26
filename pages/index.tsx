@@ -462,9 +462,6 @@ export default function Services() {
         textColor={textColor}
         setQuestionColor={setQuestionColor}
         questionColor={questionColor}
-        style={{
-            position: 'absolute'
-        }}
       />
       <div
         style={{
@@ -604,7 +601,7 @@ export default function Services() {
             border: `2px solid ${questionColor}`,
             borderRadius: '10px',
             padding: '3em',
-            marginTop: resize ? '12vh' : '16vh',
+            marginTop: resize ? '160px' : '105px',
             marginBottom: '100px',
           }}
         >
