@@ -462,6 +462,9 @@ export default function Services() {
         textColor={textColor}
         setQuestionColor={setQuestionColor}
         questionColor={questionColor}
+        style={{
+            position: 'absolute'
+        }}
       />
       <div
         style={{
