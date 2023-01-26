@@ -602,7 +602,7 @@ export default function Services() {
             border: `2px solid ${questionColor}`,
             borderRadius: '10px',
             padding: '3em',
-            marginTop: resize ? '12vh' : '16vh', 
+            marginTop: resize ? '12vh' : '25vh', 
             marginBottom: '100px',
           }}
         >
