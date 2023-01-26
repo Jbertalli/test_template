@@ -469,8 +469,7 @@ export default function Services() {
           color: `${textColor}`,
           minHeight: '100vh',
           height: '100%',
-          transform: 'translateY(-130px)',
-          marginTop: '102px',
+          transform: 'translateY(-30px)',
           paddingBottom: '1px',
         }}
       >
@@ -602,7 +601,7 @@ export default function Services() {
             border: `2px solid ${questionColor}`,
             borderRadius: '10px',
             padding: '3em',
-            marginTop: resize ? '12vh' : '16vh', 
+            marginTop: resize ? '12vh' : '16vh',
             marginBottom: '100px',
           }}
         >
