@@ -469,7 +469,7 @@ export default function Services() {
           color: `${textColor}`,
           minHeight: '100vh',
           height: '100%',
-        //   transform: 'translateY(-30px)',
+          transform: 'translateY(-60px)',
           paddingBottom: '1px',
         }}
       >
