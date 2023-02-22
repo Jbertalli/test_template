@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 
 export default function DemoModal(values) {
@@ -36,6 +37,24 @@ export default function DemoModal(values) {
     setTitleClicked,
     setSaveRipple,
   } = values;
+
+  console.log(adminEmail);
+  console.log(password);
+
+  const submitData = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      const body = { adminEmail, password }
+      await fetch(`http://localhost:3099/api/user`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
       <Modal
@@ -59,7 +78,7 @@ export default function DemoModal(values) {
             cursor: 'pointer',
           }}
           onClick={() => {
-            setOpenModal(false),
+              setOpenModal(false),
               setAuth(false),
               setHide('password'),
               setEye(true);
@@ -196,10 +215,11 @@ export default function DemoModal(values) {
                   >
                     <Button
                       disabled={password.length > 0 && isValid ? false : true}
-                      onClick={() => {
-                        setClickPassword(false),
+                      onClick={(e) => {
+                          setClickPassword(false),
                           setEye(true),
-                          setHide('password');
+                          setHide('password'),
+                          submitData(e)
                       }}
                       style={{
                         border: '2px solid #125CA1',
