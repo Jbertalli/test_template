@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
 
 export default function DemoModal(values) {
@@ -38,8 +38,10 @@ export default function DemoModal(values) {
     setSaveRipple,
   } = values;
 
-  console.log(adminEmail);
-  console.log(password);
+  // console.log(adminEmail);
+  // console.log(password);
+  const [emailSQL, setEmailSQL] = useState<string>('');
+  const [passwordSQL, setPasswordSQL] = useState<string>('');
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -50,10 +52,16 @@ export default function DemoModal(values) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
+      console.log(body);
+      setEmailSQL(body?.adminEmail);
+      setPasswordSQL(body?.password);
     } catch (error) {
       console.error(error);
     }
   }
+
+  console.log(emailSQL);
+  console.log(passwordSQL);
 
   const getData = async (e: React.SyntheticEvent) => {
     e.preventDefault()

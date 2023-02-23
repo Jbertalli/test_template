@@ -19,8 +19,7 @@ export default async(req, res) => {
         res.json(results);
         return res.send(results);
     } else if (req.method === 'DELETE') {
-        // const { id, adminEmail, password } = req.params;
         const users = await prisma.user.deleteMany({})
-        res.json(users)
+        res.json(users);
     }
 }
