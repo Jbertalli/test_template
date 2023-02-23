@@ -4,10 +4,7 @@ const prisma = new PrismaClient();
 
 export default async(req, res) => {
     const prisma = new PrismaClient();
-    if (req.method === 'GET') {
-        const users = await prisma.user.findMany();
-        return res.send(users);
-    } else if (req.method === 'POST') {
+    if (req.method === 'POST') {
         const { adminEmail, password } = req.body;
         const result = await prisma.user.create({
             data: {
@@ -16,5 +13,14 @@ export default async(req, res) => {
             },
         })
         res.json(result)
+    } else if (req.method === 'GET') {
+        const results = await prisma.user.findMany();
+        // const results = await prisma.user.findFirst();
+        res.json(results);
+        return res.send(results);
+    } else if (req.method === 'DELETE') {
+        // const { id, adminEmail, password } = req.params;
+        const users = await prisma.user.deleteMany({})
+        res.json(users)
     }
 }

@@ -51,7 +51,32 @@ export default function DemoModal(values) {
         body: JSON.stringify(body),
       })
     } catch (error) {
-      console.error(error)
+      console.error(error);
+    }
+  }
+
+  const getData = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      await fetch(`http://localhost:3099/api/user`, {
+        method: 'GET',
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const deleteData = async (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    try {
+      const body = { adminEmail, password }
+      await fetch(`http://localhost:3099/api/user`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+    } catch (error) {
+      console.error(error);
     }
   }
 
@@ -224,10 +249,30 @@ export default function DemoModal(values) {
                       style={{
                         border: '2px solid #125CA1',
                         background: 'transparent',
-                        color: '#125CA1',
+                        color: '#125CA1'
                       }}
                     >
                       Set Admin Email & Password
+                    </Button>
+                    <Button
+                      onClick={getData}
+                      style={{
+                        border: '2px solid green',
+                        background: 'transparent',
+                        color: 'green'
+                      }}
+                    >
+                      Get User
+                    </Button>
+                    <Button
+                      onClick={deleteData}
+                      style={{
+                        border: '2px solid red',
+                        background: 'transparent',
+                        color: 'red'
+                      }}
+                    >
+                      Delete User
                     </Button>
                   </div>
                 </>
