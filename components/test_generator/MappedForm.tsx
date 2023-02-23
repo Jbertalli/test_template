@@ -174,8 +174,7 @@ export default function MappedForm(values) {
                         {finish ? (
                           <>
                             <div>
-                              {singleService.answer.toLowerCase() ===
-                              singleService.student.toLowerCase() ? (
+                              {singleService.answer.toLowerCase() === singleService.student.toLowerCase() ? (
                                 <>
                                   <div
                                     style={{
