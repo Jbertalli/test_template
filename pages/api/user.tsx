@@ -14,8 +14,8 @@ export default async(req, res) => {
         })
         res.json(result)
     } else if (req.method === 'GET') {
-        const results = await prisma.user.findMany();
-        // const results = await prisma.user.findFirst();
+        // const results = await prisma.user.findMany();
+        const results = await prisma.user.findFirst();
         res.json(results);
         return res.send(results);
     } else if (req.method === 'DELETE') {
