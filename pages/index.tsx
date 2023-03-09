@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Divider, Container } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
 import emailjs from 'emailjs-com';
-// import hash from 'object-hash';
 import MyTimer from '../components/test_generator/MyTimer';
 import DemoModal from '../components/test_generator/DemoModal';
 import ReturnAdminModal from '../components/test_generator/ReturnAdminModal';
@@ -21,8 +20,11 @@ import StudentAdminSwitch from '../components/test_generator/StudentAdminSwitch'
 import TestHeader from '../components/test_generator/TestHeader';
 import Local from '../components/test_generator/Local';
 import SideMenu from '../components/test_generator/SideMenu';
+import baseUrl from '../utils/baseUrl';
+import { PrismaClient } from '@prisma/client';
+import { useRouter } from 'next/router';
 
-export default function Services() {
+export default function Services({ newUser }) {
   const [serviceList, setServiceList] = useState([
     { id: '', service: '', answer: '', student: '' },
   ]);
@@ -80,6 +82,19 @@ export default function Services() {
   const [resize, setResize] = useState<boolean>(false);
   const [openHover, setOpenHover] = useState<boolean>(false);
 
+  const router = useRouter();
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  }
+
+  useEffect(() => {
+    refreshData();
+  }, []);
+
+  console.log(newUser);
+  console.log(newUser.pop()?.password);
+
   useEffect(() => {
     if (window.innerWidth > 440) {
       setResize(true);
@@ -100,7 +115,7 @@ export default function Services() {
 
   // console.log(serviceList[0].service);
 
-  console.log('Full Test Array', serviceList);
+  // console.log('Full Test Array', serviceList);
 
   let questionArray = [];
 
@@ -109,7 +124,7 @@ export default function Services() {
     questionArray.push(serviceList[i].service);
   }
 
-  console.log('%c Question Array', 'color: red', questionArray);
+  // console.log('%c Question Array', 'color: red', questionArray);
 
   let answerArray = [];
 
@@ -118,7 +133,7 @@ export default function Services() {
     answerArray.push(serviceList[i].answer);
   }
 
-  console.log('%c Answer Array', 'color: blue', answerArray);
+  // console.log('%c Answer Array', 'color: blue', answerArray);
 
   let studentAnswerArray = [];
 
@@ -127,7 +142,7 @@ export default function Services() {
     studentAnswerArray.push(serviceList[i].student);
   }
 
-  console.log('%c Student Answer Array', 'color: green', studentAnswerArray);
+  // console.log('%c Student Answer Array', 'color: green', studentAnswerArray);
 
   const length = serviceList.length;
 
@@ -260,10 +275,10 @@ export default function Services() {
   }, [letterGrade]);
 
   let secondTime = Number(second);
-  console.log(secondTime);
+  // console.log(secondTime);
 
   let minuteTime = Number(minute);
-  console.log(minuteTime);
+  // console.log(minuteTime);
 
   // let hourTime = Number(hour);
   // console.log(hourTime);
@@ -315,7 +330,7 @@ export default function Services() {
   }
 
   function matchPass() {
-    if (password.length > 0 && password === adminPassword) {
+    if (password.length > 0 && password === newUser.pop()?.password) {
       setAuth(true);
     } else {
       setAuth(false);
@@ -323,7 +338,7 @@ export default function Services() {
   }
 
   function match() {
-    if (newPassword.length > 0 && newPassword === adminPassword) {
+    if (newPassword.length > 0 && newPassword === newUser.pop()?.password) {
       setSame(true);
     } else {
       setSame(false);
@@ -383,7 +398,6 @@ export default function Services() {
   // console.log(allZero);
 
   // console.log(password);
-  // console.log(hash(password));
   // console.log(resetPassword);
   // console.log(adminEmail);
 
@@ -469,8 +483,8 @@ export default function Services() {
           color: `${textColor}`,
           minHeight: '100vh',
           height: '100%',
-          transform: 'translateY(-30px)',
-          paddingBottom: '1px',
+          transform: resize ? 'translateY(-30px)' : 'translateY(-105px)',
+          paddingBottom: '1px'
         }}
       >
         <SideMenu
@@ -563,6 +577,7 @@ export default function Services() {
           ) : null}
         </div>
         <DemoModal
+          refreshData={refreshData}
           openModal={openModal}
           setOpenModal={setOpenModal}
           auth={auth}
@@ -826,4 +841,15 @@ export default function Services() {
       </div>
     </>
   );
+}
+
+const prisma = new PrismaClient();
+
+export const getServerSideProps = async () => {
+    const users = await prisma.user.findMany();
+    return {
+        props: {
+            newUser: users
+        }
+    }
 }
