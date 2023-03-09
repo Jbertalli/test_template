@@ -84,13 +84,13 @@ export default function Services({ newUser }) {
 
   const router = useRouter();
 
-  const refreshData = () => {
-    router.replace(router.asPath);
-  }
+//   const refreshData = () => {
+//     router.replace(router.asPath);
+//   }
 
-  useEffect(() => {
-    refreshData();
-  }, []);
+//   useEffect(() => {
+//     refreshData();
+//   }, []);
 
   console.log(newUser);
   console.log(newUser.pop()?.password);
@@ -577,7 +577,7 @@ export default function Services({ newUser }) {
           ) : null}
         </div>
         <DemoModal
-          refreshData={refreshData}
+        //   refreshData={refreshData}
           openModal={openModal}
           setOpenModal={setOpenModal}
           auth={auth}
