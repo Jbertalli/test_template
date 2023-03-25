@@ -26,4 +26,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://localhost:3099/api/my-sitemap
+Sitemap: https://www.testandgrade.com/api/my-sitemap

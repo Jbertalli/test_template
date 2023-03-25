@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
+import baseUrl from '../../utils/baseUrl';
 
 export default function DemoModal(values) {
 
   const {
+    refreshData,
     openModal,
     setOpenModal,
     auth,
@@ -38,16 +40,15 @@ export default function DemoModal(values) {
     setSaveRipple,
   } = values;
 
-  // console.log(adminEmail);
-  // console.log(password);
   const [emailSQL, setEmailSQL] = useState<string>('');
   const [passwordSQL, setPasswordSQL] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
       const body = { adminEmail, password }
-      await fetch(`http://localhost:3099/api/user`, {
+      await fetch(`${baseUrl}/api/user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -60,13 +61,10 @@ export default function DemoModal(values) {
     }
   }
 
-  console.log(emailSQL);
-  console.log(passwordSQL);
-
   const getData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
     try {
-      await fetch(`http://localhost:3099/api/user`, {
+      await fetch(`${baseUrl}/api/user`, {
         method: 'GET',
       })
     } catch (error) {
@@ -78,7 +76,7 @@ export default function DemoModal(values) {
     e.preventDefault()
     try {
       const body = { adminEmail, password }
-      await fetch(`http://localhost:3099/api/user`, {
+      await fetch(`${baseUrl}/api/user`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -87,6 +85,15 @@ export default function DemoModal(values) {
       console.error(error);
     }
   }
+
+  // useEffect(() => {
+  //   refreshData();
+  // }, []);
+
+  console.log(emailSQL);
+  console.log(passwordSQL);
+  // console.log(adminEmail);
+  // console.log(password);
 
   return (
     <>
@@ -263,16 +270,6 @@ export default function DemoModal(values) {
                       Set Admin Email & Password
                     </Button>
                     <Button
-                      onClick={getData}
-                      style={{
-                        border: '2px solid green',
-                        background: 'transparent',
-                        color: 'green'
-                      }}
-                    >
-                      Get User
-                    </Button>
-                    <Button
                       onClick={deleteData}
                       style={{
                         border: '2px solid red',
@@ -298,22 +295,23 @@ export default function DemoModal(values) {
                         fontSize: '35px',
                         fontWeight: '700',
                         marginBottom: '20px',
-                        marginTop: '3vh',
+                        marginTop: '3vh'
                       }}
                     >
-                      Login
+                      Verify Password
                     </div>
                     <div
                       style={{
                         display: 'flex',
-                        justifyContent: 'center',
+                        justifyContent: 'center'
                       }}
                     >
                       <input
-                        type={hide}
-                        placeholder="Admin Password"
-                        value={adminPassword}
-                        onChange={(e) => setAdminPassword(e.target.value)}
+                        type='text'
+                        placeholder="Admin Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        // onKeyUp={(e) => refreshData()}
                         style={{
                           padding: '9px 14px 9px 14px',
                           fontSize: '14px',
@@ -325,6 +323,32 @@ export default function DemoModal(values) {
                           position: 'relative',
                           zIndex: '100',
                           marginBottom: '20px',
+                        }}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <input
+                        type={hide}
+                        placeholder="Admin Password"
+                        value={adminPassword}
+                        onChange={(e) => setAdminPassword(e.target.value)}
+                        // onKeyUp={() => refreshData()}
+                        style={{
+                          padding: '9px 14px 9px 14px',
+                          fontSize: '14px',
+                          fontWeight: '400',
+                          cursor: 'text',
+                          width: '178.5px',
+                          borderRadius: '4px',
+                          border: '1px solid rgba(34, 36, 38. 0.15)',
+                          position: 'relative',
+                          zIndex: '100',
+                          marginBottom: '20px'
                         }}
                       />
                       {eye ? (
@@ -389,8 +413,12 @@ export default function DemoModal(values) {
                   >
                     <Button
                       disabled={adminPassword.length > 0 ? false : true}
-                      onClick={() => {
-                        matchPass(), setErrorCheck(true);
+                      // onMouseOver={refreshData}
+                      onClick={(e) => {
+                        matchPass(), 
+                        setErrorCheck(true), 
+                        // refreshData(),
+                        getData(e);
                       }}
                       style={{
                         border: '2px solid #125CA1',
@@ -407,7 +435,8 @@ export default function DemoModal(values) {
                           setAdminPassword(''),
                           setAdminEmail(''),
                           setAuth(false),
-                          setErrorCheck(false)
+                          setErrorCheck(false),
+                          refreshData()
                       }}
                       style={{
                         border: '2px solid red',
@@ -420,42 +449,6 @@ export default function DemoModal(values) {
                   </div>
                 </>
               )}
-              {/* <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        {show ? (
-                        <>
-                            <Checkbox
-                                onClick={() => {setHide('password'), setShow(false)}}
-                                label={
-                                    <label>
-                                        Hide Password
-                                    </label>
-                                }
-                                style={{
-                                    marginTop: '15px'
-                                }}
-                            />
-                        </>
-                        ):(
-                        <>
-                            <Checkbox
-                                onClick={() => {setHide('text'), setShow(true)}}
-                                label={
-                                    <label>
-                                        Show Password
-                                    </label>
-                                }
-                                style={{
-                                    marginTop: '15px'
-                                }}
-                            />
-                        </>
-                        )}
-                    </div> */}
               <div
                 style={{
                   display: 'flex',
@@ -465,11 +458,6 @@ export default function DemoModal(values) {
               >
                 {auth ? (
                   <>
-                    {/* <Button
-                                onClick={() => {setStudent(true), setHideAdmin(true), setSave(true), setOpenModal(false), setSame(false), setFinish(false), setDemo(true)}}
-                            >
-                                Take Test
-                            </Button> */}
                     <Button
                       onClick={() => {
                         setOpenModal(false),

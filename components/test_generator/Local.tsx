@@ -289,7 +289,7 @@ export default function Local(values) {
     );
   }, [adminPassword]);
 
-  console.log(adminPassword);
+  // console.log(adminPassword);
 
   // ClickPassword
   // useEffect(() => {
