@@ -20,9 +20,9 @@ import StudentAdminSwitch from '../components/test_generator/StudentAdminSwitch'
 import TestHeader from '../components/test_generator/TestHeader';
 import Local from '../components/test_generator/Local';
 import SideMenu from '../components/test_generator/SideMenu';
-import baseUrl from '../utils/baseUrl';
-import { PrismaClient } from '@prisma/client';
-import { useRouter } from 'next/router';
+// import baseUrl from '../utils/baseUrl';
+// import { PrismaClient } from '@prisma/client';
+// import { useRouter } from 'next/router';
 
 export default function Services({ newUser }) {
   const [serviceList, setServiceList] = useState([
@@ -82,7 +82,7 @@ export default function Services({ newUser }) {
   const [resize, setResize] = useState<boolean>(false);
   const [openHover, setOpenHover] = useState<boolean>(false);
 
-  const router = useRouter();
+//   const router = useRouter();
 
 //   const refreshData = () => {
 //     router.replace(router.asPath);
@@ -843,13 +843,13 @@ export default function Services({ newUser }) {
   );
 }
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
-export const getServerSideProps = async () => {
-    const users = await prisma.user.findMany();
-    return {
-        props: {
-            newUser: users
-        }
-    }
-}
+// export const getServerSideProps = async () => {
+//     const users = await prisma.user.findMany();
+//     return {
+//         props: {
+//             newUser: users
+//         }
+//     }
+// }
