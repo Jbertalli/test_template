@@ -483,7 +483,7 @@ export default function Services({ newUser }) {
           color: `${textColor}`,
           minHeight: '100vh',
           height: '100%',
-          transform: resize ? 'translateY(-30px)' : 'translateY(-105px)',
+          transform: resize ? 'translateY(-30px)' : 'translateY(-15px)',
           paddingBottom: '1px'
         }}
       >
