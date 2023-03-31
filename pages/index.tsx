@@ -407,6 +407,7 @@ export default function Services({ newUser }) {
         <title>Test Generator</title>
         <meta name="description" content="test" />
       </Head>
+      <div style={{ background: 'red' }}>
       <Local
         setServiceList={setServiceList}
         serviceList={serviceList}
@@ -838,6 +839,7 @@ export default function Services({ newUser }) {
             </div>
           </div>
         </Container>
+      </div>
       </div>
     </>
   );
