@@ -534,55 +534,54 @@ export default function Services({ newUser }) {
                 setSame={setSame}
             />
             <div
-            style={{
-                marginRight: '1vw',
-                display: 'flex',
-                justifyContent: 'flex-end',
-                marginBottom: '-50px',
-            }}
+                style={{
+                    marginRight: '1vw',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    marginBottom: '-50px',
+                }}
             >
             {student ? (
                 <>
-                <ReturnAdminModal
-                    newModal={newModal}
-                    setNewModal={setNewModal}
-                    isResetting={isResetting}
-                    setIsResetting={setIsResetting}
-                    errorCheck={errorCheck}
-                    setErrorCheck={setErrorCheck}
-                    hide={hide}
-                    setHide={setHide}
-                    eye={eye}
-                    setEye={setEye}
-                    setResetTernary={setResetTernary}
-                    resetTernary={resetTernary}
-                    sendResetEmail={sendResetEmail}
-                    setPassword={setPassword}
-                    resetPassword={resetPassword}
-                    randomString={randomString}
-                    setResetPassword={setResetPassword}
-                    setAdminPassword={setAdminPassword}
-                    setResetClicked={setResetClicked}
-                    setShow={setShow}
-                    sameReset={sameReset}
-                    resetMatch={resetMatch}
-                    setCreated={setCreated}
-                    setStudent={setStudent}
-                    setHideAdmin={setHideAdmin}
-                    setSave={setSave}
-                    setClickPassword={setClickPassword}
-                    setAuth={setAuth}
-                    resize={resize}
-                    newPassword={newPassword}
-                    setNewPassword={setNewPassword}
-                    same={same}
-                    match={match}
-                />
+                    <ReturnAdminModal
+                        newModal={newModal}
+                        setNewModal={setNewModal}
+                        isResetting={isResetting}
+                        setIsResetting={setIsResetting}
+                        errorCheck={errorCheck}
+                        setErrorCheck={setErrorCheck}
+                        hide={hide}
+                        setHide={setHide}
+                        eye={eye}
+                        setEye={setEye}
+                        setResetTernary={setResetTernary}
+                        resetTernary={resetTernary}
+                        sendResetEmail={sendResetEmail}
+                        setPassword={setPassword}
+                        resetPassword={resetPassword}
+                        randomString={randomString}
+                        setResetPassword={setResetPassword}
+                        setAdminPassword={setAdminPassword}
+                        setResetClicked={setResetClicked}
+                        setShow={setShow}
+                        sameReset={sameReset}
+                        resetMatch={resetMatch}
+                        setCreated={setCreated}
+                        setStudent={setStudent}
+                        setHideAdmin={setHideAdmin}
+                        setSave={setSave}
+                        setClickPassword={setClickPassword}
+                        setAuth={setAuth}
+                        resize={resize}
+                        newPassword={newPassword}
+                        setNewPassword={setNewPassword}
+                        same={same}
+                        match={match}
+                    />
                 </>
             ) : null}
             </div>
             <DemoModal
-            //   refreshData={refreshData}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
                 auth={auth}
@@ -617,231 +616,191 @@ export default function Services({ newUser }) {
                 setSaveRipple={setSaveRipple}
             />
             <Container
-            style={{
-                border: `2px solid ${questionColor}`,
-                borderRadius: '10px',
-                padding: '3em',
-                marginTop: resize ? '12vh' : '16vh',
-                marginBottom: '100px',
-            }}
-            >
-            {/* <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        marginRight: '-60px',
-                        transform: 'translateY(-50px)'
-                    }}
-                >
-                    <div
-                        style={{
-                            position: 'absolute',
-                            transform: 'scale(0.7)'
-                        }}
-                    >
-                        <DemoMode
-                            demo={demo}
-                            setDemo={setDemo}
-                            setStudent={setStudent}
-                            setEdit={setEdit}
-                            setClickPassword={setClickPassword}
-                            setPassword={setPassword}
-                            setAdminPassword={setAdminPassword}
-                            setAdminEmail={setAdminEmail}
-                            setAuth={setAuth}
-                            setIsResetting={setIsResetting}
-                            setNewPassword={setNewPassword}
-                            setSave={setSave}
-                            setCreated={setCreated}
-                            setTitleClicked={setTitleClicked}
-                            setSaveRipple={setSaveRipple}
-                            setResetClicked={setResetClicked}
-                            setEye={setEye}
-                            setHide={setHide}
-                            setUserEmail={setUserEmail}
-                            setOpenModal={setOpenModal}
-                            setResetTernary={setResetTernary}
-                            textColor={textColor}
-                        />
-                    </div>
-                </div> */}
-            <TestHeader
-                resize={resize}
-                questionColor={questionColor}
-                demo={demo}
-            />
-            <Divider />
-            <StudentAdminSwitch
-                student={student}
-                demo={demo}
-                setStudent={setStudent}
-                setFinish={setFinish}
-                setIsTimed={setIsTimed}
-                setOpenAnswerKey={setOpenAnswerKey}
-                setOpenQuestionKey={setOpenQuestionKey}
-                setOpenStudentAnswers={setOpenStudentAnswers}
-                setEdit={setEdit}
-                setSave={setSave}
-                setTimeClick={setTimeClick}
-                textColor={textColor}
-                setOpenEmail={setOpenEmail}
-                setOpenNameDate={setOpenNameDate}
-            />
-            <SubmitTestButton
-                student={student}
-                isTimed={isTimed}
-                finish={finish}
-                allZero={allZero}
-                setFinish={setFinish}
-            />
-            {student ? (
-                <>
-                <Email
-                    openEmail={openEmail}
-                    setOpenEmail={setOpenEmail}
-                    questionColor={questionColor}
-                    finish={finish}
-                    userEmail={userEmail}
-                    setUserEmail={setUserEmail}
-                    validEmail={validEmail}
-                    isValid={isValid}
-                    send={send}
-                />
-                <Divider />
-                <div>
-                    {!openNameDate ? (
-                    <>
-                        <OpenNameDate
-                        setOpenNameDate={setOpenNameDate}
-                        questionColor={questionColor}
-                        />
-                    </>
-                    ) : (
-                    <>
-                        <NameClicked
-                        nameClicked={nameClicked}
-                        setName={setName}
-                        name={name}
-                        setNameClicked={setNameClicked}
-                        questionColor={questionColor}
-                        setOpenNameDate={setOpenNameDate}
-                        />
-                        <DateClicked
-                        dateClicked={dateClicked}
-                        setDate={setDate}
-                        setDateClicked={setDateClicked}
-                        questionColor={questionColor}
-                        date={date}
-                        />
-                    </>
-                    )}
-                </div>
-                </>
-            ) : null}
-            <CreateTimer
-                student={student}
-                edit={edit}
-                setEdit={setEdit}
-                questionColor={questionColor}
-                setTimeClick={setTimeClick}
-                setIsTimed={setIsTimed}
-                timeClick={timeClick}
-                timed={timed}
-                minute={minute}
-                setMinute={setMinute}
-                second={second}
-                setSecond={setSecond}
-            />
-            <div>
-                <MyTimer
-                    isTimed={isTimed}
-                    setIsTimed={setIsTimed}
-                    setTimed={setTimed}
-                    timed={timed}
-                    student={student}
-                    finish={finish}
-                    setFinish={setFinish}
-                    secondTime={secondTime}
-                    minuteTime={minuteTime}
-                    expiryTimestamp={time}
-                    timeClick={timeClick}
-                    edit={edit}
-                    questionColor={questionColor}
-                    setTimeClick={setTimeClick}
-                />
-            </div>
-            <DropdownKeys
-                student={student}
-                openQuestionKey={openQuestionKey}
-                setOpenQuestionKey={setOpenQuestionKey}
-                questionColor={questionColor}
-                serviceList={serviceList}
-                openAnswerKey={openAnswerKey}
-                setOpenAnswerKey={setOpenAnswerKey}
-                openStudentAnswers={openStudentAnswers}
-                setOpenStudentAnswers={setOpenStudentAnswers}
-            />
-            <Divider />
-            <EditTitle
-                student={student}
-                serviceList={serviceList}
-                save={save}
-                setSave={setSave}
-                setCreated={setCreated}
-                titleClicked={titleClicked}
-                setTitleClicked={setTitleClicked}
-                saveRipple={saveRipple}
-                setServiceList={setServiceList}
-                setOpenAnswerKey={setOpenAnswerKey}
-                setOpenQuestionKey={setOpenQuestionKey}
-                setOpenStudentAnswers={setOpenStudentAnswers}
-                setName={setName}
-                setDate={setDate}
-                setTitle={setTitle}
-                setDateClicked={setDateClicked}
-                setSecond={setSecond}
-                setTimed={setTimed}
-                setTimeClick={setTimeClick}
-                setOpenEmail={setOpenEmail}
-                setUserEmail={setUserEmail}
-                setFinish={setFinish}
-                title={title}
-                setNameClicked={setNameClicked}
-                questionColor={questionColor}
-                setOpenHover={setOpenHover}
-            />
-            <div
                 style={{
-                display: 'flex',
-                justifyContent: 'center',
-                transform: 'translateY(1em)',
+                    border: `2px solid ${questionColor}`,
+                    borderRadius: '10px',
+                    padding: '3em',
+                    marginTop: resize ? '12vh' : '16vh',
+                    marginBottom: '100px',
                 }}
             >
-                <div>
-                <GradeCard
-                    student={student}
-                    finish={finish}
-                    grade={grade}
-                    percent={percent}
-                    color={color}
-                    length={length}
-                    letterGrade={letterGrade}
+                <TestHeader
+                    resize={resize}
+                    questionColor={questionColor}
+                    demo={demo}
                 />
-                <MappedForm
+                <Divider />
+                <StudentAdminSwitch
+                    student={student}
+                    demo={demo}
+                    setStudent={setStudent}
+                    setFinish={setFinish}
+                    setIsTimed={setIsTimed}
+                    setOpenAnswerKey={setOpenAnswerKey}
+                    setOpenQuestionKey={setOpenQuestionKey}
+                    setOpenStudentAnswers={setOpenStudentAnswers}
+                    setEdit={setEdit}
+                    setSave={setSave}
+                    setTimeClick={setTimeClick}
+                    textColor={textColor}
+                    setOpenEmail={setOpenEmail}
+                    setOpenNameDate={setOpenNameDate}
+                />
+                <SubmitTestButton
+                    student={student}
+                    isTimed={isTimed}
+                    finish={finish}
+                    allZero={allZero}
+                    setFinish={setFinish}
+                />
+                {student ? (
+                    <>
+                        <Email
+                            openEmail={openEmail}
+                            setOpenEmail={setOpenEmail}
+                            questionColor={questionColor}
+                            finish={finish}
+                            userEmail={userEmail}
+                            setUserEmail={setUserEmail}
+                            validEmail={validEmail}
+                            isValid={isValid}
+                            send={send}
+                        />
+                        <Divider />
+                        <div>
+                            {!openNameDate ? (
+                            <>
+                                <OpenNameDate
+                                    setOpenNameDate={setOpenNameDate}
+                                    questionColor={questionColor}
+                                />
+                            </>
+                            ) : (
+                            <>
+                                <NameClicked
+                                    nameClicked={nameClicked}
+                                    setName={setName}
+                                    name={name}
+                                    setNameClicked={setNameClicked}
+                                    questionColor={questionColor}
+                                    setOpenNameDate={setOpenNameDate}
+                                />
+                                <DateClicked
+                                    dateClicked={dateClicked}
+                                    setDate={setDate}
+                                    setDateClicked={setDateClicked}
+                                    questionColor={questionColor}
+                                    date={date}
+                                />
+                            </>
+                            )}
+                        </div>
+                    </>
+                ) : null}
+                <CreateTimer
+                    student={student}
+                    edit={edit}
+                    setEdit={setEdit}
+                    questionColor={questionColor}
+                    setTimeClick={setTimeClick}
+                    setIsTimed={setIsTimed}
+                    timeClick={timeClick}
+                    timed={timed}
+                    minute={minute}
+                    setMinute={setMinute}
+                    second={second}
+                    setSecond={setSecond}
+                />
+                <div>
+                    <MyTimer
+                        isTimed={isTimed}
+                        setIsTimed={setIsTimed}
+                        setTimed={setTimed}
+                        timed={timed}
+                        student={student}
+                        finish={finish}
+                        setFinish={setFinish}
+                        secondTime={secondTime}
+                        minuteTime={minuteTime}
+                        expiryTimestamp={time}
+                        timeClick={timeClick}
+                        edit={edit}
+                        questionColor={questionColor}
+                        setTimeClick={setTimeClick}
+                    />
+                </div>
+                <DropdownKeys
+                    student={student}
+                    openQuestionKey={openQuestionKey}
+                    setOpenQuestionKey={setOpenQuestionKey}
+                    questionColor={questionColor}
+                    serviceList={serviceList}
+                    openAnswerKey={openAnswerKey}
+                    setOpenAnswerKey={setOpenAnswerKey}
+                    openStudentAnswers={openStudentAnswers}
+                    setOpenStudentAnswers={setOpenStudentAnswers}
+                />
+                <Divider />
+                <EditTitle
+                    student={student}
                     serviceList={serviceList}
                     save={save}
-                    demo={demo}
-                    student={student}
-                    finish={finish}
+                    setSave={setSave}
+                    setCreated={setCreated}
+                    titleClicked={titleClicked}
+                    setTitleClicked={setTitleClicked}
+                    saveRipple={saveRipple}
+                    setServiceList={setServiceList}
+                    setOpenAnswerKey={setOpenAnswerKey}
+                    setOpenQuestionKey={setOpenQuestionKey}
+                    setOpenStudentAnswers={setOpenStudentAnswers}
+                    setName={setName}
+                    setDate={setDate}
+                    setTitle={setTitle}
+                    setDateClicked={setDateClicked}
+                    setSecond={setSecond}
+                    setTimed={setTimed}
+                    setTimeClick={setTimeClick}
+                    setOpenEmail={setOpenEmail}
+                    setUserEmail={setUserEmail}
+                    setFinish={setFinish}
+                    title={title}
+                    setNameClicked={setNameClicked}
                     questionColor={questionColor}
-                    handleQuestionChange={handleQuestionChange}
-                    handleAnswerChange={handleAnswerChange}
-                    handleStudentAnswerChange={handleStudentAnswerChange}
-                    handleServiceRemove={handleServiceRemove}
-                    handleAddService={handleAddService}
+                    setOpenHover={setOpenHover}
                 />
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        transform: 'translateY(1em)'
+                    }}
+                >
+                    <div>
+                    <GradeCard
+                        student={student}
+                        finish={finish}
+                        grade={grade}
+                        percent={percent}
+                        color={color}
+                        length={length}
+                        letterGrade={letterGrade}
+                    />
+                    <MappedForm
+                        serviceList={serviceList}
+                        save={save}
+                        demo={demo}
+                        student={student}
+                        finish={finish}
+                        questionColor={questionColor}
+                        handleQuestionChange={handleQuestionChange}
+                        handleAnswerChange={handleAnswerChange}
+                        handleStudentAnswerChange={handleStudentAnswerChange}
+                        handleServiceRemove={handleServiceRemove}
+                        handleAddService={handleAddService}
+                    />
+                    </div>
                 </div>
-            </div>
             </Container>
         </div>
       </div>

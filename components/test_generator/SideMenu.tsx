@@ -71,8 +71,7 @@ export default function SideMenu(values) {
               zIndex: '1000',
               fontSize: '20px',
               fontWeight: '700',
-              border: night ? '2px solid white' : '2px solid #125CA1',
-              // minWidth: '300px',
+              border: night ? '2px solid white' : '2px solid #125CA1'
             }}
             className={resize ? styles.menu : styles.dropdown}
           >
@@ -359,14 +358,13 @@ export default function SideMenu(values) {
         )}
         style={{
           marginTop: resize ? '40px' : '3.8vh',
-          marginLeft: resize ? '30px' : '12px',
+          marginLeft: resize ? '30px' : '22px',
           transform: 'scale(1.3)',
           color: `${questionColor}`,
           position: 'absolute',
           height: '35px',
           cursor: 'pointer',
-          opacity: openHover ? '0' : '1',
-          // border: '1px solid red'
+          opacity: openHover ? '0' : '1'
         }}
       >
         <div
