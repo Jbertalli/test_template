@@ -409,8 +409,7 @@ export default function Services({ newUser }) {
       </Head>
       <div 
         style={{ 
-            background: `${background}`,
-            marginTop: resize ? null : '80px'
+            background: `${background}`
         }}
     >
         <Local
@@ -489,8 +488,8 @@ export default function Services({ newUser }) {
                 color: `${textColor}`,
                 minHeight: '100vh',
                 height: '100%',
-                transform: resize ? 'translateY(-30px)' : 'translateY(-105px)',
-                paddingBottom: '1px'
+                paddingBottom: '1px',
+                transform: resize ? 'translateY(-30px)' : 'translateY(-15px)'
             }}
         >
             <SideMenu
