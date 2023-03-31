@@ -489,7 +489,7 @@ export default function Services({ newUser }) {
                 minHeight: '100vh',
                 height: '100%',
                 paddingBottom: '1px',
-                transform: resize ? 'translateY(-30px)' : 'translateY(-25px)'
+                transform: resize ? 'translateY(-30px)' : 'translateY(-55px)'
             }}
         >
             <SideMenu
