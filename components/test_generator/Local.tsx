@@ -289,8 +289,6 @@ export default function Local(values) {
     );
   }, [adminPassword]);
 
-  // console.log(adminPassword);
-
   // ClickPassword
   // useEffect(() => {
   //     const storedClickPassword = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CLICK_PASSWORD))

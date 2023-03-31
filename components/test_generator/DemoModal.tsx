@@ -53,7 +53,6 @@ export default function DemoModal(values) {
   //       headers: { 'Content-Type': 'application/json' },
   //       body: JSON.stringify(body),
   //     })
-  //     console.log(body);
   //     setEmailSQL(body?.adminEmail);
   //     setPasswordSQL(body?.password);
   //   } catch (error) {
