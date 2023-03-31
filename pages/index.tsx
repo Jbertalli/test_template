@@ -92,8 +92,8 @@ export default function Services({ newUser }) {
 //     refreshData();
 //   }, []);
 
-  console.log(newUser);
-  console.log(newUser.pop()?.password);
+//   console.log(newUser);
+//   console.log(newUser.pop()?.password);
 
   useEffect(() => {
     if (window.innerWidth > 440) {

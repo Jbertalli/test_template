@@ -40,26 +40,26 @@ export default function DemoModal(values) {
     setSaveRipple,
   } = values;
 
-  const [emailSQL, setEmailSQL] = useState<string>('');
-  const [passwordSQL, setPasswordSQL] = useState<string>('');
+  // const [emailSQL, setEmailSQL] = useState<string>('');
+  // const [passwordSQL, setPasswordSQL] = useState<string>('');
   const [email, setEmail] = useState<string>('');
 
-  const submitData = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    try {
-      const body = { adminEmail, password }
-      await fetch(`${baseUrl}/api/user`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-      console.log(body);
-      setEmailSQL(body?.adminEmail);
-      setPasswordSQL(body?.password);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // const submitData = async (e: React.SyntheticEvent) => {
+  //   e.preventDefault()
+  //   try {
+  //     const body = { adminEmail, password }
+  //     await fetch(`${baseUrl}/api/user`, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(body),
+  //     })
+  //     console.log(body);
+  //     setEmailSQL(body?.adminEmail);
+  //     setPasswordSQL(body?.password);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   const getData = async (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -90,8 +90,8 @@ export default function DemoModal(values) {
   //   refreshData();
   // }, []);
 
-  console.log(emailSQL);
-  console.log(passwordSQL);
+  // console.log(emailSQL);
+  // console.log(passwordSQL);
   // console.log(adminEmail);
   // console.log(password);
 
@@ -258,8 +258,8 @@ export default function DemoModal(values) {
                       onClick={(e) => {
                           setClickPassword(false),
                           setEye(true),
-                          setHide('password'),
-                          submitData(e)
+                          setHide('password')
+                          // submitData(e)
                       }}
                       style={{
                         border: '2px solid #125CA1',
