@@ -37,17 +37,9 @@ export default function MyTimer(values) {
     },
   });
 
-  // console.log(minutes);
-  // console.log(seconds);
-
-  // let value = secondTime;
-  // console.log(typeof value);
-
   const time = new Date();
   time.setSeconds(time.getSeconds() + secondTime);
   time.setMinutes(time.getMinutes() + minuteTime);
-
-  // console.log('isRunning', isRunning);
 
   return (
     <div
@@ -236,25 +228,6 @@ export default function MyTimer(values) {
           ) : null}
         </>
       )}
-      {/* {student ? (
-            <>
-                {isTimed ? (
-                <>
-                    {!finish ? (
-                    <>
-                        <div
-                            style={{
-                                marginBottom: '230px'
-                            }}
-                        >
-                            <Divider />
-                        </div>
-                    </>
-                    ): null}
-                </>
-                ): null}
-            </>
-            ): null} */}
       {!finish && isTimed && student ? (
         <>
           <div

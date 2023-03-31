@@ -29,7 +29,7 @@ export default function MappedForm(values) {
                     <>
                       <div
                         style={{
-                          fontSize: '25px',
+                          fontSize: '25px'
                         }}
                       >
                         {singleService.service}
@@ -39,13 +39,12 @@ export default function MappedForm(values) {
                     <>
                       <div
                         style={{
-                          color: 'black',
+                          color: 'black'
                         }}
                       >
                         <input
                           name="service"
                           type="text"
-                          // id='service'
                           placeholder="Question"
                           value={singleService.service}
                           onChange={(e) => handleQuestionChange(e, index)}
@@ -58,7 +57,7 @@ export default function MappedForm(values) {
                             borderRadius: '4px',
                             border: '1px solid rgba(34, 36, 38. 0.15)',
                             position: 'relative',
-                            zIndex: '100',
+                            zIndex: '100'
                           }}
                         />
                       </div>
@@ -71,7 +70,7 @@ export default function MappedForm(values) {
                         <>
                           <div
                             style={{
-                              fontSize: '25px',
+                              fontSize: '25px'
                             }}
                           >
                             {singleService.answer}
@@ -81,13 +80,12 @@ export default function MappedForm(values) {
                         <>
                           <div
                             style={{
-                              color: 'black',
+                              color: 'black'
                             }}
                           >
                             <input
                               name="answer"
                               type="text"
-                              // id='answer'
                               placeholder="Answer"
                               value={singleService.answer}
                               onChange={(e) => handleAnswerChange(e, index)}
@@ -100,7 +98,7 @@ export default function MappedForm(values) {
                                 borderRadius: '4px',
                                 border: '1px solid rgba(34, 36, 38. 0.15)',
                                 position: 'relative',
-                                zIndex: '100',
+                                zIndex: '100'
                               }}
                             />
                           </div>
@@ -117,7 +115,7 @@ export default function MappedForm(values) {
                             singleService.answer.length > 0
                               ? 'block'
                               : 'none',
-                          marginTop: '20px',
+                          marginTop: '20px'
                         }}
                       >
                         <h2>Student Answer #{index + 1}</h2>
@@ -135,13 +133,12 @@ export default function MappedForm(values) {
                           <>
                             <div
                               style={{
-                                color: 'black',
+                                color: 'black'
                               }}
                             >
                               <input
                                 name="student"
                                 type="text"
-                                // id='student'
                                 placeholder="Student Question"
                                 value={singleService.student}
                                 onChange={(e) =>
@@ -156,7 +153,7 @@ export default function MappedForm(values) {
                                   borderRadius: '4px',
                                   border: '1px solid rgba(34, 36, 38. 0.15)',
                                   position: 'relative',
-                                  zIndex: '100',
+                                  zIndex: '100'
                                 }}
                               />
                             </div>
@@ -180,7 +177,7 @@ export default function MappedForm(values) {
                                     style={{
                                       fontSize: '30px',
                                       fontWeight: '500',
-                                      color: 'green',
+                                      color: 'green'
                                     }}
                                   >
                                     <Icon name="check" />
@@ -207,7 +204,7 @@ export default function MappedForm(values) {
                             </div>
                             <div
                               style={{
-                                transform: 'translateY(-7px)',
+                                transform: 'translateY(-7px)'
                               }}
                             >
                               <Divider />
@@ -217,7 +214,6 @@ export default function MappedForm(values) {
                       </>
                     ) : (
                       <>
-                        {/* <Divider /> */}
                         <div>
                           {singleService.answer.toLowerCase() === singleService.student.toLowerCase() ? (
                             <>
@@ -225,7 +221,7 @@ export default function MappedForm(values) {
                                 style={{
                                   fontSize: '30px',
                                   fontWeight: '500',
-                                  color: 'green',
+                                  color: 'green'
                                 }}
                               >
                                 <Icon name="check" />
@@ -238,7 +234,7 @@ export default function MappedForm(values) {
                                 style={{
                                   fontSize: '30px',
                                   fontWeight: '500',
-                                  color: 'red',
+                                  color: 'red'
                                 }}
                               >
                                 <Icon
@@ -252,7 +248,7 @@ export default function MappedForm(values) {
                         </div>
                         <div
                           style={{
-                            transform: 'translateY(-5px)',
+                            transform: 'translateY(-5px)'
                           }}
                         >
                           <Divider />
@@ -261,13 +257,6 @@ export default function MappedForm(values) {
                     )}
                   </>
                 ) : null}
-                {/* <div
-                  style={{
-                    transform: 'translateY(-5px)',
-                  }}
-                >
-                  <Divider />
-                </div> */}
                 {!student ? (
                   <>
                     <div>
@@ -277,7 +266,7 @@ export default function MappedForm(values) {
                           style={{
                             border: '2px solid red',
                             background: 'transparent',
-                            color: 'red',
+                            color: 'red'
                           }}
                         >
                           <span>Remove Question #{index + 1}</span>
@@ -290,7 +279,7 @@ export default function MappedForm(values) {
                         <div
                           style={{
                             display: 'flex',
-                            justifyContent: 'center',
+                            justifyContent: 'center'
                           }}
                         >
                           {serviceList.length - 1 === index && (
@@ -299,7 +288,7 @@ export default function MappedForm(values) {
                               style={{
                                 border: `2px solid ${questionColor}`,
                                 background: 'transparent',
-                                color: `${questionColor}`,
+                                color: `${questionColor}`
                               }}
                             >
                               Add a Question

@@ -113,36 +113,23 @@ export default function Services({ newUser }) {
     return () => window.removeEventListener('resize', updateMedia);
   }, []);
 
-  // console.log(serviceList[0].service);
-
-  // console.log('Full Test Array', serviceList);
-
   let questionArray = [];
 
   for (let i = 0; i < serviceList.length; i++) {
-    // console.log(serviceList[i].service);
     questionArray.push(serviceList[i].service);
   }
-
-  // console.log('%c Question Array', 'color: red', questionArray);
 
   let answerArray = [];
 
   for (let i = 0; i < serviceList.length; i++) {
-    // console.log(serviceList[i].answer);
     answerArray.push(serviceList[i].answer);
   }
-
-  // console.log('%c Answer Array', 'color: blue', answerArray);
 
   let studentAnswerArray = [];
 
   for (let i = 0; i < serviceList.length; i++) {
-    // console.log(serviceList[i].student);
     studentAnswerArray.push(serviceList[i].student);
   }
-
-  // console.log('%c Student Answer Array', 'color: green', studentAnswerArray);
 
   const length = serviceList.length;
 
@@ -181,9 +168,6 @@ export default function Services({ newUser }) {
     ]);
   };
 
-  // console.log(answerArray);
-  // console.log(studentAnswerArray);
-
   const compare = (num1, num2) => {
     let counter = num1.reduce(
       (total, el, index) =>
@@ -194,8 +178,6 @@ export default function Services({ newUser }) {
   };
 
   let grade = compare(answerArray, studentAnswerArray);
-
-  // console.log(grade);
 
   const comparePercent = (num1, num2) => {
     let counter = num1.reduce(
@@ -209,8 +191,6 @@ export default function Services({ newUser }) {
   };
 
   let percent = Number(comparePercent(answerArray, studentAnswerArray));
-
-  // console.log(percent);
 
   useEffect(() => {
     switch (true) {
@@ -275,13 +255,7 @@ export default function Services({ newUser }) {
   }, [letterGrade]);
 
   let secondTime = Number(second);
-  // console.log(secondTime);
-
   let minuteTime = Number(minute);
-  // console.log(minuteTime);
-
-  // let hourTime = Number(hour);
-  // console.log(hourTime);
 
   const time = new Date();
   time.setSeconds(time.getSeconds() + 60);
@@ -294,13 +268,6 @@ export default function Services({ newUser }) {
     letter: `${letterGrade}`,
     to_name: `${name}`,
   };
-
-  // console.log(grade);
-  // console.log(length);
-  // console.log(percent);
-  // console.log(letterGrade);
-  // console.log(userEmail);
-  // console.log('Is Timer Running?', isTimed);
 
   function send() {
     emailjs
@@ -394,12 +361,6 @@ export default function Services({ newUser }) {
   }
 
   let allZero = isEmpty.every((num) => num === 0);
-  // console.log(isEmpty);
-  // console.log(allZero);
-
-  // console.log(password);
-  // console.log(resetPassword);
-  // console.log(adminEmail);
 
   return (
     <>
