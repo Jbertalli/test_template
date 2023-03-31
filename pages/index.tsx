@@ -409,7 +409,8 @@ export default function Services({ newUser }) {
       </Head>
       <div 
         style={{ 
-            background: `${background}`
+            background: `${background}`,
+            marginTop: resize ? null : '80px'
         }}
     >
         <Local
