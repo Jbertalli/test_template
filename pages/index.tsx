@@ -481,8 +481,8 @@ export default function Services({ newUser }) {
         style={{
           background: `${background}`,
           color: `${textColor}`,
-          minHeight: '100vh',
-          height: '100%',
+        //   minHeight: '100vh',
+        //   height: '100%',
           transform: resize ? 'translateY(-30px)' : 'translateY(-15px)',
           paddingBottom: '1px'
         }}
@@ -527,6 +527,7 @@ export default function Services({ newUser }) {
           resetClicked={resetClicked}
           setNewModal={setNewModal}
           setSame={setSame}
+          style={{ position: 'absolute' }}
         />
         <div
           style={{
