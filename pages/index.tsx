@@ -297,7 +297,7 @@ export default function Services({ newUser }) {
   }
 
   function matchPass() {
-    if (password.length > 0 && password === newUser.pop()?.password) {
+    if (password.length > 0 && password === adminPassword) {
       setAuth(true);
     } else {
       setAuth(false);
@@ -305,7 +305,7 @@ export default function Services({ newUser }) {
   }
 
   function match() {
-    if (newPassword.length > 0 && newPassword === newUser.pop()?.password) {
+    if (newPassword.length > 0 && newPassword === adminPassword) {
       setSame(true);
     } else {
       setSame(false);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Icon, Modal } from 'semantic-ui-react';
-import baseUrl from '../../utils/baseUrl';
+// import baseUrl from '../../utils/baseUrl';
 
 export default function DemoModal(values) {
 
@@ -60,30 +60,30 @@ export default function DemoModal(values) {
   //   }
   // }
 
-  const getData = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    try {
-      await fetch(`${baseUrl}/api/user`, {
-        method: 'GET',
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // const getData = async (e: React.SyntheticEvent) => {
+  //   e.preventDefault()
+  //   try {
+  //     await fetch(`${baseUrl}/api/user`, {
+  //       method: 'GET',
+  //     })
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
-  const deleteData = async (e: React.SyntheticEvent) => {
-    e.preventDefault()
-    try {
-      const body = { adminEmail, password }
-      await fetch(`${baseUrl}/api/user`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      })
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // const deleteData = async (e: React.SyntheticEvent) => {
+  //   e.preventDefault()
+  //   try {
+  //     const body = { adminEmail, password }
+  //     await fetch(`${baseUrl}/api/user`, {
+  //       method: 'DELETE',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(body),
+  //     })
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   // useEffect(() => {
   //   refreshData();
@@ -104,7 +104,7 @@ export default function DemoModal(values) {
           transform: 'translateY(-200px)',
           borderRadius: '20px',
           position: 'fixed',
-          height: '400px',
+          height: '400px'
         }}
       >
         <div
@@ -114,7 +114,7 @@ export default function DemoModal(values) {
             marginRight: '10px',
             fontSize: '40px',
             color: 'red',
-            cursor: 'pointer',
+            cursor: 'pointer'
           }}
           onClick={() => {
               setOpenModal(false),
@@ -127,7 +127,7 @@ export default function DemoModal(values) {
         </div>
         <div
           style={{
-            transform: 'translateY(10px)',
+            transform: 'translateY(10px)'
           }}
         >
           {creating ? (
@@ -141,7 +141,7 @@ export default function DemoModal(values) {
                       fontSize: '35px',
                       fontWeight: '700',
                       marginBottom: '20px',
-                      marginTop: '3vh',
+                      marginTop: '3vh'
                     }}
                   >
                     Set Admin Password
@@ -149,7 +149,7 @@ export default function DemoModal(values) {
                   <div
                     style={{
                       display: 'flex',
-                      justifyContent: 'center',
+                      justifyContent: 'center'
                     }}
                   >
                     <input
@@ -168,7 +168,7 @@ export default function DemoModal(values) {
                         border: '1px solid rgba(34, 36, 38. 0.15)',
                         position: 'relative',
                         zIndex: '100',
-                        marginBottom: '10px',
+                        marginBottom: '10px'
                       }}
                     />
                   </div>
@@ -179,7 +179,7 @@ export default function DemoModal(values) {
                         justifyContent: 'center',
                         transform: 'translateY(8px)',
                         color: 'red',
-                        fontSize: '15px',
+                        fontSize: '15px'
                       }}
                     >
                       Error: Email is Invalid
@@ -189,7 +189,7 @@ export default function DemoModal(values) {
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
-                      marginTop: '15px',
+                      marginTop: '15px'
                     }}
                   >
                     <input
@@ -207,7 +207,7 @@ export default function DemoModal(values) {
                         border: '1px solid rgba(34, 36, 38. 0.15)',
                         position: 'relative',
                         zIndex: '100',
-                        marginBottom: '10px',
+                        marginBottom: '10px'
                       }}
                     />
                     {eye ? (
@@ -222,7 +222,7 @@ export default function DemoModal(values) {
                             color: '#80808099',
                             position: 'absolute',
                             zIndex: '100',
-                            cursor: 'pointer',
+                            cursor: 'pointer'
                           }}
                         />
                       </>
@@ -239,7 +239,7 @@ export default function DemoModal(values) {
                             color: '#80808099',
                             position: 'absolute',
                             zIndex: '100',
-                            cursor: 'pointer',
+                            cursor: 'pointer'
                           }}
                         />
                       </>
@@ -249,7 +249,7 @@ export default function DemoModal(values) {
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
-                      marginTop: '20px',
+                      marginTop: '20px'
                     }}
                   >
                     <Button
@@ -268,7 +268,7 @@ export default function DemoModal(values) {
                     >
                       Set Admin Email & Password
                     </Button>
-                    <Button
+                    {/* <Button
                       onClick={deleteData}
                       style={{
                         border: '2px solid red',
@@ -277,7 +277,7 @@ export default function DemoModal(values) {
                       }}
                     >
                       Delete User
-                    </Button>
+                    </Button> */}
                   </div>
                 </>
               ) : (
@@ -297,33 +297,7 @@ export default function DemoModal(values) {
                         marginTop: '3vh'
                       }}
                     >
-                      Verify Password
-                    </div>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'center'
-                      }}
-                    >
-                      <input
-                        type='text'
-                        placeholder="Admin Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        // onKeyUp={(e) => refreshData()}
-                        style={{
-                          padding: '9px 14px 9px 14px',
-                          fontSize: '14px',
-                          fontWeight: '400',
-                          cursor: 'text',
-                          width: '178.5px',
-                          borderRadius: '4px',
-                          border: '1px solid rgba(34, 36, 38. 0.15)',
-                          position: 'relative',
-                          zIndex: '100',
-                          marginBottom: '20px',
-                        }}
-                      />
+                      Login
                     </div>
                     <div
                       style={{
@@ -336,7 +310,6 @@ export default function DemoModal(values) {
                         placeholder="Admin Password"
                         value={adminPassword}
                         onChange={(e) => setAdminPassword(e.target.value)}
-                        // onKeyUp={() => refreshData()}
                         style={{
                           padding: '9px 14px 9px 14px',
                           fontSize: '14px',
@@ -379,7 +352,7 @@ export default function DemoModal(values) {
                               color: '#80808099',
                               position: 'absolute',
                               zIndex: '100',
-                              cursor: 'pointer',
+                              cursor: 'pointer'
                             }}
                           />
                         </>
@@ -396,7 +369,7 @@ export default function DemoModal(values) {
                           color: 'red',
                           fontSize: '20px',
                           fontWeight: '500',
-                          marginBottom: '30px',
+                          marginBottom: '30px'
                         }}
                       >
                         Error: Password is Invalid
@@ -407,22 +380,18 @@ export default function DemoModal(values) {
                     style={{
                       display: 'flex',
                       justifyContent: 'center',
-                      marginTop: '15px',
+                      marginTop: '15px'
                     }}
                   >
                     <Button
                       disabled={adminPassword.length > 0 ? false : true}
-                      // onMouseOver={refreshData}
-                      onClick={(e) => {
-                        matchPass(), 
-                        setErrorCheck(true), 
-                        // refreshData(),
-                        getData(e);
+                      onClick={() => {
+                        matchPass(), setErrorCheck(true);
                       }}
                       style={{
                         border: '2px solid #125CA1',
                         background: 'transparent',
-                        color: '#125CA1',
+                        color: '#125CA1'
                       }}
                     >
                       Submit
@@ -434,13 +403,12 @@ export default function DemoModal(values) {
                           setAdminPassword(''),
                           setAdminEmail(''),
                           setAuth(false),
-                          setErrorCheck(false),
-                          refreshData()
+                          setErrorCheck(false)
                       }}
                       style={{
                         border: '2px solid red',
                         background: 'transparent',
-                        color: 'red',
+                        color: 'red'
                       }}
                     >
                       Reset Admin Email & Password
@@ -452,7 +420,7 @@ export default function DemoModal(values) {
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
-                  marginTop: '15px',
+                  marginTop: '15px'
                 }}
               >
                 {auth ? (
@@ -476,7 +444,7 @@ export default function DemoModal(values) {
                         border: '2px solid #21BA45',
                         background: 'transparent',
                         color: '#21BA45',
-                        marginTop: '10px',
+                        marginTop: '10px'
                       }}
                     >
                       Create New Test
@@ -491,7 +459,7 @@ export default function DemoModal(values) {
                 style={{
                   display: 'flex',
                   justifyContent: 'center',
-                  marginTop: '140px',
+                  marginTop: '140px'
                 }}
               >
                 <Button
@@ -501,7 +469,7 @@ export default function DemoModal(values) {
                   style={{
                     border: '2px solid #21BA45',
                     background: 'transparent',
-                    color: '#21BA45',
+                    color: '#21BA45'
                   }}
                 >
                   Create a Test
